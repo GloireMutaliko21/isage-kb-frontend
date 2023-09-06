@@ -1,11 +1,46 @@
 'use client';
 import Image from 'next/image';
+import { FormEventHandler, useEffect, useRef, useState } from 'react';
 import InputComponent from '../global/Input';
 import PwdInput from '../global/PwdInput';
 import Link from 'next/link';
 import { Divider } from 'antd';
+import type { InputRef } from 'antd';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { loginUser } from '@/redux/auth/auth.slice';
+import useAuth from '@/hooks/useAuh';
+import { useRouter } from 'next/navigation';
 
 const LoginForm = () => {
+	const dispatch = useAppDispatch();
+
+	const [data, setData] = useState({
+		email: '',
+		password: '',
+	});
+
+	const submit: FormEventHandler = (e) => {
+		e.preventDefault();
+		const { email, password } = data;
+
+		const payload = {
+			email,
+			password,
+		};
+
+		dispatch(loginUser(payload));
+	};
+	const handleChange = (e: any) => {
+		setData({ ...data, [e.target.name]: e.target.value });
+	};
+
+	// Account Verification
+	const { user, isPendindLogin } = useAuth();
+	const router = useRouter();
+	useEffect(() => {
+		if (user.token || localStorage.getItem('session_token')) router.push('/');
+	});
+
 	return (
 		<section className='flex flex-col gap-y-8 w-full md:px-10 2xl:px-24 py-0 md:py-6 2xl:py-14'>
 			<div className='mb-6'>
@@ -30,7 +65,7 @@ const LoginForm = () => {
 			</div>
 
 			<div>
-				<form action='' className='flex flex-col gap-3'>
+				<form className='flex flex-col gap-3' onSubmit={submit}>
 					<div>
 						<div className='mb-1'>
 							<label htmlFor='' className='font-semibold'>
@@ -42,7 +77,7 @@ const LoginForm = () => {
 							size='large'
 							name='email'
 							placeholder='user@isagekb.com'
-							onChange={() => {}}
+							onChange={handleChange}
 						/>
 					</div>
 					<div>
@@ -56,7 +91,7 @@ const LoginForm = () => {
 							size='large'
 							name='password'
 							placeholder='******'
-							onChange={() => {}}
+							onChange={handleChange}
 						/>
 					</div>
 					<div className='text-sm w-full text-end hover:underline text-primary-900'>
@@ -67,7 +102,14 @@ const LoginForm = () => {
 							className='mb-6 bg-primary-900 hover:bg-primary-800 hover:shadow-md duration-300 text-white font-medium flex justify-center items-center gap-2 border w-full py-3 rounded-lg'
 							// onClick={handleSubmit}
 						>
-							Se connecter
+							{isPendindLogin ? (
+								<span
+									hidden={isPendindLogin}
+									className='w-4 h-4 inline-block animate-spin border border-transparent border-t-neutral-200 rounded-full'
+								/>
+							) : (
+								<span>Se connecter</span>
+							)}
 						</button>
 					</div>
 				</form>
