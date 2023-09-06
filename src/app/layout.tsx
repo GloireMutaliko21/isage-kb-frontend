@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
 	return (
 		<html lang='fr'>
-			<body className='w-full h-screen'>
+			<body className='w-full h-full'>
 				<AntdLayout>{children}</AntdLayout>
 			</body>
 		</html>

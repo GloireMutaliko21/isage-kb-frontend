@@ -3,10 +3,11 @@ import Image from 'next/image';
 import InputComponent from '../global/Input';
 import PwdInput from '../global/PwdInput';
 import Link from 'next/link';
+import { Divider } from 'antd';
 
 const LoginForm = () => {
 	return (
-		<section className='flex flex-col gap-y-8 w-full lg:w-1/2'>
+		<section className='flex flex-col gap-y-8 w-full md:px-10 2xl:px-24 py-0 md:py-6 2xl:py-14'>
 			<div className='mb-6'>
 				<div className='w-12 h-12'>
 					<Image
@@ -18,10 +19,16 @@ const LoginForm = () => {
 					/>
 				</div>
 			</div>
+
 			<div className='leading-loose'>
-				<h1 className='font-bold text-4xl'>Bienvenue !</h1>
-				<p className='font-extralight'>Connectez-vous pour commencer</p>
+				<h1 className='font-extrabol text-4xl text-primary-900'>
+					Connectez-vous ici !
+				</h1>
+				<p className='font-extralight'>
+					Saisissez vos identifiants pour commencer
+				</p>
 			</div>
+
 			<div>
 				<form action='' className='flex flex-col gap-3'>
 					<div>
@@ -52,10 +59,31 @@ const LoginForm = () => {
 							onChange={() => {}}
 						/>
 					</div>
-					<div className='text-sm w-full text-end hover:underline text-primary-800'>
+					<div className='text-sm w-full text-end hover:underline text-primary-900'>
 						<Link href='/pwd'>Mot de passe oublié ?</Link>
 					</div>
+					<div>
+						<button
+							className='mb-6 bg-primary-900 hover:bg-primary-800 hover:shadow-md duration-300 text-white font-medium flex justify-center items-center gap-2 border w-full py-3 rounded-lg'
+							// onClick={handleSubmit}
+						>
+							Se connecter
+						</button>
+					</div>
 				</form>
+			</div>
+
+			<div>
+				<Divider></Divider>
+				<div className='flex justify-center text-center text-sm gap-1'>
+					<p>Vous n&apos;avez pas de compte ? </p>
+					<Link
+						href='/requestAccount'
+						className='hover:underline text-primary-900'
+					>
+						Contactez un admin
+					</Link>
+				</div>
 			</div>
 		</section>
 	);
