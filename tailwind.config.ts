@@ -9,7 +9,7 @@ const config: Config = {
 	theme: {
 		extend: {
 			fontFamily: {
-				sans: ['Raleway', 'Helvetica', 'Ubuntu', 'system-ui', 'sans-serif'],
+				sans: ['cairo', 'Helvetica', 'Ubuntu', 'system-ui', 'sans-serif'],
 			},
 			colors: {
 				primary: {
