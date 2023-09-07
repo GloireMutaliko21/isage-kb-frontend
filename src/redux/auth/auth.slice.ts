@@ -41,7 +41,7 @@ const authSlice = createSlice({
 			window.location.reload();
 		},
 		loadUserToken: (state, { payload }: { payload: string }) => {
-			state.token = payload;
+			state.token = JSON.parse(payload);
 		},
 	},
 	extraReducers: (builder) => {
