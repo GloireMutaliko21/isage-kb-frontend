@@ -12,7 +12,7 @@ const AntdLayout = ({
 			theme={{
 				token: {
 					colorPrimary: '#01579B',
-					fontFamily: 'Raleway',
+					fontFamily: 'cairo',
 				},
 			}}
 		>
