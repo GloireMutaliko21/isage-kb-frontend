@@ -12,7 +12,7 @@ const MainLayout = ({
 	return (
 		<main>
 			<div className='flex h-screen bg-[#f3f4f6]'>
-				<div className='h-screen z-10 w-72 bg-slate-500 overflow-y-auto relative'></div>
+				<Sidebar />
 				<div className=' basis-full overflow-x-hidden h-screen  flex flex-col'>
 					<div className='bg-primary-800 md:w-full w-full flex justify-between items-center p-7 text-white'>
 						<div className='hidden md:flex gap-x-4 [&>.active]:border-b-4 border-white text-sm'></div>
