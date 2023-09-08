@@ -21,9 +21,7 @@ const MainLayout = ({
 					<MainProvider>
 						<Navbar />
 					</MainProvider>
-					<div className='p-1 lg:p-10 overflow-y-auto max-w-screen'>
-						{children}
-					</div>
+					<div className='overflow-y-auto max-w-screen'>{children}</div>
 				</div>
 			</div>
 		</main>
