@@ -1,6 +1,7 @@
 'use client';
 import CardStat from '@/components/dashboards/PersPatr/CardStat';
 import useAgents from '@/hooks/useAgents';
+import useAttendency from '@/hooks/useAttendency';
 import useAuth from '@/hooks/useAuh';
 import { BsCalendarMonth } from 'react-icons/bs';
 import { HiOutlineUsers } from 'react-icons/hi2';
@@ -9,6 +10,7 @@ import { MdOutlineMoneyOff } from 'react-icons/md';
 
 export default function Home() {
 	const { agents } = useAgents();
+	const { attendecies } = useAttendency();
 	const { isLogin } = useAuth();
 	if (!isLogin)
 		return <div>Veillez vous connectez pour voir vos évenements</div>;
@@ -34,8 +36,12 @@ export default function Home() {
 				/>
 				<CardStat
 					title='agents présents'
-					value={agents.length.toString()}
-					decoration={<></>}
+					value={attendecies.length.toString()}
+					decoration={
+						<p>
+							{attendecies.filter((a) => a.status! == 'retard').length} retards
+						</p>
+					}
 					icon={<IoTodayOutline />}
 				/>
 				<CardStat
