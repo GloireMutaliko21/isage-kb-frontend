@@ -1,6 +1,7 @@
-export const checkUserRole = (user: User, givenRole: string) => {
+export const checkUserRole = (user: any, givenRole: string) => {
 	return user.roles?.find(
-		(role) => role.title.toLocaleLowerCase() === givenRole.toLocaleLowerCase()
+		(role: any) =>
+			role.title.toLocaleLowerCase() === givenRole.toLocaleLowerCase()
 	)
 		? true
 		: false;

@@ -35,10 +35,10 @@ const LoginForm = () => {
 	};
 
 	// Account Verification
-	const { user, isPendindLogin } = useAuth();
+	const { user } = useAuth();
 	const router = useRouter();
 	useEffect(() => {
-		if (user.token || localStorage.getItem('session_token')) router.push('/');
+		if (user.session || localStorage.getItem('session-user')) router.push('/');
 	});
 
 	return (
@@ -102,9 +102,9 @@ const LoginForm = () => {
 							className='mb-6 bg-primary-900 hover:bg-primary-800 hover:shadow-md duration-300 text-white font-medium flex justify-center items-center gap-2 border w-full py-3 rounded-lg'
 							// onClick={handleSubmit}
 						>
-							{isPendindLogin ? (
+							{user.status.isLoading ? (
 								<span
-									hidden={isPendindLogin}
+									hidden={user.status.isLoading}
 									className='w-4 h-4 inline-block animate-spin border border-transparent border-t-neutral-200 rounded-full'
 								/>
 							) : (
