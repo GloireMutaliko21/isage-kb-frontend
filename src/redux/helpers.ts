@@ -8,7 +8,7 @@ export const authUrls = {
 
 export const agentsUrls = {
 	getAllAndCreate: `${apiUrl}agents`,
-	getById: (id: string) => `${apiUrl}agents/${id}`,
+	getByIdAndUpdate: (id: string) => `${apiUrl}agents/${id}`,
 };
 
 export const attendecyUrls = {
