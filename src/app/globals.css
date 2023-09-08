@@ -7,3 +7,17 @@
 html {
 	font-family: cairo, ui-sans-serif, system-ui;
 }
+
+.ant-collapse-item {
+	margin: 8px 5px;
+}
+
+.ant-collapse-item-active > .ant-collapse-header {
+	background-color: rgb(224 247 250 / var(--tw-bg-opacity));
+	border-radius: 0.475rem;
+}
+
+.ant-collapse-item > .ant-collapse-header:hover {
+	background-color: rgb(224 247 250 / var(--tw-bg-opacity));
+	border-radius: 0.475rem;
+}
