@@ -1,4 +1,3 @@
-import Sidebar from '@/components/layouts/Sidebar';
 import Link from 'next/link';
 
 export default function Home() {
