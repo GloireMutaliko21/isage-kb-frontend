@@ -17,8 +17,8 @@ export const attendecyUrls = {
 	getMonthly: (year: number, month: number) =>
 		`${apiUrl}attendency/monthly?year=${year}&month=${month}`,
 
-	getMonthlyByAgent: (year: number, month: number) =>
-		`${apiUrl}attendency/agent-monthly?year=${year}&month=${month}`,
+	getMonthlyByAgent: (agentId: string, year: number, month: number) =>
+		`${apiUrl}attendency/agent-monthly/${agentId}?year=${year}&month=${month}`,
 
 	getOwnMonthly: (year: number, month: number) =>
 		`${apiUrl}attendency/monthly-me?year=${year}&month=${month}`,
