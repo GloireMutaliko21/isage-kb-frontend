@@ -3,6 +3,7 @@ import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import { BiHome } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
+import { RiLogoutCircleLine } from 'react-icons/ri';
 import { BsCassette } from 'react-icons/bs';
 import {
 	PiCalendarLight,
@@ -29,7 +30,7 @@ const text = `
 
 const Sidebar = () => {
 	const activeLink = useSelectedLayoutSegment();
-	const { user } = useAuth();
+	const { user, logout } = useAuth();
 
 	const RenderItem = ({
 		headerText,
@@ -152,6 +153,15 @@ const Sidebar = () => {
 					<PiCalendarLight className='text-xl' />
 					Mes présences
 				</Link>
+			</div>
+			<div className='absolute bottom-0 py-4 px-2 w-full'>
+				<button
+					onClick={logout}
+					className='bg-secondary-600 p-3 py-2 text-sm w-full text-white rounded-md flex gap-2 justify-center items-center'
+				>
+					<RiLogoutCircleLine className='text-lg' />
+					Déconnexion
+				</button>
 			</div>
 		</div>
 	);

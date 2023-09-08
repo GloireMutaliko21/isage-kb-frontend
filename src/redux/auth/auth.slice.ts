@@ -33,7 +33,7 @@ const authSlice = createSlice({
 		logoutUser: (state) => {
 			localStorage.removeItem('session-user');
 			state.session = null;
-			window.location.reload();
+			window.location.replace('/login');
 		},
 		loadUserData: (
 			state,
