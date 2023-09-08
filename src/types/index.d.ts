@@ -1,7 +1,10 @@
-interface User {
+interface GeneralData {
 	id: string;
 	createdAt?: Date;
 	updatedAt?: Date;
+}
+
+interface User extends GeneralData {
 	names: string;
 	email: string;
 	matricule: string;
@@ -14,10 +17,11 @@ interface User {
 	promDate?: Date;
 	acadTitle?: string;
 	sifa?: number;
-	contacts: object;
-	username: string;
-	imgUrl: string;
-	public_id: string;
+	contacts?: object;
+	username?: string;
+	password?: string;
+	imgUrl?: string;
+	public_id?: string;
 	gradeId?: string;
 	roles?: {
 		id: string;
@@ -25,6 +29,48 @@ interface User {
 		updatedAt?: Date;
 		title: string;
 	}[];
+}
+
+interface CreateAgentDto {
+	email: string;
+	names: string;
+	matricule: string;
+	sex: string;
+	function: string;
+	status: string;
+	birthDate: Date;
+	engagDate: Date;
+	promDate?: Date;
+	acadTitle: string;
+	sifa: number;
+	username?: string;
+	password?: string;
+	contacts: Record<string, any>;
+	file?: File;
+	gradeId: string;
+}
+
+interface UpdateAgentDto {
+	id: string;
+	matricule?: string;
+	function?: string;
+	status?: string;
+	engagDate?: Date;
+	promDate?: Date;
+	acadTitle?: string;
+	sifa?: number;
+}
+
+interface UpdateAgentProfileDto {
+	id: string;
+	names?: string;
+	email?: string;
+	sex?: string;
+	bithDate?: Date;
+	username?: string;
+	password: string;
+	contacts?: Record<string, any>;
+	file?: File;
 }
 
 interface HrefLink {

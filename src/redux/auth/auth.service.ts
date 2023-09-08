@@ -11,7 +11,6 @@ export const login: AsyncThunkPayloadCreator<string, any> = async (
 		const response = await axios.post(authUrls.login, data);
 		return response.data;
 	} catch (error) {
-		if (axios.isAxiosError(error)) console.log(returnApiError(error));
 		return axios.isAxiosError(error)
 			? thunkAPI.rejectWithValue(returnApiError(error))
 			: thunkAPI.rejectWithValue('Auth error');

@@ -1,7 +1,6 @@
 import PageLoader from '@/components/global/PageLoader';
-import dynamic, { LoaderMap } from 'next/dynamic';
+import dynamic from 'next/dynamic';
 
-// import MainLayout from '../../components/layouts/MainLayout';
 const MainLayout = dynamic(() => import('@/components/layouts/MainLayout'), {
 	ssr: false,
 	loading: () => <PageLoader />,
