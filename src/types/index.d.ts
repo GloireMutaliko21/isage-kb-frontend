@@ -73,6 +73,22 @@ interface UpdateAgentProfileDto {
 	file?: File;
 }
 
+interface Attendency extends GeneralData {
+	status: string;
+	agentId?: string;
+	agent?: User;
+}
+
+interface CreateAttendencyDto {
+	dateNow: Date;
+	agentId: string;
+}
+
+interface YearMonthParams {
+	year: number;
+	month: number;
+}
+
 interface HrefLink {
 	href: string;
 	label: string;
