@@ -26,3 +26,8 @@ interface User {
 		title: string;
 	}[];
 }
+
+interface HrefLink {
+	href: string;
+	label: string;
+}

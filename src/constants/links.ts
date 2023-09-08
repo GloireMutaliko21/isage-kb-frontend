@@ -1,7 +1,4 @@
-export const PERSONNEL_LINKS: {
-	href: string;
-	label: string;
-}[] = [
+export const PERSONNEL_LINKS: HrefLink[] = [
 	{
 		href: 'personnel/agents',
 		label: 'Agents',
@@ -25,5 +22,35 @@ export const PERSONNEL_LINKS: {
 	{
 		href: 'personnel/soccas',
 		label: 'Gestion cas sociaux',
+	},
+];
+
+export const INVENTORY_LINKS: HrefLink[] = [
+	{
+		href: 'inv/articles',
+		label: 'Articles',
+	},
+	{
+		href: 'inv/unit-cat',
+		label: 'Unités et catégories',
+	},
+	{
+		href: 'inv/oper',
+		label: 'Opérations',
+	},
+	{
+		href: 'inv/order',
+		label: 'Commandes',
+	},
+];
+
+export const IMMOB_LINKS: HrefLink[] = [
+	{
+		href: 'immob',
+		label: 'Immobilisations',
+	},
+	{
+		href: 'immob/amortis',
+		label: 'Immobilisations amortis',
 	},
 ];

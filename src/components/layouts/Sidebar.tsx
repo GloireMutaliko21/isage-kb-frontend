@@ -3,17 +3,23 @@ import type { CollapseProps } from 'antd';
 import { Collapse } from 'antd';
 import { BiHome } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
+import { BsCassette } from 'react-icons/bs';
 import {
 	PiCalendarLight,
 	PiCalendarPlusDuotone,
 	PiUsersFourThin,
 } from 'react-icons/pi';
-import { RxDashboard } from 'react-icons/rx';
+import { AiOutlineBarChart } from 'react-icons/ai';
 import { HiOutlineArrowsPointingIn } from 'react-icons/hi2';
 import Link from 'next/link';
 import useAuth from '@/hooks/useAuh';
 import { checkUserRole } from '@/features/check-role';
-import { PERSONNEL_LINKS } from '@/constants/links';
+import {
+	IMMOB_LINKS,
+	INVENTORY_LINKS,
+	PERSONNEL_LINKS,
+} from '@/constants/links';
+import { useSelectedLayoutSegment } from 'next/navigation';
 
 const text = `
   A dog is a type of domesticated animal.
@@ -22,20 +28,23 @@ const text = `
 `;
 
 const Sidebar = () => {
+	const activeLink = useSelectedLayoutSegment();
 	const { user } = useAuth();
 
 	const RenderItem = ({
 		headerText,
 		links,
+		icon,
 	}: {
 		headerText: string;
 		links: any[];
+		icon: React.ReactNode;
 	}) => {
 		return {
 			label: (
 				<div className='flex gap-2 items-center justify-between text-[#737a87]'>
 					<div className='flex gap-2 items-center text-[#737a87]'>
-						<BiHome className='text-xl' />
+						<div className='text-xl'>{icon}</div>
 						<span className='text-sm'>{headerText}</span>
 					</div>
 					<div>
@@ -45,11 +54,17 @@ const Sidebar = () => {
 			),
 			children: (
 				<ul className='ml-5 text-gray-500'>
-					{links.map((link, i) => (
+					{links.map((link: HrefLink, i) => (
 						<li key={i} className='my-4'>
 							<Link
 								href={link.href}
-								className='hover:text-secondary-800 duration-150 flex gap-2 items-center'
+								className={`hover:text-secondary-800 duration-150 flex gap-2 items-center ${
+									activeLink ===
+										link.href.substring(
+											link.href.lastIndexOf('/'),
+											link.href.length
+										) && 'text-secondary-800'
+								}`}
 							>
 								<HiOutlineArrowsPointingIn className='text-secondary-600 text-lg' />
 								{link.label}
@@ -59,36 +74,47 @@ const Sidebar = () => {
 				</ul>
 			),
 			showArrow: false,
-			// style: { marginRight: -10, marginLeft: -5, marginBottom: 0 },
 		};
 	};
-	const items: CollapseProps['items'] = [
-		{
-			key: '2',
-			label: (
-				<div className='flex gap-2 items-center justify-between text-[#737a87]'>
-					<div className='flex gap-2 items-center text-[#737a87]'>
-						<RxDashboard className='text-lg' />
-						<span className='text-sm'>Components</span>
-					</div>
-					<div>
-						<IoIosArrowDown className='text-lg' />
-					</div>
-				</div>
-			),
-			children: <p>{text}</p>,
-			showArrow: false,
-			// style: { marginRight: -10, marginLeft: -5 },
-		},
-	];
+	const items: CollapseProps['items'] = [];
 
 	checkUserRole(
 		user?.session?.user ??
 			JSON.parse(localStorage.getItem('session-user')!)?.user,
-		'gestion du personnel'
+		'gestion du personnel' || 'admin'
 	) &&
 		items.push(
-			RenderItem({ headerText: 'Gestion du personnel', links: PERSONNEL_LINKS })
+			RenderItem({
+				headerText: 'Gestion du personnel',
+				links: PERSONNEL_LINKS,
+				icon: <BiHome />,
+			})
+		);
+
+	checkUserRole(
+		user?.session?.user ??
+			JSON.parse(localStorage.getItem('session-user')!)?.user,
+		'gestion patrimoine' || 'admin'
+	) &&
+		items.push(
+			RenderItem({
+				headerText: 'Inventaire',
+				links: INVENTORY_LINKS,
+				icon: <AiOutlineBarChart />,
+			})
+		);
+
+	checkUserRole(
+		user?.session?.user ??
+			JSON.parse(localStorage.getItem('session-user')!)?.user,
+		'gestion patrimoine' || 'admin'
+	) &&
+		items.push(
+			RenderItem({
+				headerText: 'Immobilisations',
+				links: IMMOB_LINKS,
+				icon: <BsCassette />,
+			})
 		);
 
 	return (
