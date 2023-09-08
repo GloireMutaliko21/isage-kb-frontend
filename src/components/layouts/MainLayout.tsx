@@ -18,7 +18,9 @@ const MainLayout = ({
 					<Sidebar />
 				</MainProvider>
 				<div className=' basis-full overflow-x-hidden h-screen  flex flex-col'>
-					<Navbar />
+					<MainProvider>
+						<Navbar />
+					</MainProvider>
 					<div className='p-1 lg:p-10 overflow-y-auto max-w-screen'>
 						{children}
 					</div>
