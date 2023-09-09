@@ -106,6 +106,26 @@ interface UpdateAgentFileDto {
 	folderElementId: string;
 }
 
+interface Article extends GeneralData {
+	libelle?: string;
+	stockAlert?: string;
+	unityId?: string;
+	categoryId?: string;
+	category?: {
+		libelle?: string;
+	};
+	unity?: {
+		libelle?: string;
+	};
+}
+
+interface CreateArticleDto {
+	libelle: string;
+	stockAlert: number;
+	unityId: string;
+	categoryId: string;
+}
+
 interface YearMonthParams {
 	year: number;
 	month: number;

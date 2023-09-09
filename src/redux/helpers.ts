@@ -27,3 +27,10 @@ export const attendecyUrls = {
 export const agentFileUrl = {
 	createAndUpdate: `${apiUrl}agent-files`,
 };
+
+export const articleUrls = {
+	createAndGet: `${apiUrl}article`,
+	getCateg: `${apiUrl}article/categ`,
+	getUnstock: `${apiUrl}article/unstock`,
+	getOne: (id: string) => `${apiUrl}article/${id}`,
+};
