@@ -84,6 +84,28 @@ interface CreateAttendencyDto {
 	agentId: string;
 }
 
+interface AgentFile {
+	agentId_folderElementId: {
+		agentId: string;
+		folderElementId: string;
+	};
+	agentId: string;
+	folderElementId: string;
+	url?: string;
+	public_id?: string;
+}
+
+interface CreateAgentFileDto {
+	agentId: string;
+	folderElementId: string;
+}
+
+interface UpdateAgentFileDto {
+	public_id: string;
+	agentId: string;
+	folderElementId: string;
+}
+
 interface YearMonthParams {
 	year: number;
 	month: number;

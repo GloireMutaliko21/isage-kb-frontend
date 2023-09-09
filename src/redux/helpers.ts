@@ -23,3 +23,7 @@ export const attendecyUrls = {
 	getOwnMonthly: (year: number, month: number) =>
 		`${apiUrl}attendency/monthly-me?year=${year}&month=${month}`,
 };
+
+export const agentFileUrl = {
+	createAndUpdate: `${apiUrl}agent-files`,
+};
