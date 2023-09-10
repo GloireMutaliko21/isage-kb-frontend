@@ -142,6 +142,22 @@ interface CreateUnityDto {
 	libelle: string;
 }
 
+interface Conge extends GeneralData {
+	startDate?: Date;
+	endDate?: Date;
+	agent?: User;
+}
+
+interface CreateCongeDto {
+	agentId: string;
+	startDate: Date;
+	endDate: Date;
+}
+
+interface UpdateCongeDto extends CreateCongeDto {
+	id: string;
+}
+
 interface YearMonthParams {
 	year: number;
 	month: number;

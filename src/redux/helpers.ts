@@ -39,3 +39,9 @@ export const unityUrls = {
 	createAndGetAll: `${apiUrl}unity`,
 	updateAndGetOne: (id: string) => `${apiUrl}unity/${id}`,
 };
+
+export const congeUrls = {
+	createAndGet: `${apiUrl}conge`,
+	requestConge: `${apiUrl}conge/request`,
+	approveConge: (id: string) => `${apiUrl}conge/${id}`,
+};
