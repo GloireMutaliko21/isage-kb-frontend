@@ -266,6 +266,27 @@ interface StartEndDatesParams {
 	end: Date;
 }
 
+interface Order extends GeneralData {
+	qty: number;
+	status?: string;
+	articleId: string;
+	article?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		libelle: string;
+		qty: number;
+		stockAlert: number;
+		categoryId: string;
+		unityId: string;
+	};
+}
+
+interface CreateOrderDto {
+	qty: string;
+	articleId: string;
+}
+
 interface HrefLink {
 	href: string;
 	label: string;

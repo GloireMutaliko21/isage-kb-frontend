@@ -72,3 +72,10 @@ export const inventaireUrls = {
 	getGlobalHistoricByArticle: (id: string, start: Date, end: Date) =>
 		`${apiUrl}inventaire/${id}?start=${start}&end=${end}`,
 };
+
+export const orderUrls = {
+	createAndGet: `${apiUrl}order`,
+	getHistoric: `${apiUrl}order/historic`,
+	close: (id: string) => `${apiUrl}order/close/${id}`,
+	cancel: (id: string) => `${apiUrl}order/cancel/${id}`,
+};
