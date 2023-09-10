@@ -4,7 +4,7 @@ import { authUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
 
-export const login: AsyncThunkPayloadCreator<string, any> = async (
+export const login: AsyncThunkPayloadCreator<User, any> = async (
 	data,
 	thunkAPI
 ) => {
