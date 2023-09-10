@@ -134,3 +134,12 @@ const articleSlice = createSlice({
 			});
 	},
 });
+
+export default articleSlice.reducer;
+export {
+	getArticles,
+	getArticleById,
+	getArticleByCated,
+	getUnstockArticles,
+	createArticle,
+};
