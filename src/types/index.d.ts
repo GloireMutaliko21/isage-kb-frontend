@@ -73,6 +73,12 @@ interface UpdateAgentProfileDto {
 	file?: File;
 }
 
+interface DefinePwdDto {
+	username: string;
+	password: string;
+	confirmPassword: string;
+}
+
 interface Attendency extends GeneralData {
 	status: string;
 	agentId?: string;

@@ -1,7 +1,8 @@
 import { AsyncThunkPayloadCreator } from '@reduxjs/toolkit';
-import axios from 'axios';
+import axios, { AxiosResponse } from 'axios';
 import { authUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
+import { RootState } from '../store';
 
 export const login: AsyncThunkPayloadCreator<string, any> = async (
 	data,
@@ -14,5 +15,44 @@ export const login: AsyncThunkPayloadCreator<string, any> = async (
 		return axios.isAxiosError(error)
 			? thunkAPI.rejectWithValue(returnApiError(error))
 			: thunkAPI.rejectWithValue('Auth error');
+	}
+};
+
+export const getMe: AsyncThunkPayloadCreator<User> = async (_, thunkAPI) => {
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const response: AxiosResponse<User> = await axios.get(authUrls.getMe, {
+			headers: { Authorization: `Bearer ${session?.token}` },
+		});
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Fetch error');
+	}
+};
+
+export const definePwdAndUsername: AsyncThunkPayloadCreator<
+	User,
+	DefinePwdDto
+> = async (payload, thunkAPI) => {
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const response: AxiosResponse<User> = await axios.post(
+			authUrls.definePwd,
+			payload,
+			{
+				headers: { Authorization: `Bearer ${session?.token}` },
+			}
+		);
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Post error');
 	}
 };
