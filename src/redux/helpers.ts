@@ -84,3 +84,10 @@ export const categoryUrls = {
 	createAndGet: `${apiUrl}category`,
 	updateAndGetOne: (id: string) => `${apiUrl}category/${id}`,
 };
+
+export const roleUrls = {
+	createAndGet: `${apiUrl}roles`,
+	getOneUpdateDelete: (id: string) => `${apiUrl}roles/${id}`,
+	createAccess: (agentId: string) => `${apiUrl}roles/access/${agentId}`,
+	removeAccess: (agentId: string) => `${apiUrl}roles/rm/${agentId}`,
+};

@@ -318,6 +318,25 @@ interface CreateCategoryDto {
 	libelle: string;
 }
 
+interface Role extends GeneralData {
+	title: string;
+}
+
+interface createRoleDto {
+	title: string;
+}
+
+interface UpdateRoleDto {
+	id: string;
+	agentId: string;
+	roleId: string;
+}
+
+interface CreateAccess {
+	roleId: string;
+	agentId: string;
+}
+
 interface HrefLink {
 	href: string;
 	label: string;
