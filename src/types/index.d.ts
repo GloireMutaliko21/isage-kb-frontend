@@ -287,6 +287,37 @@ interface CreateOrderDto {
 	articleId: string;
 }
 
+interface Category extends GeneralData {
+	libelle?: string;
+	immobilisation?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		libelle: string;
+		valDepart: number;
+		duration: number;
+		vnc: number;
+		amortissDate: Date;
+		categoryId: string;
+		serviceId: string;
+	}[];
+	articles?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		libelle: string;
+		qty: number;
+		stockAlert: number;
+		categoryId: string;
+		unityId: string;
+	}[];
+}
+
+interface CreateCategoryDto {
+	id?: string;
+	libelle: string;
+}
+
 interface HrefLink {
 	href: string;
 	label: string;

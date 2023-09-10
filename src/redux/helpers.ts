@@ -79,3 +79,8 @@ export const orderUrls = {
 	close: (id: string) => `${apiUrl}order/close/${id}`,
 	cancel: (id: string) => `${apiUrl}order/cancel/${id}`,
 };
+
+export const categoryUrls = {
+	createAndGet: `${apiUrl}category`,
+	updateAndGetOne: (id: string) => `${apiUrl}category/${id}`,
+};
