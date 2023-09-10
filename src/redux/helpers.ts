@@ -61,3 +61,14 @@ export const immobUrls = {
 	createAndGet: `${apiUrl}immob`,
 	getAmortis: `${apiUrl}immob/amortis`,
 };
+
+export const inventaireUrls = {
+	createOp: `${apiUrl}inventaire`,
+	getSheetToday: `${apiUrl}inventaire/today`,
+	getSheetWeek: `${apiUrl}inventaire/week`,
+	getSheetSynthese: `${apiUrl}inventaire/synthese`,
+	getGlobal: (start: Date, end: Date) =>
+		`${apiUrl}inventaire?start=${start}&end=${end}`,
+	getGlobalHistoricByArticle: (id: string, start: Date, end: Date) =>
+		`${apiUrl}inventaire/${id}?start=${start}&end=${end}`,
+};

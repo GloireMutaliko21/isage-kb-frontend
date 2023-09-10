@@ -230,9 +230,40 @@ interface CreateImmobDto {
 	categoryId: string;
 }
 
+interface SheetSynthese {
+	libelle?: string;
+	entree?: number;
+	sortie?: number;
+	qty?: number;
+}
+
+interface SheetGlobalHistoric {
+	typeOp: string;
+	data: {
+		date?: Date;
+		libelle: string;
+		qte: number;
+		designation: libelle;
+	}[];
+}
+
+interface CreateOperationDto {
+	typeOp: string;
+	libelle: string;
+	qty: number;
+	dateOp: Date;
+	articleId: string;
+}
+
 interface YearMonthParams {
 	year: number;
 	month: number;
+}
+
+interface StartEndDatesParams {
+	id?: string;
+	start: Date;
+	end: Date;
 }
 
 interface HrefLink {
