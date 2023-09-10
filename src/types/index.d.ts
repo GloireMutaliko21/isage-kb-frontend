@@ -188,9 +188,9 @@ interface Grade extends GeneralData {
 		maladAcc: number;
 		heureSupp: number;
 	};
-	baseSalary: number;
-	folderIds: string[];
-	agents: User[];
+	baseSalary?: number;
+	folderIds?: string[];
+	agents?: User[];
 }
 
 interface CreateGradeDto {
@@ -204,6 +204,30 @@ interface UpdateGradeDto {
 	title?: string;
 	rate?: Record<string, number>;
 	folderIds?: string[];
+}
+
+interface Immob extends GeneralData {
+	libelle?: string;
+	valDepart?: number;
+	duration?: number;
+	vnc?: number;
+	amortissDate?: Date;
+	category?: {
+		id: string;
+		libelle: string;
+	};
+	service?: {
+		id: string;
+		libelle: string;
+	};
+}
+
+interface CreateImmobDto {
+	libelle: string;
+	valDepart: number;
+	duration: number;
+	serviceId: string;
+	categoryId: string;
 }
 
 interface YearMonthParams {

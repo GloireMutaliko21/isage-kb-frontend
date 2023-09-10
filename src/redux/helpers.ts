@@ -56,3 +56,8 @@ export const gradeUrls = {
 	createAndGet: `${apiUrl}grades`,
 	getOnePatchDelete: (id: string) => `${apiUrl}grades/${id}`,
 };
+
+export const immobUrls = {
+	createAndGet: `${apiUrl}immob`,
+	getAmortis: `${apiUrl}immob/amortis`,
+};
