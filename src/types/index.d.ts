@@ -159,6 +159,25 @@ interface UpdateCongeDto extends CreateCongeDto {
 	id: string;
 }
 
+interface FolderElement extends GeneralData {
+	title?: string;
+	agents?: {
+		agentId: string;
+		folderElementId: string;
+		url: string;
+		public_id: string;
+	}[];
+}
+
+interface CreateFolderElementDto {
+	title: string;
+}
+
+interface UpdateFolderElementDto {
+	id: string;
+	title: string;
+}
+
 interface YearMonthParams {
 	year: number;
 	month: number;

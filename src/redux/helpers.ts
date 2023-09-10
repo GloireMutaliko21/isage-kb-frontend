@@ -46,3 +46,8 @@ export const congeUrls = {
 	getUnapproved: `${apiUrl}conge/pending`,
 	approveConge: (id: string) => `${apiUrl}conge/${id}`,
 };
+
+export const folderElementUrls = {
+	createAndGet: `${apiUrl}folder-element`,
+	getOnePatchDelete: (id: string) => `${apiUrl}folder-element/${id}`,
+};
