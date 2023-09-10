@@ -34,3 +34,8 @@ export const articleUrls = {
 	getUnstock: `${apiUrl}article/unstock`,
 	getOne: (id: string) => `${apiUrl}article/${id}`,
 };
+
+export const unityUrls = {
+	createAndGetAll: `${apiUrl}unity`,
+	updateAndGetOne: (id: string) => `${apiUrl}unity/${id}`,
+};

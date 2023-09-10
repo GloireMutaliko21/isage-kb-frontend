@@ -126,6 +126,16 @@ interface CreateArticleDto {
 	categoryId: string;
 }
 
+interface Unity extends GeneralData {
+	libelle?: string;
+	articles?: Aricle[];
+}
+
+interface CreateUnityDto {
+	id: string;
+	libelle: string;
+}
+
 interface YearMonthParams {
 	year: number;
 	month: number;
