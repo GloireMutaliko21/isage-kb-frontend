@@ -24,6 +24,26 @@ export const getAgentsOnConge: AsyncThunkPayloadCreator<Conge[]> = async (
 	}
 };
 
+export const getUnApproved: AsyncThunkPayloadCreator<Conge[]> = async (
+	_,
+	thunkAPI
+) => {
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const response: AxiosResponse<Conge[]> = await axios.get(
+			congeUrls.getUnapproved,
+			{ headers: { Authorization: `Bearer ${session?.token}` } }
+		);
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Fetch error');
+	}
+};
+
 export const createConge: AsyncThunkPayloadCreator<
 	Conge,
 	CreateCongeDto

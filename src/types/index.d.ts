@@ -145,6 +145,7 @@ interface CreateUnityDto {
 interface Conge extends GeneralData {
 	startDate?: Date;
 	endDate?: Date;
+	approved?: boolean;
 	agent?: User;
 }
 
