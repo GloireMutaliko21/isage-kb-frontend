@@ -51,3 +51,8 @@ export const folderElementUrls = {
 	createAndGet: `${apiUrl}folder-element`,
 	getOnePatchDelete: (id: string) => `${apiUrl}folder-element/${id}`,
 };
+
+export const gradeUrls = {
+	createAndGet: `${apiUrl}grades`,
+	getOnePatchDelete: (id: string) => `${apiUrl}grades/${id}`,
+};

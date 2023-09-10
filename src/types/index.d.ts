@@ -178,6 +178,34 @@ interface UpdateFolderElementDto {
 	title: string;
 }
 
+interface Grade extends GeneralData {
+	title?: string;
+	rate?: {
+		base: number;
+		alloc: number;
+		conge: number;
+		ferie: number;
+		maladAcc: number;
+		heureSupp: number;
+	};
+	baseSalary: number;
+	folderIds: string[];
+	agents: User[];
+}
+
+interface CreateGradeDto {
+	title: string;
+	rate: Record<string, number>;
+	folderIds: string[];
+}
+
+interface UpdateGradeDto {
+	id: string;
+	title?: string;
+	rate?: Record<string, number>;
+	folderIds?: string[];
+}
+
 interface YearMonthParams {
 	year: number;
 	month: number;
