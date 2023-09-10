@@ -337,6 +337,22 @@ interface CreateAccess {
 	agentId: string;
 }
 
+interface Section extends GeneralData {
+	libelle?: string;
+	immobilisations?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		libelle: libelle;
+		valDepart: number;
+		duration: number;
+		vnc: number;
+		amortissDate: Date;
+		categoryId: string;
+		serviceId: string;
+	}[];
+}
+
 interface HrefLink {
 	href: string;
 	label: string;

@@ -91,3 +91,8 @@ export const roleUrls = {
 	createAccess: (agentId: string) => `${apiUrl}roles/access/${agentId}`,
 	removeAccess: (agentId: string) => `${apiUrl}roles/rm/${agentId}`,
 };
+
+export const sectionUrls = {
+	createAndGet: `${apiUrl}service`,
+	updateAndGetOne: (id: string) => `${apiUrl}service/${id}`,
+};
