@@ -1,29 +1,38 @@
 import { AsyncThunkPayloadCreator } from '@reduxjs/toolkit';
 import axios, { AxiosResponse } from 'axios';
-import { authUrls } from '../helpers';
+import { immobUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
 
-export const login: AsyncThunkPayloadCreator<User, any> = async (
-	data,
+export const getImmobs: AsyncThunkPayloadCreator<Immob[]> = async (
+	_,
 	thunkAPI
 ) => {
-	try {
-		const response = await axios.post(authUrls.login, data);
-		return response.data;
-	} catch (error) {
-		return axios.isAxiosError(error)
-			? thunkAPI.rejectWithValue(returnApiError(error))
-			: thunkAPI.rejectWithValue('Auth error');
-	}
-};
-
-export const getMe: AsyncThunkPayloadCreator<User> = async (_, thunkAPI) => {
 	const {
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<User> = await axios.get(authUrls.getMe, {
+		const response: AxiosResponse<Immob[]> = await axios.get(
+			immobUrls.createAndGet,
+			{ headers: { Authorization: `Bearer ${session?.token}` } }
+		);
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Fetch error');
+	}
+};
+
+export const getAmortis: AsyncThunkPayloadCreator<any> = async (
+	_,
+	thunkAPI
+) => {
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const response: AxiosResponse<any> = await axios.get(immobUrls.getAmortis, {
 			headers: { Authorization: `Bearer ${session?.token}` },
 		});
 		return response.data;
@@ -34,16 +43,16 @@ export const getMe: AsyncThunkPayloadCreator<User> = async (_, thunkAPI) => {
 	}
 };
 
-export const definePwdAndUsername: AsyncThunkPayloadCreator<
-	User,
-	DefinePwdDto
+export const createImmob: AsyncThunkPayloadCreator<
+	Immob,
+	CreateImmobDto
 > = async (payload, thunkAPI) => {
 	const {
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<User> = await axios.post(
-			authUrls.definePwd,
+		const response: AxiosResponse<Immob> = await axios.post(
+			immobUrls.getAmortis,
 			payload,
 			{
 				headers: { Authorization: `Bearer ${session?.token}` },

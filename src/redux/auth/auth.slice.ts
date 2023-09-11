@@ -1,10 +1,11 @@
 'use client';
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit';
-import { login } from './auth.service';
+import { definePwdAndUsername, getMe, login } from './auth.service';
 import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	session: any;
+	profile: User | null;
 	status: {
 		isLoading: boolean;
 		isSuccess: boolean;
@@ -16,6 +17,7 @@ const initialState: {
 		typeof window !== 'undefined'
 			? JSON.parse(window?.localStorage?.getItem('session-user')!)
 			: null,
+	profile: null,
 	status: {
 		isLoading: false,
 		isSuccess: false,
@@ -25,6 +27,10 @@ const initialState: {
 };
 
 const loginUser = createAsyncThunk('auth/login', login);
+
+const getProfile = createAsyncThunk('auth/getMe', getMe);
+
+const defineUserPwd = createAsyncThunk('auth/pwd', definePwdAndUsername);
 
 const authSlice = createSlice({
 	name: 'auth',
@@ -49,13 +55,16 @@ const authSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
+		//getProfile
 		builder
+			//login
 			.addCase(loginUser.pending, (state) => {
 				state.status = STATUS.PENDING;
 			})
 			.addCase(loginUser.fulfilled, (state, { payload }) => {
 				localStorage.setItem('session-user', JSON.stringify(payload));
 				state.session = payload;
+				state.profile = payload;
 				state.message = null;
 			})
 			.addCase(loginUser.rejected, (state, { payload }) => {
@@ -63,11 +72,39 @@ const authSlice = createSlice({
 				state.status = STATUS.ERROR;
 				state.message = payload as string;
 				state.session = null;
+			})
+			//get profile
+			.addCase(getProfile.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(getProfile.fulfilled, (state, { payload }) => {
+				state.status = STATUS.SUCCESS;
+				state.profile = payload;
+				state.message = null;
+			})
+			.addCase(getProfile.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
+				state.profile = state.session;
+				state.message = payload as string;
+			})
+
+			//define password and username
+			.addCase(defineUserPwd.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(defineUserPwd.fulfilled, (state, { payload }) => {
+				state.status = STATUS.SUCCESS;
+				state.profile = payload;
+				state.message = null;
+			})
+			.addCase(defineUserPwd.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
+				state.message = payload as string;
 			});
 	},
 });
 
 export const { setAuthIsError, setAuthIsSuccess, logoutUser, loadUserData } =
 	authSlice.actions;
-export { loginUser };
+export { loginUser, getProfile, defineUserPwd };
 export default authSlice.reducer;

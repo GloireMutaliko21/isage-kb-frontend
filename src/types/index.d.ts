@@ -73,6 +73,12 @@ interface UpdateAgentProfileDto {
 	file?: File;
 }
 
+interface DefinePwdDto {
+	username: string;
+	password: string;
+	confirmPassword: string;
+}
+
 interface Attendency extends GeneralData {
 	status: string;
 	agentId?: string;
@@ -84,9 +90,493 @@ interface CreateAttendencyDto {
 	agentId: string;
 }
 
+interface AgentFile {
+	agentId_folderElementId: {
+		agentId: string;
+		folderElementId: string;
+	};
+	agentId: string;
+	folderElementId: string;
+	url?: string;
+	public_id?: string;
+}
+
+interface CreateAgentFileDto {
+	agentId: string;
+	folderElementId: string;
+}
+
+interface UpdateAgentFileDto {
+	public_id: string;
+	agentId: string;
+	folderElementId: string;
+}
+
+interface Article extends GeneralData {
+	libelle?: string;
+	stockAlert?: string;
+	unityId?: string;
+	categoryId?: string;
+	category?: {
+		libelle?: string;
+	};
+	unity?: {
+		libelle?: string;
+	};
+}
+
+interface CreateArticleDto {
+	libelle: string;
+	stockAlert: number;
+	unityId: string;
+	categoryId: string;
+}
+
+interface Unity extends GeneralData {
+	libelle?: string;
+	articles?: Aricle[];
+}
+
+interface CreateUnityDto {
+	id: string;
+	libelle: string;
+}
+
+interface Conge extends GeneralData {
+	startDate?: Date;
+	endDate?: Date;
+	approved?: boolean;
+	agent?: User;
+}
+
+interface CreateCongeDto {
+	agentId: string;
+	startDate: Date;
+	endDate: Date;
+}
+
+interface UpdateCongeDto extends CreateCongeDto {
+	id: string;
+}
+
+interface FolderElement extends GeneralData {
+	title?: string;
+	agents?: {
+		agentId: string;
+		folderElementId: string;
+		url: string;
+		public_id: string;
+	}[];
+}
+
+interface CreateFolderElementDto {
+	title: string;
+}
+
+interface UpdateFolderElementDto {
+	id: string;
+	title: string;
+}
+
+interface Grade extends GeneralData {
+	title?: string;
+	rate?: {
+		base: number;
+		alloc: number;
+		conge: number;
+		ferie: number;
+		maladAcc: number;
+		heureSupp: number;
+	};
+	baseSalary?: number;
+	folderIds?: string[];
+	agents?: User[];
+}
+
+interface CreateGradeDto {
+	title: string;
+	rate: Record<string, number>;
+	folderIds: string[];
+}
+
+interface UpdateGradeDto {
+	id: string;
+	title?: string;
+	rate?: Record<string, number>;
+	folderIds?: string[];
+}
+
+interface Immob extends GeneralData {
+	libelle?: string;
+	valDepart?: number;
+	duration?: number;
+	vnc?: number;
+	amortissDate?: Date;
+	category?: {
+		id: string;
+		libelle: string;
+	};
+	service?: {
+		id: string;
+		libelle: string;
+	};
+}
+
+interface CreateImmobDto {
+	libelle: string;
+	valDepart: number;
+	duration: number;
+	serviceId: string;
+	categoryId: string;
+}
+
+interface SheetSynthese {
+	libelle?: string;
+	entree?: number;
+	sortie?: number;
+	qty?: number;
+}
+
+interface SheetGlobalHistoric {
+	typeOp: string;
+	data: {
+		date?: Date;
+		libelle: string;
+		qte: number;
+		designation: libelle;
+	}[];
+}
+
+interface CreateOperationDto {
+	typeOp: string;
+	libelle: string;
+	qty: number;
+	dateOp: Date;
+	articleId: string;
+}
+
 interface YearMonthParams {
+	id?: string;
 	year: number;
 	month: number;
+}
+
+interface StartEndDatesParams {
+	id?: string;
+	start: Date;
+	end: Date;
+}
+
+interface Order extends GeneralData {
+	qty: number;
+	status?: string;
+	articleId: string;
+	article?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		libelle: string;
+		qty: number;
+		stockAlert: number;
+		categoryId: string;
+		unityId: string;
+	};
+}
+
+interface CreateOrderDto {
+	qty: string;
+	articleId: string;
+}
+
+interface Category extends GeneralData {
+	libelle?: string;
+	immobilisation?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		libelle: string;
+		valDepart: number;
+		duration: number;
+		vnc: number;
+		amortissDate: Date;
+		categoryId: string;
+		serviceId: string;
+	}[];
+	articles?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		libelle: string;
+		qty: number;
+		stockAlert: number;
+		categoryId: string;
+		unityId: string;
+	}[];
+}
+
+interface CreateCategoryDto {
+	id?: string;
+	libelle: string;
+}
+
+interface Role extends GeneralData {
+	title: string;
+}
+
+interface createRoleDto {
+	title: string;
+}
+
+interface UpdateRoleDto {
+	id: string;
+	agentId: string;
+	roleId: string;
+}
+
+interface CreateAccess {
+	roleId: string;
+	agentId: string;
+}
+
+interface Section extends GeneralData {
+	libelle?: string;
+	immobilisations?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		libelle: libelle;
+		valDepart: number;
+		duration: number;
+		vnc: number;
+		amortissDate: Date;
+		categoryId: string;
+		serviceId: string;
+	}[];
+}
+
+interface Subscription extends GeneralData {
+	montant: number;
+	casSocId: string;
+	agentId: string;
+	casSoc?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		description: string;
+		endDate: Date;
+		status: string;
+		validity: string;
+		agentId: string;
+		agent: {
+			names: string;
+		};
+	};
+	agent?: {
+		names: string;
+	};
+}
+
+interface CreatedSubscription {
+	subscription: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		montant: number;
+		casSocId: string;
+		agentId: string;
+	};
+	deduction: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		amount: number;
+		libelle: string;
+		agentId: string;
+	};
+}
+
+interface CreateSubscriptionDto {
+	montant: number;
+	casSocId: string;
+}
+
+interface SocialCase extends GeneralData {
+	description: string;
+	endDate: Date;
+	status: string;
+	validity: string;
+	agentId: string;
+	agent: User;
+	casSocSubscriptions: Subscription[];
+}
+
+interface CreateSocialCaseDto {
+	description: string;
+	endDate: Date;
+}
+
+interface UpdateSocialCaseDto {
+	id: string;
+	description?: string;
+	endDate?: Date;
+}
+
+interface CreatedRemMalad extends GeneralData {
+	days: number;
+	libelle: string;
+	agentId: string;
+	agent: User;
+}
+
+interface RemMalad {
+	days: number;
+	total: number;
+}
+
+interface CreatedDeductionPrime extends GeneralData {
+	amount: number;
+	libelle: string;
+	agentId: string;
+	agent: User;
+}
+
+interface DeductionPrime {
+	total: number;
+}
+
+interface DeductionPrimeSynthese {
+	_sum: {
+		amount: number;
+	};
+	libelle: string;
+}
+
+interface CreatedAllocRemCongFerie extends GeneralData {
+	days: number;
+	agentId: string;
+	agent: User;
+}
+
+interface Alloc {
+	days: number;
+	nbEnfant: number;
+	total: number;
+}
+
+interface CreatedHSupp extends GeneralData {
+	number: number;
+	agentId: string;
+	agent: User;
+}
+
+interface HSupp {
+	hours: number;
+	total: number;
+}
+
+interface RemCongeFerie {
+	days: number;
+	total: number;
+}
+
+interface PaySlip extends GeneralData {
+	month: string;
+	baseSalary: {
+		base: number;
+		rate: number;
+	};
+	supHours: {
+		rate: number;
+		hours: number;
+	};
+	jFeries: {
+		days: number;
+		rate: number;
+	};
+	jConge: {
+		days: number;
+		rate: number;
+	};
+	primes: any;
+	deductions: any;
+	alloc: {
+		days: number;
+		rate: number;
+		children: number;
+	};
+	jMaldAcc: {
+		days: number;
+		rate: number;
+	};
+	agentId: string;
+	agent: User;
+}
+
+interface PayList {
+	names: string;
+	grade: string;
+	salary: number;
+	suppHours: number;
+	ferie: number;
+	conge: number;
+	primes: number;
+	deduction: number;
+	alloc: number;
+	maladie: number;
+}
+
+interface Unpaid {
+	names: string;
+	grade: Grade;
+	prime: {
+		amount: number;
+	}[];
+	suppHours: {
+		number: number;
+	}[];
+	remJMaladAccs: {
+		days: number;
+	}[];
+	remJoursConges: {
+		days: number;
+	}[];
+	remJoursFerie: {
+		days: number;
+	}[];
+	salaryDeductions: {
+		amount: number;
+	}[];
+	familyAllocations: {
+		days: number;
+	}[];
+}
+
+interface RemJMaladAccDto {
+	days: number;
+	libelle: string;
+	agentId: string;
+}
+
+interface SalaryDeductionDto {
+	amount: number;
+	libelle: string;
+	agentId: string;
+}
+
+interface FamilyAllocationDto {
+	days: number;
+	agentId: string;
+}
+
+interface SuppHourDto {
+	number: number;
+	agentId: string;
+}
+
+interface CreatePaySlipDto {
+	year: number;
+	month: number;
+	agentId: string;
 }
 
 interface HrefLink {
