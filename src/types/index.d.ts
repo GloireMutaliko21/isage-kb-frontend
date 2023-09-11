@@ -353,6 +353,52 @@ interface Section extends GeneralData {
 	}[];
 }
 
+interface Subscription extends GeneralData {
+	montant: number;
+	casSocId: string;
+	agentId: string;
+	casSoc: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		description: string;
+		endDate: Date;
+		status: string;
+		validity: string;
+		agentId: string;
+		agent: {
+			names: string;
+		};
+	};
+	agent: {
+		names: string;
+	};
+}
+
+interface CreatedSubscription {
+	subscription: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		montant: number;
+		casSocId: string;
+		agentId: string;
+	};
+	deduction: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		amount: number;
+		libelle: string;
+		agentId: string;
+	};
+}
+
+interface CreateSubscriptionDto {
+	montant: number;
+	casSocId: string;
+}
+
 interface HrefLink {
 	href: string;
 	label: string;

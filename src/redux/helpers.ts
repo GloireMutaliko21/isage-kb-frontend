@@ -96,3 +96,8 @@ export const sectionUrls = {
 	createAndGet: `${apiUrl}service`,
 	updateAndGetOne: (id: string) => `${apiUrl}service/${id}`,
 };
+
+export const subscriptionUrls = {
+	subscribe: `${apiUrl}subscription`,
+	getSubscriptions: (id: string) => `${apiUrl}subscription`,
+};
