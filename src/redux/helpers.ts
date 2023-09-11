@@ -109,3 +109,61 @@ export const socialCaseUrls = {
 	publish: (id: string) => `${apiUrl}social-case/pub/${id}`,
 	close: (id: string) => `${apiUrl}social-case/close/${id}`,
 };
+
+export const remunerationUrls = {
+	maladAcc: {
+		create: `${apiUrl}remuneration/malad`,
+		getPerAgent: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/malad/${id}?year=${year}&month=${month}`,
+	},
+
+	deduc: {
+		create: `${apiUrl}remuneration/deduc`,
+		getPerAgent: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/deduc/${id}?year=${year}&month=${month}`,
+		deducSynth: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/deduc-synth/${id}?year=${year}&month=${month}`,
+	},
+
+	prime: {
+		create: `${apiUrl}remuneration/prime`,
+		getPerAgent: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/prime/${id}?year=${year}&month=${month}`,
+		primeSynth: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/prime-synth/${id}?year=${year}&month=${month}`,
+	},
+
+	alloc: {
+		create: `${apiUrl}remuneration/alloc`,
+		getPerAgent: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/alloc/${id}?year=${year}&month=${month}`,
+	},
+
+	hsupp: {
+		create: `${apiUrl}remuneration/hsupp`,
+		getPerAgent: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/hsupp/${id}?year=${year}&month=${month}`,
+	},
+
+	conge: {
+		create: `${apiUrl}remuneration/conge`,
+		getPerAgent: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/conge/${id}?year=${year}&month=${month}`,
+	},
+
+	ferie: {
+		create: `${apiUrl}remuneration/ferie`,
+		getPerAgent: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/ferie/${id}?year=${year}&month=${month}`,
+	},
+
+	payslip: {
+		create: `${apiUrl}remuneration/payslip`,
+		getPerAgent: (id: string, year: number, month: number) =>
+			`${apiUrl}remuneration/payslip/${id}?year=${year}&month=${month}`,
+		getPayList: (year: number, month: number) =>
+			`${apiUrl}remuneration/paylist?year=${year}&month=${month}`,
+		unpaid: (year: number, month: number) =>
+			`${apiUrl}remuneration/unpaid?year=${year}&month=${month}`,
+	},
+};

@@ -256,6 +256,7 @@ interface CreateOperationDto {
 }
 
 interface YearMonthParams {
+	id?: string;
 	year: number;
 	month: number;
 }
@@ -418,6 +419,164 @@ interface UpdateSocialCaseDto {
 	id: string;
 	description?: string;
 	endDate?: Date;
+}
+
+interface CreatedRemMalad extends GeneralData {
+	days: number;
+	libelle: string;
+	agentId: string;
+	agent: User;
+}
+
+interface RemMalad {
+	days: number;
+	total: number;
+}
+
+interface CreatedDeductionPrime extends GeneralData {
+	amount: number;
+	libelle: string;
+	agentId: string;
+	agent: User;
+}
+
+interface DeductionPrime {
+	total: number;
+}
+
+interface DeductionPrimeSynthese {
+	_sum: {
+		amount: number;
+	};
+	libelle: string;
+}
+
+interface CreatedAllocRemCongFerie extends GeneralData {
+	days: number;
+	agentId: string;
+	agent: User;
+}
+
+interface Alloc {
+	days: number;
+	nbEnfant: number;
+	total: number;
+}
+
+interface CreatedHSupp extends GeneralData {
+	number: number;
+	agentId: string;
+	agent: User;
+}
+
+interface HSupp {
+	hours: number;
+	total: number;
+}
+
+interface RemCongeFerie {
+	days: number;
+	total: number;
+}
+
+interface PaySlip extends GeneralData {
+	month: string;
+	baseSalary: {
+		base: number;
+		rate: number;
+	};
+	supHours: {
+		rate: number;
+		hours: number;
+	};
+	jFeries: {
+		days: number;
+		rate: number;
+	};
+	jConge: {
+		days: number;
+		rate: number;
+	};
+	primes: any;
+	deductions: any;
+	alloc: {
+		days: number;
+		rate: number;
+		children: number;
+	};
+	jMaldAcc: {
+		days: number;
+		rate: number;
+	};
+	agentId: string;
+	agent: User;
+}
+
+interface PayList {
+	names: string;
+	grade: string;
+	salary: number;
+	suppHours: number;
+	ferie: number;
+	conge: number;
+	primes: number;
+	deduction: number;
+	alloc: number;
+	maladie: number;
+}
+
+interface Unpaid {
+	names: string;
+	grade: Grade;
+	prime: {
+		amount: number;
+	}[];
+	suppHours: {
+		number: number;
+	}[];
+	remJMaladAccs: {
+		days: number;
+	}[];
+	remJoursConges: {
+		days: number;
+	}[];
+	remJoursFerie: {
+		days: number;
+	}[];
+	salaryDeductions: {
+		amount: number;
+	}[];
+	familyAllocations: {
+		days: number;
+	}[];
+}
+
+interface RemJMaladAccDto {
+	days: number;
+	libelle: string;
+	agentId: string;
+}
+
+interface SalaryDeductionDto {
+	amount: number;
+	libelle: string;
+	agentId: string;
+}
+
+interface FamilyAllocationDto {
+	days: number;
+	agentId: string;
+}
+
+interface SuppHourDto {
+	number: number;
+	agentId: string;
+}
+
+interface CreatePaySlipDto {
+	year: number;
+	month: number;
+	agentId: string;
 }
 
 interface HrefLink {
