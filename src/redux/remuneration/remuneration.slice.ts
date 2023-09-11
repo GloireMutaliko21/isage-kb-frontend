@@ -184,7 +184,7 @@ const getPayList = createAsyncThunk(
 );
 
 const getUnpaidAgents = createAsyncThunk(
-	'paie/liste/get',
+	'paie/liste/unpaid',
 	remunerationService.getUnpaidAgents
 );
 
