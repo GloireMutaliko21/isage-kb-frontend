@@ -17,7 +17,7 @@ const useInventaire = () => {
 	useEffect(() => {
 		if (isLogin) {
 			dispatch(getTodaySheet());
-			dispatch(getMonthSynthese);
+			dispatch(getMonthSynthese());
 		} else console.log(message);
 	}, [dispatch, isLogin, message]);
 	return { sheetSynthese, stockSheet, status, message };
