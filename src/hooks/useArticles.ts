@@ -12,7 +12,7 @@ const useArticles = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !articles) dispatch(getArticles());
+		if (isLogin) dispatch(getArticles());
 		else console.log(message);
 	}, [articles, dispatch, isLogin, message]);
 	return { articles, selectedArticle, status, message };

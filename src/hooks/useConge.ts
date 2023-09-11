@@ -12,7 +12,7 @@ const useConge = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !agentInConges) dispatch(getAgentsOnConge());
+		if (isLogin) dispatch(getAgentsOnConge());
 		else console.log(message);
 	}, [agentInConges, dispatch, isLogin, message]);
 	return { agentInConges, status, message };

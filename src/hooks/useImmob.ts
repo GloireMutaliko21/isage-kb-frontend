@@ -12,7 +12,7 @@ const useImmob = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !immobs) dispatch(getImmobs());
+		if (isLogin) dispatch(getImmobs());
 		else console.log(message);
 	}, [dispatch, immobs, isLogin, message]);
 	return { immobs, selectedImmob, status, message };
