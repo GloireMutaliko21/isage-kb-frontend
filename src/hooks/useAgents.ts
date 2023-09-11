@@ -5,7 +5,9 @@ import useAuth from './useAuh';
 import { getAgents } from '@/redux/agents/agents.slice';
 
 const useAgents = () => {
-	const { agents, status, message } = useAppSelector((state) => state.agents);
+	const { agents, selectedAgent, status, message } = useAppSelector(
+		(state) => state.agents
+	);
 	const dispatch = useAppDispatch();
 	const { isLogin } = useAuth();
 
@@ -13,7 +15,7 @@ const useAgents = () => {
 		if (isLogin) dispatch(getAgents());
 		else console.log(message);
 	}, [dispatch, isLogin, message]);
-	return { agents, status, message };
+	return { agents, selectedAgent, status, message };
 };
 
 export default useAgents;
