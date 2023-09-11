@@ -156,3 +156,14 @@ const roleSlice = createSlice({
 			});
 	},
 });
+
+export default roleSlice.reducer;
+export {
+	getRoles,
+	getRoleById,
+	createRole,
+	updateRole,
+	creareAccess,
+	removeAccess,
+	deleteRole,
+};
