@@ -2,20 +2,20 @@ import { useEffect } from 'react';
 import { useAppDispatch } from './useAppDispatch';
 import { useAppSelector } from './useAppSelector';
 import useAuth from './useAuh';
-import { getAgents } from '@/redux/agents/agents.slice';
+import { getOrders } from '@/redux/order/order.slice';
 
-const useAgents = () => {
-	const { agents, selectedAgent, status, message } = useAppSelector(
-		(state) => state.agents
+const useOrder = () => {
+	const { message, orders, selectedOrder, status } = useAppSelector(
+		(state) => state.order
 	);
 	const dispatch = useAppDispatch();
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin) dispatch(getAgents());
+		if (isLogin) dispatch(getOrders());
 		else console.log(message);
 	}, [dispatch, isLogin, message]);
-	return { agents, selectedAgent, status, message };
+	return { orders, selectedOrder, status, message };
 };
 
-export default useAgents;
+export default useOrder;

@@ -36,7 +36,9 @@ export default function Home() {
 				/>
 				<CardStat
 					title='agents présents'
-					value={attendecies.length.toString()}
+					value={attendecies
+						.filter((a) => a.status === 'present')
+						.length.toString()}
 					decoration={
 						<p>
 							{attendecies.filter((a) => a.status! == 'retard').length} retards
