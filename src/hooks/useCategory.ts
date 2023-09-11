@@ -14,7 +14,7 @@ const useCategory = () => {
 	useEffect(() => {
 		if (isLogin && !categories) dispatch(getCategories());
 		else console.log(message);
-	}, [categories, dispatch, isLogin, message]);
+	}, [dispatch, isLogin, message]);
 	return { categories, selectedCategory, status, message };
 };
 

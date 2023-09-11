@@ -15,7 +15,7 @@ const useRole = () => {
 		if (isLogin && !roles) dispatch(getRoles());
 		else console.log(message);
 	}, [dispatch, isLogin, message, roles]);
-	return { roles, selectedRole, status, message };
+	return { selectedRole, status, message };
 };
 
 export default useRole;

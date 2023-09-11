@@ -14,7 +14,7 @@ const useGrades = () => {
 	useEffect(() => {
 		if (isLogin && !grades) dispatch(getGrades());
 		else console.log(message);
-	}, [dispatch, grades, isLogin, message]);
+	}, [dispatch, isLogin, message]);
 	return { grades, selectedGrade, status, message };
 };
 
