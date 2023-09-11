@@ -357,7 +357,7 @@ interface Subscription extends GeneralData {
 	montant: number;
 	casSocId: string;
 	agentId: string;
-	casSoc: {
+	casSoc?: {
 		id: string;
 		createdAt: Date;
 		updatedAt: Date;
@@ -370,7 +370,7 @@ interface Subscription extends GeneralData {
 			names: string;
 		};
 	};
-	agent: {
+	agent?: {
 		names: string;
 	};
 }
@@ -397,6 +397,27 @@ interface CreatedSubscription {
 interface CreateSubscriptionDto {
 	montant: number;
 	casSocId: string;
+}
+
+interface SocialCase extends GeneralData {
+	description: string;
+	endDate: Date;
+	status: string;
+	validity: string;
+	agentId: string;
+	agent: User;
+	casSocSubscriptions: Subscription[];
+}
+
+interface CreateSocialCaseDto {
+	description: string;
+	endDate: Date;
+}
+
+interface UpdateSocialCaseDto {
+	id: string;
+	description?: string;
+	endDate?: Date;
 }
 
 interface HrefLink {
