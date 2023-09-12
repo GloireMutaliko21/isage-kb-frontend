@@ -7,18 +7,23 @@ import useConge from '@/hooks/useConge';
 import useAttendency from '@/hooks/useAttendency';
 import AgentDashboardTable from '../personnel/AgentDashboardTable';
 import { Switch } from 'antd';
-import { Line, type LineConfig } from '@ant-design/plots';
-import { HiArrowRight } from 'react-icons/hi2';
+import { Line, type PieConfig, type LineConfig, Pie } from '@ant-design/plots';
+import { dashBoardPieChartData } from '@/features/attendency';
 
 const DashboardPersonnel = () => {
 	const { agents } = useAgents();
 	const { paie, lastSixMonthFiches, lastYearFiches } = useRemuneration();
 	const { agentInConges } = useConge();
-	const { attendecies } = useAttendency();
+	const { attendecies, getDailyAttends, lastMonthAttends } = useAttendency();
 
 	const onChangeLastYear = (checked: boolean) => {
 		if (checked) lastYearFiches();
 		else lastSixMonthFiches();
+	};
+
+	const onChangeAttendChart = (checked: boolean) => {
+		if (checked) lastMonthAttends();
+		else getDailyAttends();
 	};
 
 	const config: LineConfig = {
@@ -30,6 +35,46 @@ const DashboardPersonnel = () => {
 			tickCount: 5,
 		},
 		smooth: true,
+	};
+
+	const configPieAttend: PieConfig = {
+		appendPadding: 10,
+		data: dashBoardPieChartData(attendecies),
+		angleField: 'total',
+		colorField: 'Category',
+		radius: 1,
+		innerRadius: 0.6,
+		color: ['#ff8935', '#01579B', '#0097A7', '#5b39ac', '#4DD0E1'],
+		label: {
+			type: 'inner',
+			offset: '-50%',
+
+			style: {
+				textAlign: 'center',
+				fontSize: 14,
+			},
+		},
+		interactions: [
+			{
+				type: 'element-selected',
+			},
+			{
+				type: 'element-active',
+			},
+		],
+		legend: { layout: 'horizontal', position: 'bottom' },
+		statistic: {
+			title: false,
+			content: {
+				style: {
+					whiteSpace: 'pre-wrap',
+					overflow: 'hidden',
+					textOverflow: 'ellipsis',
+					fontSize: '14px',
+				},
+				content: 'Présences',
+			},
+		},
 	};
 	return (
 		<section>
@@ -76,20 +121,16 @@ const DashboardPersonnel = () => {
 							<div className='p-5 flex justify-between items-center'>
 								<h2 className='text-lg font-medium'>Présences</h2>
 								<div className='flex gap-2 items-center'>
-									<div>
-										<Link
-											href='/attendency'
-											className='text-sm hover:text-secondary-500 font-light flex items-center gap-2'
-										>
-											Plus
-											<HiArrowRight />
-										</Link>
-									</div>
+									<h3 className='text-sm font-light'>Mois dernier</h3>
+									<Switch
+										className='bg-secondary-100'
+										onChange={onChangeAttendChart}
+									/>
 								</div>
 							</div>
 						</div>
 						<div className='p-5'>
-							{/* <Pie {...configImmob} height={250} /> */}
+							<Pie {...configPieAttend} height={250} />
 						</div>
 					</div>
 				</div>

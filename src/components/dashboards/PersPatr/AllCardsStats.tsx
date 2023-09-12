@@ -35,6 +35,9 @@ const AllCardsStats = ({
 					</p>
 				}
 				icon={<BsCalendarMonth />}
+				// &&
+				// new Date(a?.createdAt || '').setHours(0, 0, 0, 0) ==
+				// 	new Date().setHours(0, 0, 0, 0)
 			/>
 			<CardStat
 				title='agents présents'

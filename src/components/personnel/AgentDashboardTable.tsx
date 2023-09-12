@@ -76,14 +76,14 @@ const AgentDashboardTable = ({ data }: { data: User[] }) => {
 											return (
 												<>
 													<Tag
-														key={role.id}
+														key={`${role.id}-${user.id}-${Math.random()}`}
 														color={color}
 														className='2xl:hidden'
 													>
 														{returnedRole.substring(0, 4)}
 													</Tag>
 													<Tag
-														key={role.id}
+														key={`${role.id}-${user.id}`}
 														color={color}
 														className='hidden 2xl:inline-block'
 													>
