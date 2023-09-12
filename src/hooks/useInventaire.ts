@@ -8,6 +8,7 @@ import {
 	getMonthSynthese,
 	getTodaySheet,
 } from '@/redux/inventaire/inventaire.slice';
+import { lastSixMonths, lastYear } from '@/utils/dates';
 
 const useInventaire = () => {
 	const { message, globalSheet, sheetSynthese, status, stockSheet } =
@@ -15,18 +16,27 @@ const useInventaire = () => {
 	const dispatch = useAppDispatch();
 	const { isLogin } = useAuth();
 
-	const currDate = dayjs();
-	const start = new Date(currDate.subtract(6, 'month').toISOString());
-	const end = new Date(currDate.endOf('month').toISOString());
+	const lastYearGlobHistoric = () => dispatch(getGlobalHistoric(lastYear()));
+
+	const lastSixMonthsGlobalHistoric = () =>
+		dispatch(getGlobalHistoric(lastSixMonths()));
 
 	useEffect(() => {
 		if (isLogin) {
 			dispatch(getTodaySheet());
 			dispatch(getMonthSynthese());
-			dispatch(getGlobalHistoric({ start, end }));
+			dispatch(getGlobalHistoric(lastSixMonths()));
 		} else console.log(message);
 	}, [dispatch, isLogin, message]);
-	return { sheetSynthese, globalSheet, stockSheet, status, message };
+	return {
+		globalSheet,
+		lastYearGlobHistoric,
+		lastSixMonthsGlobalHistoric,
+		message,
+		sheetSynthese,
+		status,
+		stockSheet,
+	};
 };
 
 export default useInventaire;

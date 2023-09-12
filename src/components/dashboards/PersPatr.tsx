@@ -13,23 +13,30 @@ import useRemuneration from '@/hooks/useRemuneration';
 import { Column, type ColumnConfig } from '@ant-design/plots';
 import useInventaire from '@/hooks/useInventaire';
 import { columnInventaireChartData } from '@/features/inventaire';
+import { Switch } from 'antd';
 
 const PersPatr = () => {
 	const { agents } = useAgents();
 	const { paie } = useRemuneration();
 	const { agentInConges } = useConge();
 	const { attendecies } = useAttendency();
-	const { globalSheet } = useInventaire();
+	const { globalSheet, lastYearGlobHistoric, lastSixMonthsGlobalHistoric } =
+		useInventaire();
 
 	const config: ColumnConfig = {
 		data: columnInventaireChartData(globalSheet),
 		isGroup: true,
-		xField: 'libelle', //libelle
-		yField: 'qty', //qty
-		seriesField: 'operation', // typeOp
+		xField: 'libelle',
+		yField: 'qty',
+		seriesField: 'operation',
 		color: ['#01579B', '#0097A7'],
 		minColumnWidth: 30,
 		maxColumnWidth: 30,
+	};
+
+	const onChangeLastYear = (checked: boolean) => {
+		if (checked) lastYearGlobHistoric();
+		else lastSixMonthsGlobalHistoric();
 	};
 	return (
 		<section>
@@ -83,8 +90,26 @@ const PersPatr = () => {
 					icon={<MdOutlineMoneyOff />}
 				/>
 			</div>
-			<div>
-				<Column {...config} />
+			<div className='p-5'>
+				<div className='grid lg:grid-cols-3 2xl:grid-cols-6 gap-9'>
+					<div className='bg-white lg:col-span-2 2xl:col-span-4 rounded-lg'>
+						<div className='border-b border-gray-300 text-slate-600'>
+							<div className='p-5 flex justify-between items-center'>
+								<h2 className='text-lg font-medium'>Synthèse Stock</h2>
+								<div className='flex gap-2 items-center'>
+									<h3 className='text-sm font-light'>L&apos;an dernier</h3>
+									<Switch
+										className='bg-secondary-100'
+										onChange={onChangeLastYear}
+									/>
+								</div>
+							</div>
+						</div>
+						<div className='p-5'>
+							<Column {...config} height={250} />
+						</div>
+					</div>
+				</div>
 			</div>
 		</section>
 	);
