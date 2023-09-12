@@ -5,6 +5,7 @@ import { BiHome } from 'react-icons/bi';
 import { IoIosArrowDown } from 'react-icons/io';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import { BsCassette } from 'react-icons/bs';
+import { TbSettingsCog } from 'react-icons/tb';
 import {
 	PiCalendarLight,
 	PiCalendarPlusDuotone,
@@ -16,6 +17,7 @@ import Link from 'next/link';
 import useAuth from '@/hooks/useAuh';
 import { checkUserRole } from '@/features/check-role';
 import {
+	ADMIN_LINKS,
 	IMMOB_LINKS,
 	INVENTORY_LINKS,
 	PERSONNEL_LINKS,
@@ -109,6 +111,19 @@ const Sidebar = () => {
 				headerText: 'Immobilisations',
 				links: IMMOB_LINKS,
 				icon: <BsCassette />,
+			})
+		);
+
+	checkUserRole(
+		user?.session?.user ??
+			JSON.parse(localStorage.getItem('session-user')!)?.user,
+		'admin'
+	) &&
+		items.push(
+			RenderItem({
+				headerText: 'Configurations',
+				links: ADMIN_LINKS,
+				icon: <TbSettingsCog />,
 			})
 		);
 

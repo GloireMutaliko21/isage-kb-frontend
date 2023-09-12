@@ -54,3 +54,22 @@ export const IMMOB_LINKS: HrefLink[] = [
 		label: 'Immobilisations amortis',
 	},
 ];
+
+export const ADMIN_LINKS: HrefLink[] = [
+	{
+		href: 'config/fold',
+		label: 'Eléments des dossiers',
+	},
+	{
+		href: 'config/grades',
+		label: 'Gestion des grades',
+	},
+	{
+		href: 'config/roles',
+		label: 'Gestion des rôles',
+	},
+	{
+		href: 'config/services',
+		label: 'Sevices et section',
+	},
+];

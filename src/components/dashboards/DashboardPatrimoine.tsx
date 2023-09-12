@@ -1,34 +1,40 @@
-'use client';
 import Link from 'next/link';
 import React from 'react';
-import useAgents from '@/hooks/useAgents';
-import useAttendency from '@/hooks/useAttendency';
-import { HiArrowRight } from 'react-icons/hi2';
-import useConge from '@/hooks/useConge';
-import useRemuneration from '@/hooks/useRemuneration';
-import {
-	Column,
-	Pie,
-	type ColumnConfig,
-	type PieConfig,
-} from '@ant-design/plots';
+import CardsStatsInventaire from './PersPatr/CardsStatsInventaire';
+import useArticles from '@/hooks/useArticles';
 import useInventaire from '@/hooks/useInventaire';
-import { columnInventaireChartData } from '@/features/inventaire';
-import { Switch } from 'antd';
 import useImmob from '@/hooks/useImmob';
-import { nonAmortis } from '@/features/immob';
-import AgentDashboardTable from '../personnel/AgentDashboardTable';
-import AllCardsStats from './PersPatr/AllCardsStats';
 import DashboardCharts from '../patrimoine/DashboardCharts';
+import { type PieConfig, type ColumnConfig } from '@ant-design/plots';
+import { columnInventaireChartData } from '@/features/inventaire';
+import { nonAmortis } from '@/features/immob';
+import ArticleDashboardTable from '../patrimoine/ArticleDashboardTable';
 
-const PersPatr = () => {
-	const { agents } = useAgents();
-	const { paie } = useRemuneration();
-	const { agentInConges } = useConge();
-	const { attendecies } = useAttendency();
-	const { globalSheet, lastYearGlobHistoric, lastSixMonthsGlobalHistoric } =
-		useInventaire();
+const DashboardPatrimoine = () => {
+	const { articles, unStocked } = useArticles();
+	const {
+		stockSheet,
+		globalSheet,
+		lastYearGlobHistoric,
+		lastSixMonthsGlobalHistoric,
+	} = useInventaire();
 	const { amortis, immobs } = useImmob();
+
+	const onChangeLastYear = (checked: boolean) => {
+		if (checked) lastYearGlobHistoric();
+		else lastSixMonthsGlobalHistoric();
+	};
+
+	const config: ColumnConfig = {
+		data: columnInventaireChartData(globalSheet),
+		isGroup: true,
+		xField: 'libelle',
+		yField: 'qty',
+		seriesField: 'operation',
+		color: ['#01579B', '#0097A7'],
+		minColumnWidth: 30,
+		maxColumnWidth: 30,
+	};
 
 	const immobChartData = [
 		{
@@ -85,53 +91,41 @@ const PersPatr = () => {
 		},
 	};
 
-	const config: ColumnConfig = {
-		data: columnInventaireChartData(globalSheet),
-		isGroup: true,
-		xField: 'libelle',
-		yField: 'qty',
-		seriesField: 'operation',
-		color: ['#01579B', '#0097A7'],
-		minColumnWidth: 30,
-		maxColumnWidth: 30,
-	};
-
-	const onChangeLastYear = (checked: boolean) => {
-		if (checked) lastYearGlobHistoric();
-		else lastSixMonthsGlobalHistoric();
-	};
 	return (
 		<section>
+			{/* Header */}
 			<div className='border-b flex justify-between items-center p-5'>
 				<h1 className='text-2xl font-semibold'>Dashboard</h1>
 				<div>
 					<Link
-						href='/attend/scan'
+						href='/stocks/inv'
 						className='bg-secondary-600 hover:bg-secondary-500 hover:shadow-lg duration-300 p-3 py-2 text-sm w-full text-white rounded-md flex gap-2 justify-center items-center'
 					>
-						Scanner Présence
+						Etats des stocks
 					</Link>
 				</div>
 			</div>
+
 			{/* Cards */}
-			<AllCardsStats
-				agentInConges={agentInConges}
-				agents={agents}
-				attendecies={attendecies}
-				paie={paie}
+			<CardsStatsInventaire
+				articles={articles}
+				unStocked={unStocked}
+				todaySheet={stockSheet}
+				amortis={amortis}
+				immobs={immobs}
 			/>
+
 			{/* Charts */}
 			<DashboardCharts
 				config={config}
 				configImmob={configImmob}
 				onChangeLastYear={onChangeLastYear}
 			/>
-			{/* Agents table */}
-			<div>
-				<AgentDashboardTable data={agents} />
-			</div>
+
+			{/* Table */}
+			<ArticleDashboardTable data={articles} />
 		</section>
 	);
 };
 
-export default PersPatr;
+export default DashboardPatrimoine;

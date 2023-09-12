@@ -1,4 +1,5 @@
 'use client';
+import DashboardPatrimoine from '@/components/dashboards/DashboardPatrimoine';
 import DashboardPersonnel from '@/components/dashboards/DashboardPersonnel';
 import PersPatr from '@/components/dashboards/PersPatr';
 import NotConnected from '@/components/global/NotConnected';
@@ -11,17 +12,17 @@ export default function Home() {
 	return (
 		<main className='w-full flex flex-col'>
 			{checkUserRole(user?.session?.user, 'gestion du personnel') &&
-				checkUserRole(user?.session?.user, 'gestion patrimoine') && (
-					<PersPatr />
-				)}
+				checkUserRole(user?.session?.user, 'gestion patrimoine') &&
+				!checkUserRole(user?.session?.user, 'admin') && <PersPatr />}
 			{checkUserRole(user?.session?.user, 'gestion du personnel') &&
-				!checkUserRole(user?.session?.user, 'gestion patrimoine') && (
-					<DashboardPersonnel />
-				)}
+				!checkUserRole(user?.session?.user, 'gestion patrimoine') &&
+				!checkUserRole(user?.session?.user, 'admin') && <DashboardPersonnel />}
 			{!checkUserRole(user?.session?.user, 'gestion du personnel') &&
+				!checkUserRole(user?.session?.user, 'admin') &&
 				checkUserRole(user?.session?.user, 'gestion patrimoine') && (
-					<p className='text-4xl'>Gestion Patrimoine</p>
+					<DashboardPatrimoine />
 				)}
+			{checkUserRole(user?.session?.user, 'admin') && <p>aDMIN</p>}
 		</main>
 	);
 }
