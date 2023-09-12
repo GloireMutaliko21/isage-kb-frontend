@@ -1,61 +1,50 @@
-'use client';
 import Link from 'next/link';
 import React from 'react';
-import CardStat from './PersPatr/CardStat';
-import useAgents from '@/hooks/useAgents';
-import useAttendency from '@/hooks/useAttendency';
-import { HiArrowRight, HiOutlineUsers } from 'react-icons/hi2';
-import { BsCalendarMonth } from 'react-icons/bs';
-import { IoTodayOutline } from 'react-icons/io5';
-import { MdOutlineMoneyOff } from 'react-icons/md';
-import useConge from '@/hooks/useConge';
-import useRemuneration from '@/hooks/useRemuneration';
-import {
-	Column,
-	Pie,
-	type ColumnConfig,
-	type PieConfig,
-} from '@ant-design/plots';
-import useInventaire from '@/hooks/useInventaire';
-import { columnInventaireChartData } from '@/features/inventaire';
-import { Switch } from 'antd';
-import useImmob from '@/hooks/useImmob';
-import { nonAmortis } from '@/features/immob';
-import AgentDashboardTable from '../personnel/AgentDashboardTable';
 import AllCardsStats from './PersPatr/AllCardsStats';
+import useAgents from '@/hooks/useAgents';
+import useRemuneration from '@/hooks/useRemuneration';
+import useConge from '@/hooks/useConge';
+import useAttendency from '@/hooks/useAttendency';
+import AgentDashboardTable from '../personnel/AgentDashboardTable';
+import { Switch } from 'antd';
+import { Line, type PieConfig, type LineConfig, Pie } from '@ant-design/plots';
+import { dashBoardPieChartData } from '@/features/attendency';
 
-const PersPatr = () => {
+const DashboardPersonnel = () => {
 	const { agents } = useAgents();
-	const { paie } = useRemuneration();
+	const { paie, lastSixMonthFiches, lastYearFiches } = useRemuneration();
 	const { agentInConges } = useConge();
-	const { attendecies } = useAttendency();
-	const { globalSheet, lastYearGlobHistoric, lastSixMonthsGlobalHistoric } =
-		useInventaire();
-	const { amortis, immobs } = useImmob();
+	const { attendecies, getDailyAttends, lastMonthAttends } = useAttendency();
 
-	const immobChartData = [
-		{
-			Category: 'Total',
-			number: immobs.length,
-		},
-		{
-			Category: 'Non amortis',
-			number: nonAmortis(amortis, immobs).length,
-		},
-		{
-			Category: 'Amortis',
-			number: amortis.length,
-		},
-	];
+	const onChangeLastYear = (checked: boolean) => {
+		if (checked) lastYearFiches();
+		else lastSixMonthFiches();
+	};
 
-	const configImmob: PieConfig = {
+	const onChangeAttendChart = (checked: boolean) => {
+		if (checked) lastMonthAttends();
+		else getDailyAttends();
+	};
+
+	const config: LineConfig = {
+		data: paie.slipList?.paySlips,
+		padding: 'auto',
+		xField: 'mois',
+		yField: 'total',
+		xAxis: {
+			tickCount: 5,
+		},
+		smooth: true,
+	};
+
+	const configPieAttend: PieConfig = {
 		appendPadding: 10,
-		data: immobChartData,
-		angleField: 'number',
+		data: dashBoardPieChartData(attendecies),
+		angleField: 'total',
 		colorField: 'Category',
 		radius: 1,
 		innerRadius: 0.6,
-		color: ['#01579B', '#0097A7', '#4DD0E1'],
+		color: ['#ff8935', '#01579B', '#0097A7', '#5b39ac', '#4DD0E1'],
 		label: {
 			type: 'inner',
 			offset: '-50%',
@@ -83,25 +72,9 @@ const PersPatr = () => {
 					textOverflow: 'ellipsis',
 					fontSize: '14px',
 				},
-				content: 'Immobilisations',
+				content: 'Présences',
 			},
 		},
-	};
-
-	const config: ColumnConfig = {
-		data: columnInventaireChartData(globalSheet),
-		isGroup: true,
-		xField: 'libelle',
-		yField: 'qty',
-		seriesField: 'operation',
-		color: ['#01579B', '#0097A7'],
-		minColumnWidth: 30,
-		maxColumnWidth: 30,
-	};
-
-	const onChangeLastYear = (checked: boolean) => {
-		if (checked) lastYearGlobHistoric();
-		else lastSixMonthsGlobalHistoric();
 	};
 	return (
 		<section>
@@ -129,7 +102,7 @@ const PersPatr = () => {
 					<div className='bg-white lg:col-span-2 2xl:col-span-4 rounded-lg'>
 						<div className='border-b border-gray-300 text-slate-600'>
 							<div className='p-5 flex justify-between items-center'>
-								<h2 className='text-lg font-medium'>Synthèse Stock</h2>
+								<h2 className='text-lg font-medium'>Paie des agents</h2>
 								<div className='flex gap-2 items-center'>
 									<h3 className='text-sm font-light'>L&apos;an dernier</h3>
 									<Switch
@@ -140,38 +113,32 @@ const PersPatr = () => {
 							</div>
 						</div>
 						<div className='p-5'>
-							<Column {...config} height={250} />
+							<Line {...config} height={250} />
 						</div>
 					</div>
 					<div className='bg-white lg:col-span-1 2xl:col-span-2 rounded-lg'>
 						<div className='border-b border-gray-300 text-slate-600'>
 							<div className='p-5 flex justify-between items-center'>
-								<h2 className='text-lg font-medium'>Immobilisations</h2>
+								<h2 className='text-lg font-medium'>Présences</h2>
 								<div className='flex gap-2 items-center'>
-									<div>
-										<Link
-											href='/immob'
-											className='text-sm hover:text-secondary-500 font-light flex items-center gap-2'
-										>
-											Plus
-											<HiArrowRight />
-										</Link>
-									</div>
+									<h3 className='text-sm font-light'>Mois dernier</h3>
+									<Switch
+										className='bg-secondary-100'
+										onChange={onChangeAttendChart}
+									/>
 								</div>
 							</div>
 						</div>
 						<div className='p-5'>
-							<Pie {...configImmob} height={250} />
+							<Pie {...configPieAttend} height={250} />
 						</div>
 					</div>
 				</div>
 			</div>
 			{/* Agents table */}
-			<div>
-				<AgentDashboardTable data={agents} />
-			</div>
+			<AgentDashboardTable data={agents} />
 		</section>
 	);
 };
 
-export default PersPatr;
+export default DashboardPersonnel;

@@ -35,6 +35,7 @@ const initialState: {
 	};
 	slipList: {
 		fiche: PaySlip | null;
+		paySlips: PaySlip[];
 		liste: PayList[];
 		unpaid: Unpaid[];
 	};
@@ -77,6 +78,7 @@ const initialState: {
 	},
 	slipList: {
 		fiche: null,
+		paySlips: [],
 		liste: [],
 		unpaid: [],
 	},
@@ -176,6 +178,11 @@ const registerPaySlip = createAsyncThunk(
 const getPaySlipPerAgent = createAsyncThunk(
 	'paie/fiche/get',
 	remunerationService.getPaySlipPerAgent
+);
+
+const getPaySlipAll = createAsyncThunk(
+	'paie/fiche/getAll',
+	remunerationService.getPaySlipAll
 );
 
 const getPayList = createAsyncThunk(
@@ -436,6 +443,19 @@ const paieSlice = createSlice({
 				state.message = payload as string;
 			})
 
+			.addCase(getPaySlipAll.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(getPaySlipAll.fulfilled, (state, { payload }) => {
+				state.status = STATUS.SUCCESS;
+				state.slipList.paySlips = payload;
+				state.message = null;
+			})
+			.addCase(getPaySlipAll.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
+				state.message = payload as string;
+			})
+
 			.addCase(getPayList.pending, (state) => {
 				state.status = STATUS.PENDING;
 			})
@@ -484,6 +504,7 @@ export {
 	getRemDaysFeriePerAgent,
 	registerPaySlip,
 	getPaySlipPerAgent,
+	getPaySlipAll,
 	getPayList,
 	getUnpaidAgents,
 };

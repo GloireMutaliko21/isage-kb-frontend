@@ -159,6 +159,8 @@ export const remunerationUrls = {
 
 	payslip: {
 		create: `${apiUrl}remuneration/payslip`,
+		getAll: (start: Date, end: Date) =>
+			`${apiUrl}remuneration/payslip?start=${start}&end=${end}`,
 		getPerAgent: (id: string, year: number, month: number) =>
 			`${apiUrl}remuneration/payslip/${id}?year=${year}&month=${month}`,
 		getPayList: (year: number, month: number) =>
