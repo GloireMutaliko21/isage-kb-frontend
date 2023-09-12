@@ -48,7 +48,7 @@ const ArticleDashboardTable = ({ data }: { data: Article[] }) => {
 							{
 								key: 'category',
 								dataIndex: 'category',
-								title: 'Fonction',
+								title: 'Catégorie',
 								render: (_, art, __) => art.category?.libelle,
 								ellipsis: true,
 							},
