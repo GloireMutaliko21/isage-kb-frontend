@@ -8,6 +8,7 @@ import DashboardCharts from '../patrimoine/DashboardCharts';
 import { type PieConfig, type ColumnConfig } from '@ant-design/plots';
 import { columnInventaireChartData } from '@/features/inventaire';
 import { nonAmortis } from '@/features/immob';
+import ArticleDashboardTable from '../patrimoine/ArticleDashboardTable';
 
 const DashboardPatrimoine = () => {
 	const { articles, unStocked } = useArticles();
@@ -120,6 +121,9 @@ const DashboardPatrimoine = () => {
 				configImmob={configImmob}
 				onChangeLastYear={onChangeLastYear}
 			/>
+
+			{/* Table */}
+			<ArticleDashboardTable data={articles} />
 		</section>
 	);
 };

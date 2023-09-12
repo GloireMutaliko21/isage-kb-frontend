@@ -1,5 +1,4 @@
 import { Table, Tag } from 'antd';
-import React from 'react';
 
 const AgentDashboardTable = ({ data }: { data: User[] }) => {
 	return (

@@ -115,7 +115,8 @@ interface UpdateAgentFileDto {
 
 interface Article extends GeneralData {
 	libelle?: string;
-	stockAlert?: string;
+	qty?: number;
+	stockAlert?: number;
 	unityId?: string;
 	categoryId?: string;
 	category?: {
