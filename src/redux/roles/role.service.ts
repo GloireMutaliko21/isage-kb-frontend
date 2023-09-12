@@ -94,7 +94,7 @@ export const createAccess: AsyncThunkPayloadCreator<any, CreateAccess> = async (
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<Category> = await axios.patch(
+		const response: AxiosResponse<any> = await axios.patch(
 			roleUrls.createAccess(payload.agentId),
 			{ roleId: payload.roleId },
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
@@ -115,7 +115,7 @@ export const removeAccess: AsyncThunkPayloadCreator<any, CreateAccess> = async (
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<Category> = await axios.patch(
+		const response: AxiosResponse<any> = await axios.patch(
 			roleUrls.removeAccess(payload.agentId),
 			{ roleId: payload.roleId },
 			{ headers: { Authorization: `Bearer ${session?.token}` } }

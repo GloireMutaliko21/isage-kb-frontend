@@ -4,19 +4,33 @@ import React from 'react';
 import CardStat from './PersPatr/CardStat';
 import useAgents from '@/hooks/useAgents';
 import useAttendency from '@/hooks/useAttendency';
-import useAuth from '@/hooks/useAuh';
 import { HiOutlineUsers } from 'react-icons/hi2';
 import { BsCalendarMonth } from 'react-icons/bs';
 import { IoTodayOutline } from 'react-icons/io5';
 import { MdOutlineMoneyOff } from 'react-icons/md';
 import useConge from '@/hooks/useConge';
 import useRemuneration from '@/hooks/useRemuneration';
+import { Column, type ColumnConfig } from '@ant-design/plots';
+import useInventaire from '@/hooks/useInventaire';
+import { columnInventaireChartData } from '@/features/inventaire';
 
 const PersPatr = () => {
 	const { agents } = useAgents();
 	const { paie } = useRemuneration();
 	const { agentInConges } = useConge();
 	const { attendecies } = useAttendency();
+	const { globalSheet } = useInventaire();
+
+	const config: ColumnConfig = {
+		data: columnInventaireChartData(globalSheet),
+		isGroup: true,
+		xField: 'libelle', //libelle
+		yField: 'qty', //qty
+		seriesField: 'operation', // typeOp
+		color: ['#01579B', '#0097A7'],
+		minColumnWidth: 30,
+		maxColumnWidth: 30,
+	};
 	return (
 		<section>
 			<div className='border-b flex justify-between items-center p-5'>
@@ -68,6 +82,9 @@ const PersPatr = () => {
 					decoration={<p>{paie.slipList.liste?.length} payé(s)</p>}
 					icon={<MdOutlineMoneyOff />}
 				/>
+			</div>
+			<div>
+				<Column {...config} />
 			</div>
 		</section>
 	);
