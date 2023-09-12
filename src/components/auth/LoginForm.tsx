@@ -105,10 +105,10 @@ const LoginForm = () => {
 							{user.status.isLoading ? (
 								<span
 									hidden={user.status.isLoading}
-									className='w-4 h-4 inline-block animate-spin border border-transparent border-t-neutral-200 rounded-full'
+									className='w-6 h-6 inline-block animate-spin border border-transparent border-t-neutral-200 rounded-full'
 								/>
 							) : (
-								<span>Se connecter</span>
+								<span className='h-6'>Se connecter</span>
 							)}
 						</button>
 					</div>

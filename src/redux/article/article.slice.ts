@@ -4,6 +4,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	articles: Article[];
+	unStocked: Article[];
 	selectedArticle: Article | null;
 	status: {
 		isLoading: boolean;
@@ -13,6 +14,7 @@ const initialState: {
 	message: string | null;
 } = {
 	articles: [],
+	unStocked: [],
 	selectedArticle: null,
 	status: {
 		isLoading: false,
@@ -92,7 +94,7 @@ const articleSlice = createSlice({
 			.addCase(getUnstockArticles.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.selectedArticle = null;
-				state.articles = payload;
+				state.unStocked = payload;
 				state.message = null;
 			})
 			.addCase(getUnstockArticles.rejected, (state, { payload }) => {

@@ -1,13 +1,9 @@
 'use client';
 import Link from 'next/link';
 import React from 'react';
-import CardStat from './PersPatr/CardStat';
 import useAgents from '@/hooks/useAgents';
 import useAttendency from '@/hooks/useAttendency';
-import { HiArrowRight, HiOutlineUsers } from 'react-icons/hi2';
-import { BsCalendarMonth } from 'react-icons/bs';
-import { IoTodayOutline } from 'react-icons/io5';
-import { MdOutlineMoneyOff } from 'react-icons/md';
+import { HiArrowRight } from 'react-icons/hi2';
 import useConge from '@/hooks/useConge';
 import useRemuneration from '@/hooks/useRemuneration';
 import {

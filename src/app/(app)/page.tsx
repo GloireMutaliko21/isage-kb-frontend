@@ -1,4 +1,5 @@
 'use client';
+import DashboardPatrimoine from '@/components/dashboards/DashboardPatrimoine';
 import DashboardPersonnel from '@/components/dashboards/DashboardPersonnel';
 import PersPatr from '@/components/dashboards/PersPatr';
 import NotConnected from '@/components/global/NotConnected';
@@ -20,7 +21,7 @@ export default function Home() {
 				)}
 			{!checkUserRole(user?.session?.user, 'gestion du personnel') &&
 				checkUserRole(user?.session?.user, 'gestion patrimoine') && (
-					<p className='text-4xl'>Gestion Patrimoine</p>
+					<DashboardPatrimoine />
 				)}
 		</main>
 	);
