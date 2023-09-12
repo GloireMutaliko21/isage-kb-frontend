@@ -21,6 +21,7 @@ import { columnInventaireChartData } from '@/features/inventaire';
 import { Switch } from 'antd';
 import useImmob from '@/hooks/useImmob';
 import { nonAmortis } from '@/features/immob';
+import AgentDashboardTable from '../personnel/AgentDashboardTable';
 
 const PersPatr = () => {
 	const { agents } = useAgents();
@@ -194,6 +195,9 @@ const PersPatr = () => {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div>
+				<AgentDashboardTable data={agents} />
 			</div>
 		</section>
 	);
