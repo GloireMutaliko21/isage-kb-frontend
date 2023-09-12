@@ -15,9 +15,9 @@ const CardStat = ({
 				<p className='text-[#737a87] text-sm'>{title.toLocaleUpperCase()}</p>
 				<div className='flex gap-2 2xl:gap-5 items-baseline'>
 					<p className='text-lg'>{value}</p>
-					<p className='bg-secondary-50 text-secondary-600 text-xs px-3 py-px rounded-md'>
+					<div className='bg-secondary-50 text-secondary-600 text-xs px-3 py-px rounded-md'>
 						{decoration}
-					</p>
+					</div>
 				</div>
 			</div>
 			<div className='text-slate-400 text-4xl'>{icon}</div>

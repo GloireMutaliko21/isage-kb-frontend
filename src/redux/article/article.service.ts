@@ -12,7 +12,7 @@ export const getArticles: AsyncThunkPayloadCreator<Article[]> = async (
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<User[]> = await axios.get(
+		const response: AxiosResponse<Article[]> = await axios.get(
 			articleUrls.createAndGet,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
@@ -32,7 +32,7 @@ export const getArticleById: AsyncThunkPayloadCreator<Article, string> = async (
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<User> = await axios.get(
+		const response: AxiosResponse<Article> = await axios.get(
 			articleUrls.getOne(id),
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
@@ -52,7 +52,7 @@ export const getByCated: AsyncThunkPayloadCreator<Article[]> = async (
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<User[]> = await axios.get(
+		const response: AxiosResponse<Article[]> = await axios.get(
 			articleUrls.getCateg,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
@@ -72,7 +72,7 @@ export const getUnstock: AsyncThunkPayloadCreator<Article[]> = async (
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<User[]> = await axios.get(
+		const response: AxiosResponse<Article[]> = await axios.get(
 			articleUrls.getUnstock,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);

@@ -4,6 +4,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	immobs: Immob[];
+	amortis: Immob[];
 	selectedImmob: Immob | null;
 	status: {
 		isLoading: boolean;
@@ -13,6 +14,7 @@ const initialState: {
 	message: string | null;
 } = {
 	immobs: [],
+	amortis: [],
 	selectedImmob: null,
 	status: {
 		isLoading: false,
@@ -57,7 +59,7 @@ const immobSlice = createSlice({
 			.addCase(getAmortis.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.selectedImmob = null;
-				state.immobs = payload;
+				state.amortis = payload;
 				state.message = null;
 			})
 			.addCase(getAmortis.rejected, (state, { payload }) => {

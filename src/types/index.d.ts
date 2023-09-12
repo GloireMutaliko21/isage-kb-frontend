@@ -23,6 +23,7 @@ interface User extends GeneralData {
 	imgUrl?: string;
 	public_id?: string;
 	gradeId?: string;
+	grade?: Grade;
 	roles?: {
 		id: string;
 		createdAt?: Date;

@@ -4,6 +4,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	stockSheet: SheetGlobalHistoric[];
+	globalSheet: SheetGlobalHistoric[];
 	sheetSynthese: SheetSynthese[];
 	status: {
 		isLoading: boolean;
@@ -13,6 +14,7 @@ const initialState: {
 	message: string | null;
 } = {
 	stockSheet: [],
+	globalSheet: [],
 	sheetSynthese: [],
 	status: {
 		isLoading: false,
@@ -119,7 +121,7 @@ const inventaireSlice = createSlice({
 			})
 			.addCase(getGlobalHistoric.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.stockSheet = payload;
+				state.globalSheet = payload;
 				state.message = null;
 			})
 			.addCase(getGlobalHistoric.rejected, (state, { payload }) => {

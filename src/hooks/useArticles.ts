@@ -14,7 +14,7 @@ const useArticles = () => {
 	useEffect(() => {
 		if (isLogin) dispatch(getArticles());
 		else console.log(message);
-	}, [articles, dispatch, isLogin, message]);
+	}, [dispatch, isLogin, message]);
 	return { articles, selectedArticle, status, message };
 };
 

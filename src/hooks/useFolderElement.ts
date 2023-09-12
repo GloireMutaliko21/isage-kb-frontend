@@ -14,7 +14,7 @@ const useFolderElement = () => {
 	useEffect(() => {
 		if (isLogin && !folderElements) dispatch(getFolderElements());
 		else console.log(message);
-	}, [dispatch, folderElements, isLogin, message]);
+	}, [dispatch, isLogin, message]);
 	return { folderElements, selectedFoldEl, status, message };
 };
 
