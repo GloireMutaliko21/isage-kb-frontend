@@ -390,6 +390,27 @@ export const getPaySlipPerAgent: AsyncThunkPayloadCreator<
 	}
 };
 
+export const getPaySlipAll: AsyncThunkPayloadCreator<
+	PaySlip[],
+	YearMonthParams
+> = async (data, thunkAPI) => {
+	const { month, year } = data;
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const response: AxiosResponse<PaySlip[]> = await axios.get(
+			remunerationUrls.payslip.getAll(year, month),
+			{ headers: { Authorization: `Bearer ${session?.token}` } }
+		);
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Fetch error');
+	}
+};
+
 export const getPayList: AsyncThunkPayloadCreator<
 	PayList[],
 	YearMonthParams

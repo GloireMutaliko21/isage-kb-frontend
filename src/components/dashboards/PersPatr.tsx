@@ -116,12 +116,14 @@ const PersPatr = () => {
 					</Link>
 				</div>
 			</div>
+			{/* Cards */}
 			<AllCardsStats
 				agentInConges={agentInConges}
 				agents={agents}
 				attendecies={attendecies}
 				paie={paie}
 			/>
+			{/* Charts */}
 			<div className='p-5'>
 				<div className='grid lg:grid-cols-3 2xl:grid-cols-6 gap-9'>
 					<div className='bg-white lg:col-span-2 2xl:col-span-4 rounded-lg'>
@@ -164,6 +166,7 @@ const PersPatr = () => {
 					</div>
 				</div>
 			</div>
+			{/* Agents table */}
 			<div>
 				<AgentDashboardTable data={agents} />
 			</div>
