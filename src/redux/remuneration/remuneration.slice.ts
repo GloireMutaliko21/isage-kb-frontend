@@ -504,6 +504,7 @@ export {
 	getRemDaysFeriePerAgent,
 	registerPaySlip,
 	getPaySlipPerAgent,
+	getPaySlipAll,
 	getPayList,
 	getUnpaidAgents,
 };

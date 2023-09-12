@@ -392,15 +392,15 @@ export const getPaySlipPerAgent: AsyncThunkPayloadCreator<
 
 export const getPaySlipAll: AsyncThunkPayloadCreator<
 	PaySlip[],
-	YearMonthParams
+	StartEndDatesParams
 > = async (data, thunkAPI) => {
-	const { month, year } = data;
+	const { start, end } = data;
 	const {
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
 		const response: AxiosResponse<PaySlip[]> = await axios.get(
-			remunerationUrls.payslip.getAll(year, month),
+			remunerationUrls.payslip.getAll(start, end),
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;
