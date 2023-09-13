@@ -1,4 +1,3 @@
-import MainProvider from '@/redux/Provider';
 import Navbar from './Navbar';
 import Sidebar from './Sidebar';
 
@@ -17,7 +16,9 @@ const MainLayout = ({
 				<Sidebar />
 				<div className=' basis-full overflow-x-hidden h-screen  flex flex-col'>
 					<Navbar />
-					<div className='overflow-y-auto max-w-screen'>{children}</div>
+					<div className='overflow-y-auto max-w-screen flex-grow'>
+						{children}
+					</div>
 				</div>
 			</div>
 		</main>

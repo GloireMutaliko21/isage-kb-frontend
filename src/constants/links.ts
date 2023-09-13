@@ -57,19 +57,19 @@ export const IMMOB_LINKS: HrefLink[] = [
 
 export const ADMIN_LINKS: HrefLink[] = [
 	{
-		href: 'config/fold',
+		href: '/config/f',
 		label: 'Eléments des dossiers',
 	},
 	{
-		href: 'config/grades',
+		href: '/config/g',
 		label: 'Gestion des grades',
 	},
 	{
-		href: 'config/roles',
+		href: '/config/r',
 		label: 'Gestion des rôles',
 	},
 	{
-		href: 'config/services',
+		href: '/config/s',
 		label: 'Sevices et section',
 	},
 ];
