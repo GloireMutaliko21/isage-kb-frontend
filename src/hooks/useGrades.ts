@@ -12,7 +12,7 @@ const useGrades = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !grades) dispatch(getGrades());
+		if (isLogin) dispatch(getGrades());
 		else console.log(message);
 	}, [dispatch, isLogin, message]);
 	return { grades, selectedGrade, status, message };

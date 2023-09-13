@@ -12,7 +12,7 @@ const useServiceSection = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !services) dispatch(getServices());
+		if (isLogin) dispatch(getServices());
 		else console.log(message);
 	}, [dispatch, isLogin, message]);
 	return { services, selectedService, status, message };
