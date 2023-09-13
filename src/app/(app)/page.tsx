@@ -1,4 +1,5 @@
 'use client';
+import DashboardAdmin from '@/components/dashboards/DashboardAdmin';
 import DashboardPatrimoine from '@/components/dashboards/DashboardPatrimoine';
 import DashboardPersonnel from '@/components/dashboards/DashboardPersonnel';
 import PersPatr from '@/components/dashboards/PersPatr';
@@ -22,7 +23,7 @@ export default function Home() {
 				checkUserRole(user?.session?.user, 'gestion patrimoine') && (
 					<DashboardPatrimoine />
 				)}
-			{checkUserRole(user?.session?.user, 'admin') && <p>aDMIN</p>}
+			{checkUserRole(user?.session?.user, 'admin') && <DashboardAdmin />}
 		</main>
 	);
 }
