@@ -3,6 +3,7 @@ import './globals.css';
 import type { Metadata } from 'next';
 import MainProvider from '@/redux/Provider';
 import NextTopLoader from 'nextjs-toploader';
+import ModalManager from '@/components/modals/ModalManager';
 export const metadata: Metadata = {
 	title: 'ISAGE-KB',
 	description: "Gestion Administrative de l'institution",
@@ -28,7 +29,11 @@ export default function RootLayout({
 						speed={200}
 						shadow='0 0 10px #2299DD,0 0 5px #2299DD'
 					/>
-					<AntdLayout>{children}</AntdLayout>
+					<AntdLayout>
+						{children}
+
+						<ModalManager />
+					</AntdLayout>
 				</MainProvider>
 			</body>
 		</html>

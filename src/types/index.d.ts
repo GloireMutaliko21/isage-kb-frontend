@@ -585,3 +585,8 @@ interface HrefLink {
 	href: string;
 	label: string;
 }
+
+interface ModalsHandlers {
+	id?: string;
+	close?: (id: string) => void;
+}
