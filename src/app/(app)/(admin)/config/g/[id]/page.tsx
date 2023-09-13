@@ -14,6 +14,7 @@ import {
 	Input,
 	Button,
 	Card,
+	Tag,
 } from 'antd';
 import { CiEdit } from 'react-icons/ci';
 import { EditFilled } from '@ant-design/icons';
@@ -203,7 +204,8 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 								pagination={{
 									position: 'bottom',
 									align: 'end',
-									pageSize: 6,
+									pageSize: 3,
+									size: 'small',
 								}}
 								dataSource={selectedGrade?.agents}
 								renderItem={(agent, index) => (
@@ -223,6 +225,32 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 									</List.Item>
 								)}
 							/>
+							<Divider
+								orientation='left'
+								orientationMargin={0}
+								className='text-lg !font-bold !text-slate-700'
+							>
+								Eléments dossier associés
+							</Divider>
+							<List
+								size='large'
+								pagination={{
+									size: 'small',
+									align: 'end',
+									position: 'bottom',
+									pageSize: 2,
+								}}
+								bordered
+								dataSource={selectedGrade?.folderElements!}
+								renderItem={(item) => (
+									<List.Item>
+										<Tag color='cyan'>{item.title}</Tag>
+									</List.Item>
+								)}
+							/>
+							<button className='bg-secondary-600 hover:shadow-lg p-3 py-2 text-sm mt-5 text-white rounded-md flex gap-2 justify-center items-center'>
+								Modifier
+							</button>
 						</div>
 					</div>
 				</div>
