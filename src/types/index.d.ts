@@ -193,6 +193,7 @@ interface Grade extends GeneralData {
 	baseSalary?: number;
 	folderIds?: string[];
 	agents?: User[];
+	folderElements?: FolderElement;
 }
 
 interface CreateGradeDto {
