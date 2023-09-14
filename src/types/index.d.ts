@@ -198,7 +198,8 @@ interface Grade extends GeneralData {
 
 interface CreateGradeDto {
 	title: string;
-	rate: Record<string, number>;
+	baseSalary: string | number;
+	rate: Record<string, string | number>;
 	folderIds: string[];
 }
 

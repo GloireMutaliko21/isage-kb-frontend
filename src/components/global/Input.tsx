@@ -11,7 +11,7 @@ const InputComponent = ({
 	placeholder: string;
 	name: string;
 	prefix?: React.ReactNode | React.ReactElement;
-	onChange: any;
+	onChange?: any;
 }) => {
 	return (
 		<Input

@@ -22,21 +22,21 @@ const initialState: {
 	message: null,
 };
 
-const getGrades = createAsyncThunk('foldEl/getAll', gradeService.getGrades);
+const getGrades = createAsyncThunk('grade/getAll', gradeService.getGrades);
 
 const getGradeById = createAsyncThunk(
-	'foldEl/getOne',
+	'grade/getOne',
 	gradeService.getGradeById
 );
 
-const createGrade = createAsyncThunk('foldEl/create', gradeService.createGrade);
+const createGrade = createAsyncThunk('grade/create', gradeService.createGrade);
 
-const updateGrade = createAsyncThunk('foldEl/update', gradeService.updateGrade);
+const updateGrade = createAsyncThunk('grade/update', gradeService.updateGrade);
 
-const deleteGrade = createAsyncThunk('foldEl/delete', gradeService.deleteGrade);
+const deleteGrade = createAsyncThunk('grade/delete', gradeService.deleteGrade);
 
 const gradeSlice = createSlice({
-	name: 'folderElement',
+	name: 'grade',
 	initialState,
 	reducers: {},
 	extraReducers: (builder) => {
