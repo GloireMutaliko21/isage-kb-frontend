@@ -7,12 +7,12 @@ import { useCallback } from 'react';
 import CreateGrade from './CreateGrade';
 
 const ModalManager = () => {
-	const modals = useAppSelector((state) => state.modal);
+	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
 	const dispatch = useAppDispatch();
 	const close = useCallback(() => dispatch(closeModal()), [dispatch]);
 	return (
 		<div className=''>
-			{modals.modal_ID == 'NEW_GRADE' ? (
+			{modal_ID == 'NEW_GRADE' ? (
 				<CreateGrade handlers={{ close, id: 'NEW_GRADE' }} />
 			) : (
 				<></>

@@ -201,6 +201,7 @@ interface CreateGradeDto {
 	baseSalary: string | number;
 	rate: Record<string, string | number>;
 	folderIds: string[];
+	dispatch?: any;
 }
 
 interface UpdateGradeDto {

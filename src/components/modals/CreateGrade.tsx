@@ -3,21 +3,29 @@ import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { Button, Input, Modal, Form, Select } from 'antd';
 import useFolderElement from '@/hooks/useFolderElement';
 import { createGrade } from '@/redux/grade/grade.slice';
-
-const { Option } = Select;
+import useGrades from '@/hooks/useGrades';
 
 const CreateGrade = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const { folderElements } = useFolderElement();
+	const { status } = useGrades();
 	const dispatch = useAppDispatch();
+	const onSubmit = (values: any) => {
+		const { title, folderIds, baseSalary, ...rest } = values;
+		const data = {
+			title,
+			baseSalary: parseInt(baseSalary),
+			folderIds,
+			rate: { base: baseSalary, ...rest },
+			dispatch,
+		};
+		dispatch(createGrade(data));
+		console.log(status);
+	};
 
 	return (
 		<Modal
 			open={true}
-			destroyOnClose
-			mousePosition={{
-				y: window.innerHeight / 2,
-				x: window.innerWidth / 2,
-			}}
+			centered
 			title='Nouveau Grade'
 			footer={null}
 			onCancel={() => handlers.close!(handlers.id!)}
@@ -25,18 +33,7 @@ const CreateGrade = ({ handlers }: { handlers: ModalsHandlers }) => {
 			<div className='mt-5 flex flex-col gap-y-4 w-full'>
 				<div>
 					<div>
-						<Form
-							onFinish={(values) => {
-								const { title, folderIds, baseSalary, ...rest } = values;
-								const data = {
-									title,
-									baseSalary: parseInt(baseSalary),
-									folderIds,
-									rate: { base: baseSalary, ...rest },
-								};
-								dispatch(createGrade(data));
-							}}
-						>
+						<Form onFinish={onSubmit}>
 							<div className='flex gap-3'>
 								<div>
 									<p className='mb-2'>
@@ -126,9 +123,9 @@ const CreateGrade = ({ handlers }: { handlers: ModalsHandlers }) => {
 									optionLabelProp='label'
 								>
 									{folderElements.map((el) => (
-										<Option key={el.id} value={el.id} label={el.title}>
+										<Select.Option key={el.id} value={el.id} label={el.title}>
 											{el.title?.toUpperCase()}
-										</Option>
+										</Select.Option>
 									))}
 								</Select>
 							</Form.Item>
@@ -140,7 +137,9 @@ const CreateGrade = ({ handlers }: { handlers: ModalsHandlers }) => {
 									>
 										Annuler
 									</Button>
-									<Button htmlType='submit'>Soumettre</Button>
+									<Button htmlType='submit' loading={status.isLoading}>
+										Soumettre
+									</Button>
 								</div>
 							</Form.Item>
 						</Form>
