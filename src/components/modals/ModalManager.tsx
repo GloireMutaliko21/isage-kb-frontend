@@ -8,6 +8,7 @@ import CreateGrade from './CreateGrade';
 import UpdateGradeRate from './UpdateGradeRate';
 import UpdateGradeFolderIds from './UpdateGradeFolderIds';
 import CreateFolderElement from './CreateFolderElement';
+import DetailFolderElement from './DetailFolderElement';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -31,6 +32,11 @@ const ModalManager = () => {
 			{/* Folder elements */}
 			{modal_ID == 'NEW_FOLDER_ELEMENT' && (
 				<CreateFolderElement handlers={{ close, id: 'NEW_FOLDER_ELEMENT' }} />
+			)}
+			{modal_ID == 'FOLDER_ELEMENT_DETAILS' && (
+				<DetailFolderElement
+					handlers={{ close, id: 'FOLDER_ELEMENT_DETAILS' }}
+				/>
 			)}
 			<></>
 		</div>
