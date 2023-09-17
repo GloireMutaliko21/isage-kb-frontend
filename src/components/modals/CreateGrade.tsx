@@ -19,7 +19,6 @@ const CreateGrade = ({ handlers }: { handlers: ModalsHandlers }) => {
 			dispatch,
 		};
 		dispatch(createGrade(data));
-		console.log(status);
 	};
 
 	return (

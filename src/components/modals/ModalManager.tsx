@@ -5,6 +5,7 @@ import { useAppSelector } from '@/hooks/useAppSelector';
 import { closeModal } from '@/redux/modalWindow/modalwindow.slice';
 import { useCallback } from 'react';
 import CreateGrade from './CreateGrade';
+import UpdateGradeRate from './UpdateGradeRate';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -12,11 +13,13 @@ const ModalManager = () => {
 	const close = useCallback(() => dispatch(closeModal()), [dispatch]);
 	return (
 		<div className=''>
-			{modal_ID == 'NEW_GRADE' ? (
+			{modal_ID == 'NEW_GRADE' && (
 				<CreateGrade handlers={{ close, id: 'NEW_GRADE' }} />
-			) : (
-				<></>
 			)}
+			{modal_ID == 'UPDATE_GRADE_RATES' && (
+				<UpdateGradeRate handlers={{ close, id: 'UPDATE_GRADE_RATES' }} />
+			)}
+			<></>
 		</div>
 	);
 };

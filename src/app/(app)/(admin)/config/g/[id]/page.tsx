@@ -19,6 +19,8 @@ import {
 } from 'antd';
 import { CiEdit } from 'react-icons/ci';
 import Link from 'next/link';
+import { title } from 'process';
+import { openModal } from '@/redux/modalWindow/modalwindow.slice';
 
 const Singlegrade = ({ params }: { params: { id: string } }) => {
 	const { selectedGrade, status } = useAppSelector((state) => state.grade);
@@ -28,8 +30,16 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 		if (isLogin) dispatch(getGradeById(params.id));
 	}, []);
 
-	const [editingTitle, seteditingTitle] = useState(false);
-	const [editingBaseSalary, setEditingBaseSalary] = useState(false);
+	const [editingData, setEditingData] = useState({
+		title: false,
+		baseSalary: false,
+		base: false,
+		alloc: false,
+		conge: false,
+		ferie: false,
+		malad: false,
+		hsupp: false,
+	});
 
 	const tableProps: TableProps<any> = {
 		pagination: false,
@@ -86,7 +96,7 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 										dataSource={[
 											{
 												dataKey: 'Titre : ',
-												dataValue: editingTitle ? (
+												dataValue: editingData.title ? (
 													<Form
 														onFinish={(values) => {
 															dispatch(
@@ -95,7 +105,7 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 																	title: values.title,
 																})
 															);
-															seteditingTitle(false);
+															setEditingData({ ...editingData, title: false });
 														}}
 													>
 														<div className='flex gap-4 w-3/4 2xl:w-1/2'>
@@ -112,7 +122,14 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 															>
 																Save
 															</Button>
-															<Button onClick={() => seteditingTitle(false)}>
+															<Button
+																onClick={() =>
+																	setEditingData({
+																		...editingData,
+																		title: false,
+																	})
+																}
+															>
 																Cancel
 															</Button>
 														</div>
@@ -121,23 +138,37 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 													<div className='flex gap-4 items-center'>
 														<span>{selectedGrade?.title}</span>
 														<span className='text-xl cursor-pointer hover:text-primary-800 duration-500'>
-															<CiEdit onClick={() => seteditingTitle(true)} />
+															<CiEdit
+																onClick={() =>
+																	setEditingData({
+																		...editingData,
+																		title: true,
+																	})
+																}
+															/>
 														</span>
 													</div>
 												),
 											},
 											{
 												dataKey: 'Salaire de base : ',
-												dataValue: editingBaseSalary ? (
+												dataValue: editingData.baseSalary ? (
 													<Form
 														onFinish={(values) => {
 															dispatch(
 																updateGrade({
 																	id: selectedGrade?.id!,
 																	baseSalary: parseInt(values.baseSalary),
+																	rate: {
+																		...selectedGrade?.rate,
+																		base: parseInt(values.baseSalary),
+																	},
 																})
 															);
-															setEditingBaseSalary(false);
+															setEditingData({
+																...editingData,
+																baseSalary: false,
+															});
 														}}
 													>
 														<div className='flex gap-4 w-3/4 2xl:w-1/2'>
@@ -155,7 +186,12 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 																Save
 															</Button>
 															<Button
-																onClick={() => setEditingBaseSalary(false)}
+																onClick={() =>
+																	setEditingData({
+																		...editingData,
+																		baseSalary: false,
+																	})
+																}
 															>
 																Cancel
 															</Button>
@@ -168,7 +204,12 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 														</span>
 														<span className='text-xl cursor-pointer hover:text-primary-800 duration-500'>
 															<CiEdit
-																onClick={() => setEditingBaseSalary(true)}
+																onClick={() =>
+																	setEditingData({
+																		...editingData,
+																		baseSalary: true,
+																	})
+																}
 															/>
 														</span>
 													</div>
@@ -180,13 +221,19 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 								<div>
 									{/* Pay rates */}
 									<div>
-										<Divider
-											orientation='left'
-											orientationMargin={0}
-											className='text-lg !font-bold !text-slate-700'
-										>
-											Taux de rémunération
-										</Divider>
+										<div className='text-lg !font-bold !text-slate-700 !flex !justify-between items-center mb-4'>
+											<p>Taux de rémunération</p>
+											<button
+												onClick={() =>
+													dispatch(
+														openModal({ modal_ID: 'UPDATE_GRADE_RATES' })
+													)
+												}
+												className='bg-secondary-600 hover:shadow-lg p-3 py-2 text-sm text-white rounded-md flex gap-2 justify-center items-center'
+											>
+												Modifier
+											</button>
+										</div>
 										<List
 											grid={{
 												gutter: 16,
@@ -212,10 +259,6 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 															<p className='font-bold text-slate-600'>
 																{item.value}
 															</p>
-															<CiEdit
-																onClick={() => seteditingTitle(true)}
-																className='text-xl cursor-pointer text-slate-500 hover:text-secondary-600'
-															/>
 														</div>
 													</Card>
 												</List.Item>
