@@ -7,6 +7,11 @@ import { useCallback } from 'react';
 import CreateGrade from './CreateGrade';
 import UpdateGradeRate from './UpdateGradeRate';
 import UpdateGradeFolderIds from './UpdateGradeFolderIds';
+import CreateFolderElement from './CreateFolderElement';
+import DetailFolderElement from './DetailFolderElement';
+import CreateRole from './CreateRole';
+import DetailRole from './DetailRole';
+import CreateAccess from './CreateAccess';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -14,6 +19,7 @@ const ModalManager = () => {
 	const close = useCallback(() => dispatch(closeModal()), [dispatch]);
 	return (
 		<div className=''>
+			{/* Grades */}
 			{modal_ID == 'NEW_GRADE' && (
 				<CreateGrade handlers={{ close, id: 'NEW_GRADE' }} />
 			)}
@@ -24,6 +30,35 @@ const ModalManager = () => {
 				<UpdateGradeFolderIds
 					handlers={{ close, id: 'UPDATE_GRADE_FOLDERS' }}
 				/>
+			)}
+
+			{/* Folder elements */}
+			{modal_ID == 'NEW_FOLDER_ELEMENT' && (
+				<CreateFolderElement handlers={{ close, id: 'NEW_FOLDER_ELEMENT' }} />
+			)}
+			{modal_ID == 'FOLDER_ELEMENT_UPDATE' && (
+				<CreateFolderElement
+					handlers={{ close, id: 'FOLDER_ELEMENT_UPDATE' }}
+				/>
+			)}
+			{modal_ID == 'FOLDER_ELEMENT_DETAILS' && (
+				<DetailFolderElement
+					handlers={{ close, id: 'FOLDER_ELEMENT_DETAILS' }}
+				/>
+			)}
+
+			{/* Rôles */}
+			{modal_ID == 'NEW_ROLE' && (
+				<CreateRole handlers={{ close, id: 'NEW_ROLE' }} />
+			)}
+			{modal_ID == 'UPDATE_ROLE' && (
+				<CreateRole handlers={{ close, id: 'UPDATE_ROLE' }} />
+			)}
+			{modal_ID == 'ROLE_DETAILS' && (
+				<DetailRole handlers={{ close, id: 'ROLE_DETAILS' }} />
+			)}
+			{modal_ID == 'CREATE_ACCESS' && (
+				<CreateAccess handlers={{ close, id: 'CREATE_ACCESS' }} />
 			)}
 			<></>
 		</div>

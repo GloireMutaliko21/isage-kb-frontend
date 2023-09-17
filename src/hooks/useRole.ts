@@ -12,10 +12,10 @@ const useRole = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !roles) dispatch(getRoles());
+		if (isLogin) dispatch(getRoles());
 		else console.log(message);
-	}, [dispatch, isLogin, message, roles]);
-	return { selectedRole, status, message };
+	}, [dispatch, isLogin, message]);
+	return { roles, selectedRole, status, message };
 };
 
 export default useRole;

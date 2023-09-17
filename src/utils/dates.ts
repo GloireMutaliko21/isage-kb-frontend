@@ -1,4 +1,8 @@
 import dayjs from 'dayjs';
+import utc from 'dayjs/plugin/utc';
+import localeData from 'dayjs/plugin/localeData';
+import localizedFormat from 'dayjs/plugin/localizedFormat';
+import fr from 'dayjs/locale/fr';
 
 export const currDate = dayjs();
 
@@ -17,4 +21,14 @@ export const lastYear = () => {
 	const start = new Date(currDate.subtract(1, 'year').toISOString());
 	const end = new Date(currDate.endOf('month').toISOString());
 	return { start, end };
+};
+
+export const frenchFormattedDate = (date: any) => {
+	dayjs.extend(utc);
+	dayjs.extend(localeData);
+	dayjs.extend(localizedFormat);
+
+	dayjs.locale(fr);
+	const formattedDate = dayjs.utc(date).format('dddd, [le] D MMM YYYY');
+	return formattedDate;
 };

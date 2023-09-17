@@ -5,7 +5,7 @@
 @tailwind utilities;
 
 html {
-	font-family: cairo, ui-sans-serif, system-ui;
+	font-family: cairo, sans-serif, ui-sans-serif, system-ui;
 }
 
 .ant-collapse-item {
@@ -20,4 +20,24 @@ html {
 .ant-collapse-item > .ant-collapse-header:hover {
 	background-color: rgb(224 247 250 / var(--tw-bg-opacity));
 	border-radius: 0.475rem;
+}
+
+::-webkit-scrollbar {
+	width: 8px;
+	height: 5px;
+	background: #dcdcdf;
+}
+
+::-webkit-scrollbar:hover {
+	width: 10px;
+	height: 5px;
+	background: #dcdcdf;
+}
+
+::-webkit-scrollbar-thumb {
+	@apply bg-slate-400;
+}
+
+::-webkit-scrollbar-track {
+	background-color: transparent;
 }

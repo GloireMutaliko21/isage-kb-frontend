@@ -173,6 +173,7 @@ interface FolderElement extends GeneralData {
 
 interface CreateFolderElementDto {
 	title: string;
+	dispatch?: any;
 }
 
 interface UpdateFolderElementDto {
@@ -331,12 +332,12 @@ interface Role extends GeneralData {
 
 interface createRoleDto {
 	title: string;
+	dispatch?: any;
 }
 
 interface UpdateRoleDto {
 	id: string;
-	agentId: string;
-	roleId: string;
+	title: string;
 }
 
 interface CreateAccess {

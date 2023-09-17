@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { folderElementUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { closeModal } from '../modalWindow/modalwindow.slice';
 
 export const getFolderElements: AsyncThunkPayloadCreator<
 	FolderElement[]
@@ -31,11 +32,13 @@ export const createFolderElement: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const { dispatch, ...rest } = payload;
 		const response: AxiosResponse<FolderElement> = await axios.post(
 			folderElementUrls.createAndGet,
-			payload,
+			rest,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
