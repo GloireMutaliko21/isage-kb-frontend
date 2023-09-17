@@ -123,3 +123,4 @@ const sectionSlice = createSlice({
 
 export default sectionSlice.reducer;
 export { getServiceById, getServices, createService, updateService };
+export const { setSectionIsError, setSectionIsSuccess } = sectionSlice.actions;

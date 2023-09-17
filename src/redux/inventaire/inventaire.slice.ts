@@ -161,3 +161,5 @@ export {
 	getGlobalHistoric,
 	getGlobalHistoricByArticle,
 };
+export const { setInventaireIsError, setInventaireIsSuccess } =
+	inventaireSlice.actions;

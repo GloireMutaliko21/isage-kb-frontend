@@ -182,3 +182,5 @@ export {
 	publishSocialCase,
 	closeSocialCase,
 };
+export const { setSocialCaseIsError, setSocialCaseIsSuccess } =
+	socialCaseSlice.actions;

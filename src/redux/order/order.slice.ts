@@ -131,3 +131,4 @@ const orderSlice = createSlice({
 
 export default orderSlice.reducer;
 export { createOrder, getOrders, getHistoric, closeOrder, cancelOrder };
+export const { setOrderIsError, setOrderIsSuccess } = orderSlice.actions;

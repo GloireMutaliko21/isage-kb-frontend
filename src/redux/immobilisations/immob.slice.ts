@@ -95,3 +95,4 @@ const immobSlice = createSlice({
 
 export default immobSlice.reducer;
 export { getImmobs, getAmortis, createImmob };
+export const { setImmobIsError, setImmobIsSuccess } = immobSlice.actions;

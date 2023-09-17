@@ -125,3 +125,5 @@ const categorySlice = createSlice({
 
 export default categorySlice.reducer;
 export { createCategory, getCategories, getCategoryById, updateCategory };
+export const { setCategoryIsError, setCategoryIsSuccess } =
+	categorySlice.actions;

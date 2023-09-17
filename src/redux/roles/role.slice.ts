@@ -174,3 +174,4 @@ export {
 	removeAccess,
 	deleteRole,
 };
+export const { setRoleIsError, setRoleIsSuccess } = roleSlice.actions;

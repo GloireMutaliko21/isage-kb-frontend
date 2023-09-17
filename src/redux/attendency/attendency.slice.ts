@@ -127,3 +127,5 @@ const attendencySlice = createSlice({
 
 export default attendencySlice.reducer;
 export { getDaily, getMonthly, getMonthlyAgent, getOwn, createAttendency };
+export const { setAttendencyIsError, setAttendencyIsSuccess } =
+	attendencySlice.actions;

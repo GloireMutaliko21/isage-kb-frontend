@@ -134,3 +134,4 @@ const gradeSlice = createSlice({
 
 export default gradeSlice.reducer;
 export { getGrades, getGradeById, createGrade, updateGrade, deleteGrade };
+export const { setGradeIsError, setGradeIsSuccess } = gradeSlice.actions;

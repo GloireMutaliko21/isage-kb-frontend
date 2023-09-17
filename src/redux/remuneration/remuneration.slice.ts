@@ -515,3 +515,5 @@ export {
 	getPayList,
 	getUnpaidAgents,
 };
+export const { setRemunerationIsError, setRemunerationIsSuccess } =
+	paieSlice.actions;

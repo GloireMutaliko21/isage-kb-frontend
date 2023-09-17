@@ -132,3 +132,4 @@ export {
 	approveConge,
 	requestConge,
 };
+export const { setCongeIsError, setCongeIsSuccess } = congeSlice.actions;

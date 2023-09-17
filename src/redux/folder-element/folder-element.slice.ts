@@ -156,3 +156,6 @@ export {
 	updateFolderElement,
 	deleteFolderElement,
 };
+
+export const { setFolderElementIsError, setFolderElementIsSuccess } =
+	folderElementSlice.actions;

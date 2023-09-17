@@ -78,3 +78,5 @@ const subsciptionSlice = createSlice({
 
 export default subsciptionSlice.reducer;
 export { subscribe, getSocialCaseSubscriptions };
+export const { setSubscriptionIsError, setSubscriptionIsSuccess } =
+	subsciptionSlice.actions;

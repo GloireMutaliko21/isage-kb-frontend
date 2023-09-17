@@ -152,3 +152,4 @@ export {
 	getUnstockArticles,
 	createArticle,
 };
+export const { setArticleIsError, setArticleIsSuccess } = articleSlice.actions;

@@ -114,3 +114,5 @@ const unitySlice = createSlice({
 
 export default unitySlice.reducer;
 export { getUnities, getUnityById, createUnity, updateUnity };
+export const { setArticleUnityIsError, setArticleUnityIsSuccess } =
+	unitySlice.actions;

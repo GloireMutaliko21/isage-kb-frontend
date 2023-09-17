@@ -93,3 +93,5 @@ const agentFileSlice = createSlice({
 
 export default agentFileSlice.reducer;
 export { createAgentFile, updateAgentFile };
+export const { setAgentFileIsError, setAgentFileIsSuccess } =
+	agentFileSlice.actions;

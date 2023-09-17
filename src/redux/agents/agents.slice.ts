@@ -145,3 +145,4 @@ const agentSlice = createSlice({
 
 export default agentSlice.reducer;
 export { getAgents, getAgentById, createAgent, updateAgent };
+export const { setAgentIsError, setAgentIsSuccess } = agentSlice.actions;
