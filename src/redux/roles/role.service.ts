@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { roleUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { closeModal } from '../modalWindow/modalwindow.slice';
 
 export const getRoles: AsyncThunkPayloadCreator<Role[]> = async (
 	_,
@@ -52,11 +53,13 @@ export const createRole: AsyncThunkPayloadCreator<Role, createRoleDto> = async (
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const { dispatch, ...rest } = payload;
 		const response: AxiosResponse<Role> = await axios.post(
 			roleUrls.createAndGet,
-			payload,
+			rest,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
@@ -75,7 +78,7 @@ export const updateRole: AsyncThunkPayloadCreator<Role, UpdateRoleDto> = async (
 	try {
 		const response: AxiosResponse<Role> = await axios.patch(
 			roleUrls.getOneUpdateDelete(payload.id),
-			{ agentId: payload.agentId, roleId: payload.roleId },
+			{ title: payload.title },
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;

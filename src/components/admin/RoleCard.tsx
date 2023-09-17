@@ -16,7 +16,7 @@ const RoleCard = ({ role, loading }: { role: Role; loading: boolean }) => {
 					key={`${role.id}-${role.title}`}
 					onClick={() => {
 						dispatch(getRoleById(role.id));
-						dispatch(openModal({ modal_ID: 'NEW_ROLE' }));
+						dispatch(openModal({ modal_ID: 'UPDATE_ROLE' }));
 					}}
 				>
 					Modifier

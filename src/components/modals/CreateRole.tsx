@@ -1,50 +1,40 @@
+import { Button, Form, Input, Modal } from 'antd';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
-import {
-	createFolderElement,
-	updateFolderElement,
-} from '@/redux/folder-element/folder-element.slice';
 import { closeModal } from '@/redux/modalWindow/modalwindow.slice';
-import { Button, Form, Input, Modal } from 'antd';
+import { createRole, updateRole } from '@/redux/roles/role.slice';
 
-const CreateFolderElement = ({ handlers }: { handlers: ModalsHandlers }) => {
-	const { selectedFoldEl, status } = useAppSelector(
-		(state) => state.folderElement
-	);
+const CreateRole = ({ handlers }: { handlers: ModalsHandlers }) => {
+	const { selectedRole, status } = useAppSelector((state) => state.role);
 	const { modal_ID } = useAppSelector((state) => state.modal);
 	const dispatch = useAppDispatch();
 	const onSubmit = (values: any) => {
 		const { title } = values;
 		const data = { title, dispatch };
-		dispatch(createFolderElement(data));
+		dispatch(createRole(data));
 	};
 	const onSubmitUpdate = (values: any) => {
 		const { title } = values;
-		dispatch(updateFolderElement({ id: selectedFoldEl?.id!, title }));
+		dispatch(updateRole({ id: selectedRole?.id!, title }));
 		dispatch(closeModal());
 	};
-
 	return (
 		<Modal
 			open={true}
 			centered
-			title='Nouvel élément de dossier'
+			title='Nouveau rôle'
 			footer={null}
 			onCancel={() => handlers.close!(handlers.id!)}
 		>
 			<Form
-				onFinish={
-					modal_ID == 'FOLDER_ELEMENT_UPDATE' ? onSubmitUpdate : onSubmit
-				}
+				onFinish={modal_ID == 'UPDATE_ROLE' ? onSubmitUpdate : onSubmit}
 				layout='vertical'
 			>
 				<Form.Item
 					name='title'
 					label='Titre'
 					rules={[{ required: true }]}
-					initialValue={
-						modal_ID == 'FOLDER_ELEMENT_UPDATE' ? selectedFoldEl?.title : null
-					}
+					initialValue={modal_ID == 'UPDATE_ROLE' ? selectedRole?.title : null}
 				>
 					<Input />
 				</Form.Item>
@@ -54,9 +44,7 @@ const CreateFolderElement = ({ handlers }: { handlers: ModalsHandlers }) => {
 							size='middle'
 							onClick={() =>
 								handlers.close!(
-									modal_ID == 'FOLDER_ELEMENT_UPDATE'
-										? 'FOLDER_ELEMENT_UPDATE'
-										: 'NEW_FOLDER_ELEMENT'
+									modal_ID == 'UPDATE_ROLE' ? 'UPDATE_ROLE' : 'NEW_ROLE'
 								)
 							}
 						>
@@ -72,4 +60,4 @@ const CreateFolderElement = ({ handlers }: { handlers: ModalsHandlers }) => {
 	);
 };
 
-export default CreateFolderElement;
+export default CreateRole;

@@ -9,6 +9,7 @@ import UpdateGradeRate from './UpdateGradeRate';
 import UpdateGradeFolderIds from './UpdateGradeFolderIds';
 import CreateFolderElement from './CreateFolderElement';
 import DetailFolderElement from './DetailFolderElement';
+import CreateRole from './CreateRole';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -42,6 +43,14 @@ const ModalManager = () => {
 				<DetailFolderElement
 					handlers={{ close, id: 'FOLDER_ELEMENT_DETAILS' }}
 				/>
+			)}
+
+			{/* Rôles */}
+			{modal_ID == 'NEW_ROLE' && (
+				<CreateRole handlers={{ close, id: 'NEW_ROLE' }} />
+			)}
+			{modal_ID == 'UPDATE_ROLE' && (
+				<CreateRole handlers={{ close, id: 'UPDATE_ROLE' }} />
 			)}
 			<></>
 		</div>
