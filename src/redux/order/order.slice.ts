@@ -53,7 +53,7 @@ const orderSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
 				state.orders = [...state.orders, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createOrder.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -102,7 +102,7 @@ const orderSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
 				state.orders = [...updated];
-				state.message = null;
+				state.message = 'Fermé avec succès';
 			})
 			.addCase(closeOrder.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -119,7 +119,7 @@ const orderSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
 				state.orders = [...updated];
-				state.message = null;
+				state.message = 'Commande annulée';
 			})
 			.addCase(cancelOrder.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

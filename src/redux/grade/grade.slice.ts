@@ -88,7 +88,7 @@ const gradeSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedGrade = payload;
 				state.grades = [...state.grades, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createGrade.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -105,7 +105,7 @@ const gradeSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedGrade = payload;
 				state.grades = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateGrade.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -122,7 +122,7 @@ const gradeSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedGrade = null;
 				state.grades = [...deleted];
-				state.message = null;
+				state.message = 'Supprimé avec succès';
 			})
 			.addCase(deleteGrade.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

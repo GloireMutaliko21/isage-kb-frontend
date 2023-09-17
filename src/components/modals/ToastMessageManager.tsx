@@ -62,7 +62,7 @@ import {
 } from '@/redux/social-case/social-case.slice';
 
 const ToastMessageManager = () => {
-	const [toast, contextHolder] = Toast.useMessage({ maxCount: 2 });
+	const [toast, contextHolder] = Toast.useMessage({ maxCount: 1 });
 	const dispach = useAppDispatch();
 
 	/**

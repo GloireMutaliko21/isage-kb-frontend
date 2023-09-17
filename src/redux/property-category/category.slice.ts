@@ -64,7 +64,7 @@ const categorySlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedCategory = payload;
 				state.categories = [...state.categories, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createCategory.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -113,7 +113,7 @@ const categorySlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedCategory = payload;
 				state.categories = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateCategory.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

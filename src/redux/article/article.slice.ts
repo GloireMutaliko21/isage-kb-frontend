@@ -134,7 +134,7 @@ const articleSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedArticle = null;
 				state.articles = [...state.articles, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createArticle.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

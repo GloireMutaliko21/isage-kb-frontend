@@ -58,7 +58,7 @@ const agentFileSlice = createSlice({
 			.addCase(createAgentFile.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.agentFile = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createAgentFile.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -81,7 +81,7 @@ const agentFileSlice = createSlice({
 			.addCase(updateAgentFile.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.agentFile = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateAgentFile.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

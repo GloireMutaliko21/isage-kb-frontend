@@ -73,7 +73,7 @@ const inventaireSlice = createSlice({
 			})
 			.addCase(createOperation.fulfilled, (state) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createOperation.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

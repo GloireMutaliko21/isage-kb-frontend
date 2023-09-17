@@ -83,7 +83,7 @@ const immobSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedImmob = null;
 				state.immobs = [...state.immobs, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createImmob.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

@@ -95,7 +95,7 @@ const authSlice = createSlice({
 			.addCase(defineUserPwd.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.profile = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(defineUserPwd.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

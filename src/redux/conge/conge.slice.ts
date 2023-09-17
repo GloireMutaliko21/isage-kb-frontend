@@ -89,7 +89,7 @@ const congeSlice = createSlice({
 			})
 			.addCase(createConge.fulfilled, (state) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createConge.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -102,7 +102,7 @@ const congeSlice = createSlice({
 			})
 			.addCase(approveConge.fulfilled, (state) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(approveConge.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -115,7 +115,7 @@ const congeSlice = createSlice({
 			})
 			.addCase(requestConge.fulfilled, (state) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(requestConge.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

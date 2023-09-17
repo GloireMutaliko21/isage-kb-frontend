@@ -116,7 +116,7 @@ const attendencySlice = createSlice({
 			.addCase(createAttendency.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.attendecies = [...state.attendecies, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createAttendency.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

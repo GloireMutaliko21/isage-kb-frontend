@@ -113,7 +113,7 @@ const agentSlice = createSlice({
 					matricule: '',
 					names: '',
 				};
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createAgent.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -134,7 +134,7 @@ const agentSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.agents = [...updated, payload];
 				state.selectedAgent = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateAgent.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

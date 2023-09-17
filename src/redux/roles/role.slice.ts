@@ -94,7 +94,7 @@ const roleSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedRole = payload;
 				state.roles = [...state.roles, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createRole.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -111,7 +111,7 @@ const roleSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedRole = payload;
 				state.roles = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateRole.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -125,7 +125,7 @@ const roleSlice = createSlice({
 			})
 			.addCase(creareAccess.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(creareAccess.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -138,7 +138,7 @@ const roleSlice = createSlice({
 			})
 			.addCase(removeAccess.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Accès supprimé';
 			})
 			.addCase(removeAccess.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -154,7 +154,7 @@ const roleSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedRole = null;
 				state.roles = updated;
-				state.message = null;
+				state.message = 'Supprimé avec succès';
 			})
 			.addCase(deleteRole.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;

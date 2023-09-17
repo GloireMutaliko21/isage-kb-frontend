@@ -52,7 +52,7 @@ const subsciptionSlice = createSlice({
 			.addCase(subscribe.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.createdSubscr = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(subscribe.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
