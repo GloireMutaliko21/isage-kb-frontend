@@ -26,7 +26,7 @@ const UpdateGradeRate = ({ handlers }: { handlers: ModalsHandlers }) => {
 			footer={null}
 			onCancel={() => handlers.close!(handlers.id!)}
 		>
-			<Form onFinish={onSubmit}>
+			<Form onFinish={onSubmit} layout='vertical'>
 				<Form.Item>
 					<Form.Item
 						name='alloc'

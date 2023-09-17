@@ -4,7 +4,6 @@ import PageHeader from '@/components/global/PageHeader';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import useGrades from '@/hooks/useGrades';
 import { openModal } from '@/redux/modalWindow/modalwindow.slice';
-import React from 'react';
 
 const Grades = () => {
 	const { grades, status } = useGrades();

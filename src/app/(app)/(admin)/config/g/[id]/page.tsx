@@ -19,7 +19,6 @@ import {
 } from 'antd';
 import { CiEdit } from 'react-icons/ci';
 import Link from 'next/link';
-import { title } from 'process';
 import { openModal } from '@/redux/modalWindow/modalwindow.slice';
 
 const Singlegrade = ({ params }: { params: { id: string } }) => {
