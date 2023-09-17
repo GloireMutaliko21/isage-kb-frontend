@@ -45,7 +45,14 @@ const deleteRole = createAsyncThunk('roles/delete', roleService.deleteRole);
 const roleSlice = createSlice({
 	name: 'roles',
 	initialState,
-	reducers: {},
+	reducers: {
+		setRoleIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setRoleIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// get all roles

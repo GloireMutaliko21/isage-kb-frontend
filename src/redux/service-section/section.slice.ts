@@ -45,7 +45,14 @@ const updateService = createAsyncThunk(
 const sectionSlice = createSlice({
 	name: 'immob',
 	initialState,
-	reducers: {},
+	reducers: {
+		setSectionIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setSectionIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get all services

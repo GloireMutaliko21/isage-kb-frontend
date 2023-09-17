@@ -41,7 +41,14 @@ const updateAgent = createAsyncThunk('agents/update', agentService.updateAgent);
 const agentSlice = createSlice({
 	name: 'agents',
 	initialState,
-	reducers: {},
+	reducers: {
+		setAgentIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setAgentIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getAgents.pending, (state) => {

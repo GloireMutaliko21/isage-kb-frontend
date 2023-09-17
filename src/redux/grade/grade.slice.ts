@@ -38,7 +38,14 @@ const deleteGrade = createAsyncThunk('grade/delete', gradeService.deleteGrade);
 const gradeSlice = createSlice({
 	name: 'grade',
 	initialState,
-	reducers: {},
+	reducers: {
+		setGradeIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setGradeIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get All grades

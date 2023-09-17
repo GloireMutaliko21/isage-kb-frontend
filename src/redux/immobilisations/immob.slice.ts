@@ -33,7 +33,14 @@ const createImmob = createAsyncThunk('immob/create', immobService.createImmob);
 const immobSlice = createSlice({
 	name: 'immob',
 	initialState,
-	reducers: {},
+	reducers: {
+		setImmobIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setImmobIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get all immobs

@@ -50,7 +50,14 @@ const deleteFolderElement = createAsyncThunk(
 const folderElementSlice = createSlice({
 	name: 'folderElement',
 	initialState,
-	reducers: {},
+	reducers: {
+		setFolderElementIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setFolderElementIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get All folder elements

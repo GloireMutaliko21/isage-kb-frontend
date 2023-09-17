@@ -57,7 +57,14 @@ const getGlobalHistoricByArticle = createAsyncThunk(
 const inventaireSlice = createSlice({
 	name: 'inventaire',
 	initialState,
-	reducers: {},
+	reducers: {
+		setInventaireIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setInventaireIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// create op

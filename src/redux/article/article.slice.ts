@@ -52,7 +52,14 @@ const createArticle = createAsyncThunk(
 const articleSlice = createSlice({
 	name: 'articles',
 	initialState,
-	reducers: {},
+	reducers: {
+		setArticleIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setArticleIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get All articles

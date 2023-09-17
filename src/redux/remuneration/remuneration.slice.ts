@@ -198,7 +198,14 @@ const getUnpaidAgents = createAsyncThunk(
 const paieSlice = createSlice({
 	name: 'paie',
 	initialState,
-	reducers: {},
+	reducers: {
+		setRemunerationIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setRemunerationIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// maladie

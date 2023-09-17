@@ -48,7 +48,14 @@ const createAttendency = createAsyncThunk(
 const attendencySlice = createSlice({
 	name: 'attendency',
 	initialState,
-	reducers: {},
+	reducers: {
+		setAttendencyIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setAttendencyIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getDaily.pending, (state) => {

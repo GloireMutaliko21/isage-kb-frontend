@@ -4,6 +4,7 @@ import type { Metadata } from 'next';
 import MainProvider from '@/redux/Provider';
 import NextTopLoader from 'nextjs-toploader';
 import ModalManager from '@/components/modals/ModalManager';
+import ToastMessageManager from '@/components/modals/ToastMessageManager';
 export const metadata: Metadata = {
 	title: 'ISAGE-KB',
 	description: "Gestion Administrative de l'institution",
@@ -33,6 +34,7 @@ export default function RootLayout({
 						{children}
 
 						<ModalManager />
+						<ToastMessageManager />
 					</AntdLayout>
 				</MainProvider>
 			</body>

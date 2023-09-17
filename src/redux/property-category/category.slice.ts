@@ -45,7 +45,14 @@ const updateCategory = createAsyncThunk(
 const categorySlice = createSlice({
 	name: 'category',
 	initialState,
-	reducers: {},
+	reducers: {
+		setCategoryIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setCategoryIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 

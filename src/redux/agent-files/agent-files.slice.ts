@@ -42,7 +42,14 @@ const updateAgentFile = createAsyncThunk(
 const agentFileSlice = createSlice({
 	name: 'agent-file',
 	initialState,
-	reducers: {},
+	reducers: {
+		setAgentFileIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setAgentFileIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(createAgentFile.pending, (state) => {

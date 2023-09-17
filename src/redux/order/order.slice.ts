@@ -35,7 +35,14 @@ const cancelOrder = createAsyncThunk('order/cancel', orderService.cancelOrder);
 const orderSlice = createSlice({
 	name: 'order',
 	initialState,
-	reducers: {},
+	reducers: {
+		setOrderIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setOrderIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//create order

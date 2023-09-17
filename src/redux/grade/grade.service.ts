@@ -34,12 +34,13 @@ export const createGrade: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const { dispatch, ...rest } = payload;
 		const response: AxiosResponse<Grade> = await axios.post(
 			gradeUrls.createAndGet,
-			payload,
+			rest,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
-		payload.dispatch(closeModal());
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)

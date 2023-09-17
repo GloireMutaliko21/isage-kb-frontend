@@ -36,7 +36,14 @@ const updateUnity = createAsyncThunk('unity/update', unityService.updateUnity);
 const unitySlice = createSlice({
 	name: 'unity',
 	initialState,
-	reducers: {},
+	reducers: {
+		setArticleUnityIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setArticleUnityIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get All unities

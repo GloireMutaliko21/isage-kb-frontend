@@ -45,7 +45,14 @@ const approveConge = createAsyncThunk(
 const congeSlice = createSlice({
 	name: 'conge',
 	initialState,
-	reducers: {},
+	reducers: {
+		setCongeIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setCongeIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//get agents on leave

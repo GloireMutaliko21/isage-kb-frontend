@@ -57,7 +57,14 @@ const closeSocialCase = createAsyncThunk(
 const socialCaseSlice = createSlice({
 	name: 'socialcase',
 	initialState,
-	reducers: {},
+	reducers: {
+		setSocialCaseIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setSocialCaseIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// create social case
