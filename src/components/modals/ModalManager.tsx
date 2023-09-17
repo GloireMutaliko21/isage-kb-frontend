@@ -10,6 +10,7 @@ import UpdateGradeFolderIds from './UpdateGradeFolderIds';
 import CreateFolderElement from './CreateFolderElement';
 import DetailFolderElement from './DetailFolderElement';
 import CreateRole from './CreateRole';
+import DetailRole from './DetailRole';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -51,6 +52,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'UPDATE_ROLE' && (
 				<CreateRole handlers={{ close, id: 'UPDATE_ROLE' }} />
+			)}
+			{modal_ID == 'ROLE_DETAILS' && (
+				<DetailRole handlers={{ close, id: 'ROLE_DETAILS' }} />
 			)}
 			<></>
 		</div>
