@@ -198,7 +198,14 @@ const getUnpaidAgents = createAsyncThunk(
 const paieSlice = createSlice({
 	name: 'paie',
 	initialState,
-	reducers: {},
+	reducers: {
+		setRemunerationIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setRemunerationIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// maladie
@@ -208,7 +215,7 @@ const paieSlice = createSlice({
 			.addCase(registerRemMaladAccid.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.remMalad.created = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerRemMaladAccid.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -235,7 +242,7 @@ const paieSlice = createSlice({
 			.addCase(registerSalaryDeduction.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.deduction.created = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerSalaryDeduction.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -275,7 +282,7 @@ const paieSlice = createSlice({
 			.addCase(registerPrime.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.prime.created = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerPrime.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -315,7 +322,7 @@ const paieSlice = createSlice({
 			.addCase(registerAllocation.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.allocation.created = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerAllocation.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -342,7 +349,7 @@ const paieSlice = createSlice({
 			.addCase(registerSuppHour.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.hsupp.created = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerSuppHour.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -369,7 +376,7 @@ const paieSlice = createSlice({
 			.addCase(registerRemDaysConge.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.remConge.created = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerRemDaysConge.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -396,7 +403,7 @@ const paieSlice = createSlice({
 			.addCase(registerRemDaysFerie.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.remFerie.created = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerRemDaysFerie.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -423,7 +430,7 @@ const paieSlice = createSlice({
 			.addCase(registerPaySlip.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.slipList.fiche = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerPaySlip.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -508,3 +515,5 @@ export {
 	getPayList,
 	getUnpaidAgents,
 };
+export const { setRemunerationIsError, setRemunerationIsSuccess } =
+	paieSlice.actions;

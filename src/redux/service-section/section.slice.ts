@@ -45,7 +45,14 @@ const updateService = createAsyncThunk(
 const sectionSlice = createSlice({
 	name: 'immob',
 	initialState,
-	reducers: {},
+	reducers: {
+		setSectionIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setSectionIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get all services
@@ -87,7 +94,7 @@ const sectionSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedService = payload;
 				state.services = [...state.services, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createService.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -104,7 +111,7 @@ const sectionSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedService = payload;
 				state.services = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateService.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -116,3 +123,4 @@ const sectionSlice = createSlice({
 
 export default sectionSlice.reducer;
 export { getServiceById, getServices, createService, updateService };
+export const { setSectionIsError, setSectionIsSuccess } = sectionSlice.actions;

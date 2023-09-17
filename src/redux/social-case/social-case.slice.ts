@@ -57,7 +57,14 @@ const closeSocialCase = createAsyncThunk(
 const socialCaseSlice = createSlice({
 	name: 'socialcase',
 	initialState,
-	reducers: {},
+	reducers: {
+		setSocialCaseIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setSocialCaseIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// create social case
@@ -68,7 +75,7 @@ const socialCaseSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedSocialCase = payload;
 				state.socialCases = [...state.socialCases, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createSocialCase.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -117,7 +124,7 @@ const socialCaseSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedSocialCase = payload;
 				state.socialCases = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateSocialCase.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -135,7 +142,7 @@ const socialCaseSlice = createSlice({
 				state.selectedSocialCase = payload;
 				state.socialCases = [...updated, payload];
 				state.pubProgSocialCases = [...state.pubProgSocialCases, payload];
-				state.message = null;
+				state.message = 'Cas social publié';
 			})
 			.addCase(publishSocialCase.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -156,7 +163,7 @@ const socialCaseSlice = createSlice({
 				state.selectedSocialCase = payload;
 				state.socialCases = [...updated, payload];
 				state.pubProgSocialCases = [...updatedPub];
-				state.message = null;
+				state.message = 'Cas social fermé';
 			})
 			.addCase(closeSocialCase.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -175,3 +182,5 @@ export {
 	publishSocialCase,
 	closeSocialCase,
 };
+export const { setSocialCaseIsError, setSocialCaseIsSuccess } =
+	socialCaseSlice.actions;

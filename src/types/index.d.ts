@@ -193,17 +193,21 @@ interface Grade extends GeneralData {
 	baseSalary?: number;
 	folderIds?: string[];
 	agents?: User[];
+	folderElements?: FolderElement[];
 }
 
 interface CreateGradeDto {
 	title: string;
-	rate: Record<string, number>;
+	baseSalary: string | number;
+	rate: Record<string, string | number>;
 	folderIds: string[];
+	dispatch?: any;
 }
 
 interface UpdateGradeDto {
 	id: string;
 	title?: string;
+	baseSalary?: number;
 	rate?: Record<string, number>;
 	folderIds?: string[];
 }
@@ -584,4 +588,9 @@ interface CreatePaySlipDto {
 interface HrefLink {
 	href: string;
 	label: string;
+}
+
+interface ModalsHandlers {
+	id?: string;
+	close?: (id: string) => void;
 }

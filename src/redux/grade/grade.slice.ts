@@ -22,23 +22,30 @@ const initialState: {
 	message: null,
 };
 
-const getGrades = createAsyncThunk('foldEl/getAll', gradeService.getGrades);
+const getGrades = createAsyncThunk('grade/getAll', gradeService.getGrades);
 
 const getGradeById = createAsyncThunk(
-	'foldEl/getOne',
+	'grade/getOne',
 	gradeService.getGradeById
 );
 
-const createGrade = createAsyncThunk('foldEl/create', gradeService.createGrade);
+const createGrade = createAsyncThunk('grade/create', gradeService.createGrade);
 
-const updateGrade = createAsyncThunk('foldEl/update', gradeService.updateGrade);
+const updateGrade = createAsyncThunk('grade/update', gradeService.updateGrade);
 
-const deleteGrade = createAsyncThunk('foldEl/delete', gradeService.deleteGrade);
+const deleteGrade = createAsyncThunk('grade/delete', gradeService.deleteGrade);
 
 const gradeSlice = createSlice({
-	name: 'folderElement',
+	name: 'grade',
 	initialState,
-	reducers: {},
+	reducers: {
+		setGradeIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setGradeIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get All grades
@@ -81,7 +88,7 @@ const gradeSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedGrade = payload;
 				state.grades = [...state.grades, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createGrade.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -98,7 +105,7 @@ const gradeSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedGrade = payload;
 				state.grades = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateGrade.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -115,7 +122,7 @@ const gradeSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedGrade = null;
 				state.grades = [...deleted];
-				state.message = null;
+				state.message = 'Supprimé avec succès';
 			})
 			.addCase(deleteGrade.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -127,3 +134,4 @@ const gradeSlice = createSlice({
 
 export default gradeSlice.reducer;
 export { getGrades, getGradeById, createGrade, updateGrade, deleteGrade };
+export const { setGradeIsError, setGradeIsSuccess } = gradeSlice.actions;

@@ -3,18 +3,11 @@ import Link from 'next/link';
 import React from 'react';
 import useAgents from '@/hooks/useAgents';
 import useAttendency from '@/hooks/useAttendency';
-import { HiArrowRight } from 'react-icons/hi2';
 import useConge from '@/hooks/useConge';
 import useRemuneration from '@/hooks/useRemuneration';
-import {
-	Column,
-	Pie,
-	type ColumnConfig,
-	type PieConfig,
-} from '@ant-design/plots';
+import { type ColumnConfig, type PieConfig } from '@ant-design/plots';
 import useInventaire from '@/hooks/useInventaire';
 import { columnInventaireChartData } from '@/features/inventaire';
-import { Switch } from 'antd';
 import useImmob from '@/hooks/useImmob';
 import { nonAmortis } from '@/features/immob';
 import AgentDashboardTable from '../personnel/AgentDashboardTable';

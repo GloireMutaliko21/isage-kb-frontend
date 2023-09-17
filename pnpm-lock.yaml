@@ -56,6 +56,9 @@ dependencies:
   nextjs-progressbar:
     specifier: ^0.0.16
     version: 0.0.16(next@13.4.19)(react@18.2.0)
+  nextjs-toploader:
+    specifier: ^1.4.2
+    version: 1.4.2(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
   postcss:
     specifier: 8.4.29
     version: 8.4.29
@@ -2768,6 +2771,21 @@ packages:
       nprogress: 0.2.0
       prop-types: 15.8.1
       react: 18.2.0
+    dev: false
+
+  /nextjs-toploader@1.4.2(next@13.4.19)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-FS5+zCdNHLq0YA+SijkbDifOMFNayKfxkCLTiM6TIrvSaf6kAzCGlNjwgVpoG3zpampVMQSVf5L/jrWFJgs23g==}
+    peerDependencies:
+      next: '>= 6.0.0'
+      react: '>= 16.0.0'
+      react-dom: '>= 16.0.0'
+    dependencies:
+      '@types/nprogress': 0.2.0
+      next: 13.4.19(react-dom@18.2.0)(react@18.2.0)
+      nprogress: 0.2.0
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /node-releases@2.0.13:

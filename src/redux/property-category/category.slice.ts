@@ -45,7 +45,14 @@ const updateCategory = createAsyncThunk(
 const categorySlice = createSlice({
 	name: 'category',
 	initialState,
-	reducers: {},
+	reducers: {
+		setCategoryIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setCategoryIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 
@@ -57,7 +64,7 @@ const categorySlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedCategory = payload;
 				state.categories = [...state.categories, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createCategory.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -106,7 +113,7 @@ const categorySlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedCategory = payload;
 				state.categories = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateCategory.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -118,3 +125,5 @@ const categorySlice = createSlice({
 
 export default categorySlice.reducer;
 export { createCategory, getCategories, getCategoryById, updateCategory };
+export const { setCategoryIsError, setCategoryIsSuccess } =
+	categorySlice.actions;

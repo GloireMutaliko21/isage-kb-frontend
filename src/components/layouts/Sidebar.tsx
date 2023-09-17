@@ -6,6 +6,7 @@ import { IoIosArrowDown } from 'react-icons/io';
 import { RiLogoutCircleLine } from 'react-icons/ri';
 import { BsCassette } from 'react-icons/bs';
 import { TbSettingsCog } from 'react-icons/tb';
+import { LuLayoutDashboard } from 'react-icons/lu';
 import {
 	PiCalendarLight,
 	PiCalendarPlusDuotone,
@@ -129,6 +130,15 @@ const Sidebar = () => {
 
 	return (
 		<div className='h-screen z-10 w-80 bg-white overflow-y-auto relative py-2 border-r'>
+			<div className='text-[#737a87] text-[14.3px] mx-3 my-3'>
+				<Link
+					href='/'
+					className='flex gap-2 items-center hover:text-secondary-800 font-bold duration-150'
+				>
+					<LuLayoutDashboard className='text-xl' />
+					Tableau de bord
+				</Link>
+			</div>
 			<Collapse
 				ghost={true}
 				accordion

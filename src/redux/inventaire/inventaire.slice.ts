@@ -57,7 +57,14 @@ const getGlobalHistoricByArticle = createAsyncThunk(
 const inventaireSlice = createSlice({
 	name: 'inventaire',
 	initialState,
-	reducers: {},
+	reducers: {
+		setInventaireIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setInventaireIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// create op
@@ -66,7 +73,7 @@ const inventaireSlice = createSlice({
 			})
 			.addCase(createOperation.fulfilled, (state) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createOperation.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -154,3 +161,5 @@ export {
 	getGlobalHistoric,
 	getGlobalHistoricByArticle,
 };
+export const { setInventaireIsError, setInventaireIsSuccess } =
+	inventaireSlice.actions;

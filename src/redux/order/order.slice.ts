@@ -35,7 +35,14 @@ const cancelOrder = createAsyncThunk('order/cancel', orderService.cancelOrder);
 const orderSlice = createSlice({
 	name: 'order',
 	initialState,
-	reducers: {},
+	reducers: {
+		setOrderIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setOrderIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//create order
@@ -46,7 +53,7 @@ const orderSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
 				state.orders = [...state.orders, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createOrder.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -95,7 +102,7 @@ const orderSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
 				state.orders = [...updated];
-				state.message = null;
+				state.message = 'Fermé avec succès';
 			})
 			.addCase(closeOrder.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -112,7 +119,7 @@ const orderSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
 				state.orders = [...updated];
-				state.message = null;
+				state.message = 'Commande annulée';
 			})
 			.addCase(cancelOrder.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -124,3 +131,4 @@ const orderSlice = createSlice({
 
 export default orderSlice.reducer;
 export { createOrder, getOrders, getHistoric, closeOrder, cancelOrder };
+export const { setOrderIsError, setOrderIsSuccess } = orderSlice.actions;

@@ -41,7 +41,14 @@ const updateAgent = createAsyncThunk('agents/update', agentService.updateAgent);
 const agentSlice = createSlice({
 	name: 'agents',
 	initialState,
-	reducers: {},
+	reducers: {
+		setAgentIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setAgentIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getAgents.pending, (state) => {
@@ -106,7 +113,7 @@ const agentSlice = createSlice({
 					matricule: '',
 					names: '',
 				};
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createAgent.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -127,7 +134,7 @@ const agentSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.agents = [...updated, payload];
 				state.selectedAgent = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateAgent.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -138,3 +145,4 @@ const agentSlice = createSlice({
 
 export default agentSlice.reducer;
 export { getAgents, getAgentById, createAgent, updateAgent };
+export const { setAgentIsError, setAgentIsSuccess } = agentSlice.actions;

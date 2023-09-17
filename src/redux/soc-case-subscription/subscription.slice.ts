@@ -35,7 +35,14 @@ const getSocialCaseSubscriptions = createAsyncThunk(
 const subsciptionSlice = createSlice({
 	name: 'subscription',
 	initialState,
-	reducers: {},
+	reducers: {
+		setSubscriptionIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setSubscriptionIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// subscribe
@@ -45,7 +52,7 @@ const subsciptionSlice = createSlice({
 			.addCase(subscribe.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.createdSubscr = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(subscribe.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -71,3 +78,5 @@ const subsciptionSlice = createSlice({
 
 export default subsciptionSlice.reducer;
 export { subscribe, getSocialCaseSubscriptions };
+export const { setSubscriptionIsError, setSubscriptionIsSuccess } =
+	subsciptionSlice.actions;

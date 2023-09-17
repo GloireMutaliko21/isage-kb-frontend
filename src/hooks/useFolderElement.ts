@@ -12,9 +12,10 @@ const useFolderElement = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !folderElements) dispatch(getFolderElements());
+		if (isLogin) dispatch(getFolderElements());
 		else console.log(message);
 	}, [dispatch, isLogin, message]);
+
 	return { folderElements, selectedFoldEl, status, message };
 };
 

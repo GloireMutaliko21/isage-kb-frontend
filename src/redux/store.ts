@@ -17,6 +17,7 @@ import roleReducer from './roles/role.slice';
 import serviceReducer from './service-section/section.slice';
 import subscriptionReducer from './soc-case-subscription/subscription.slice';
 import socialCaseReducer from './social-case/social-case.slice';
+import modalManager from './modalWindow/modalwindow.slice';
 
 const store = configureStore({
 	reducer: {
@@ -38,6 +39,7 @@ const store = configureStore({
 		service: serviceReducer,
 		subscription: subscriptionReducer,
 		socialCase: socialCaseReducer,
+		modal: modalManager,
 	},
 });
 

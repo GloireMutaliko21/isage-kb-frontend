@@ -52,7 +52,14 @@ const createArticle = createAsyncThunk(
 const articleSlice = createSlice({
 	name: 'articles',
 	initialState,
-	reducers: {},
+	reducers: {
+		setArticleIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setArticleIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get All articles
@@ -127,7 +134,7 @@ const articleSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedArticle = null;
 				state.articles = [...state.articles, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createArticle.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -145,3 +152,4 @@ export {
 	getUnstockArticles,
 	createArticle,
 };
+export const { setArticleIsError, setArticleIsSuccess } = articleSlice.actions;

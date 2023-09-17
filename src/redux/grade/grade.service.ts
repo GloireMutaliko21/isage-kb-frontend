@@ -3,6 +3,8 @@ import axios, { AxiosResponse } from 'axios';
 import { gradeUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { useDispatch } from 'react-redux';
+import { closeModal } from '../modalWindow/modalwindow.slice';
 
 export const getGrades: AsyncThunkPayloadCreator<Grade[]> = async (
 	_,
@@ -32,11 +34,13 @@ export const createGrade: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const { dispatch, ...rest } = payload;
 		const response: AxiosResponse<Grade> = await axios.post(
 			gradeUrls.createAndGet,
-			payload,
+			rest,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
@@ -69,14 +73,14 @@ export const updateGrade: AsyncThunkPayloadCreator<
 	Grade,
 	UpdateGradeDto
 > = async (payload, thunkAPI) => {
-	const { folderIds, rate, title } = payload;
+	const { folderIds, rate, title, baseSalary } = payload;
 	const {
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
 		const response: AxiosResponse<Grade> = await axios.patch(
 			gradeUrls.getOnePatchDelete(payload.id),
-			{ title, rate, folderIds },
+			{ title, rate, folderIds, baseSalary },
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;

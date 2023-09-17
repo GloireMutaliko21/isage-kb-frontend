@@ -33,7 +33,14 @@ const createImmob = createAsyncThunk('immob/create', immobService.createImmob);
 const immobSlice = createSlice({
 	name: 'immob',
 	initialState,
-	reducers: {},
+	reducers: {
+		setImmobIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setImmobIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get all immobs
@@ -76,7 +83,7 @@ const immobSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedImmob = null;
 				state.immobs = [...state.immobs, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createImmob.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -88,3 +95,4 @@ const immobSlice = createSlice({
 
 export default immobSlice.reducer;
 export { getImmobs, getAmortis, createImmob };
+export const { setImmobIsError, setImmobIsSuccess } = immobSlice.actions;

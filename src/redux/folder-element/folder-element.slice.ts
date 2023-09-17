@@ -50,7 +50,14 @@ const deleteFolderElement = createAsyncThunk(
 const folderElementSlice = createSlice({
 	name: 'folderElement',
 	initialState,
-	reducers: {},
+	reducers: {
+		setFolderElementIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setFolderElementIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get All folder elements
@@ -93,7 +100,7 @@ const folderElementSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedFoldEl = payload;
 				state.folderElements = [...state.folderElements, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createFolderElement.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -112,7 +119,7 @@ const folderElementSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedFoldEl = payload;
 				state.folderElements = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateFolderElement.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -131,7 +138,7 @@ const folderElementSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedFoldEl = null;
 				state.folderElements = [...deleted];
-				state.message = null;
+				state.message = 'Supprimé avec succès';
 			})
 			.addCase(deleteFolderElement.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -149,3 +156,6 @@ export {
 	updateFolderElement,
 	deleteFolderElement,
 };
+
+export const { setFolderElementIsError, setFolderElementIsSuccess } =
+	folderElementSlice.actions;

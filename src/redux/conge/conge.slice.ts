@@ -45,7 +45,14 @@ const approveConge = createAsyncThunk(
 const congeSlice = createSlice({
 	name: 'conge',
 	initialState,
-	reducers: {},
+	reducers: {
+		setCongeIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setCongeIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//get agents on leave
@@ -82,7 +89,7 @@ const congeSlice = createSlice({
 			})
 			.addCase(createConge.fulfilled, (state) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createConge.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -95,7 +102,7 @@ const congeSlice = createSlice({
 			})
 			.addCase(approveConge.fulfilled, (state) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(approveConge.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -108,7 +115,7 @@ const congeSlice = createSlice({
 			})
 			.addCase(requestConge.fulfilled, (state) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(requestConge.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -125,3 +132,4 @@ export {
 	approveConge,
 	requestConge,
 };
+export const { setCongeIsError, setCongeIsSuccess } = congeSlice.actions;

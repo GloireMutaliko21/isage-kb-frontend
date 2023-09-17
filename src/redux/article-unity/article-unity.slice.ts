@@ -36,7 +36,14 @@ const updateUnity = createAsyncThunk('unity/update', unityService.updateUnity);
 const unitySlice = createSlice({
 	name: 'unity',
 	initialState,
-	reducers: {},
+	reducers: {
+		setArticleUnityIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setArticleUnityIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			//Get All unities
@@ -79,7 +86,7 @@ const unitySlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedUnity = payload;
 				state.unities = [...state.unities, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createUnity.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -96,7 +103,7 @@ const unitySlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.unities = [...updated, payload];
 				state.selectedUnity = payload;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateUnity.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -107,3 +114,5 @@ const unitySlice = createSlice({
 
 export default unitySlice.reducer;
 export { getUnities, getUnityById, createUnity, updateUnity };
+export const { setArticleUnityIsError, setArticleUnityIsSuccess } =
+	unitySlice.actions;

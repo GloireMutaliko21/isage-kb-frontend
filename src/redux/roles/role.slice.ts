@@ -45,7 +45,14 @@ const deleteRole = createAsyncThunk('roles/delete', roleService.deleteRole);
 const roleSlice = createSlice({
 	name: 'roles',
 	initialState,
-	reducers: {},
+	reducers: {
+		setRoleIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setRoleIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			// get all roles
@@ -87,7 +94,7 @@ const roleSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedRole = payload;
 				state.roles = [...state.roles, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createRole.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -104,7 +111,7 @@ const roleSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedRole = payload;
 				state.roles = [...updated, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(updateRole.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -118,7 +125,7 @@ const roleSlice = createSlice({
 			})
 			.addCase(creareAccess.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(creareAccess.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -131,7 +138,7 @@ const roleSlice = createSlice({
 			})
 			.addCase(removeAccess.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.message = null;
+				state.message = 'Accès supprimé';
 			})
 			.addCase(removeAccess.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -147,7 +154,7 @@ const roleSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedRole = null;
 				state.roles = updated;
-				state.message = null;
+				state.message = 'Supprimé avec succès';
 			})
 			.addCase(deleteRole.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -167,3 +174,4 @@ export {
 	removeAccess,
 	deleteRole,
 };
+export const { setRoleIsError, setRoleIsSuccess } = roleSlice.actions;

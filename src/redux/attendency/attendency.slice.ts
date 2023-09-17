@@ -48,7 +48,14 @@ const createAttendency = createAsyncThunk(
 const attendencySlice = createSlice({
 	name: 'attendency',
 	initialState,
-	reducers: {},
+	reducers: {
+		setAttendencyIsError: (state, { payload }) => {
+			state.status.isError = payload;
+		},
+		setAttendencyIsSuccess: (state, { payload }) => {
+			state.status.isSuccess = payload;
+		},
+	},
 	extraReducers: (builder) => {
 		builder
 			.addCase(getDaily.pending, (state) => {
@@ -109,7 +116,7 @@ const attendencySlice = createSlice({
 			.addCase(createAttendency.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.attendecies = [...state.attendecies, payload];
-				state.message = null;
+				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createAttendency.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
@@ -120,3 +127,5 @@ const attendencySlice = createSlice({
 
 export default attendencySlice.reducer;
 export { getDaily, getMonthly, getMonthlyAgent, getOwn, createAttendency };
+export const { setAttendencyIsError, setAttendencyIsSuccess } =
+	attendencySlice.actions;
