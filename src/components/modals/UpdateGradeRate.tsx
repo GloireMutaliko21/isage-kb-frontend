@@ -3,7 +3,6 @@ import { useAppSelector } from '@/hooks/useAppSelector';
 import { updateGrade } from '@/redux/grade/grade.slice';
 import { closeModal } from '@/redux/modalWindow/modalwindow.slice';
 import { Button, Form, Input, Modal } from 'antd';
-import React from 'react';
 
 const UpdateGradeRate = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const dispatch = useAppDispatch();

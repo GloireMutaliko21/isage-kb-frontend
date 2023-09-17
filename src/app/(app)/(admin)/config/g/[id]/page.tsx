@@ -327,7 +327,12 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 									</List.Item>
 								)}
 							/>
-							<button className='bg-secondary-600 hover:shadow-lg p-3 py-2 text-sm mt-5 text-white rounded-md flex gap-2 justify-center items-center'>
+							<button
+								onClick={() =>
+									dispatch(openModal({ modal_ID: 'UPDATE_GRADE_FOLDERS' }))
+								}
+								className='bg-secondary-600 hover:shadow-lg p-3 py-2 text-sm mt-5 text-white rounded-md flex gap-2 justify-center items-center'
+							>
 								Modifier
 							</button>
 						</div>
