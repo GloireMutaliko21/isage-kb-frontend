@@ -20,6 +20,15 @@ const CardFolderElement = ({
 					key={`${folderElement.id}-${folderElement.title}`}
 					onClick={() => {
 						dispatch(getFolderElementById(folderElement.id));
+						dispatch(openModal({ modal_ID: 'FOLDER_ELEMENT_UPDATE' }));
+					}}
+				>
+					Modifier
+				</button>,
+				<button
+					key={`${folderElement.id}-${folderElement.title}`}
+					onClick={() => {
+						dispatch(getFolderElementById(folderElement.id));
 						dispatch(openModal({ modal_ID: 'FOLDER_ELEMENT_DETAILS' }));
 					}}
 				>

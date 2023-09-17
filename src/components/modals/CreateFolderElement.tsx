@@ -1,16 +1,29 @@
 import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { useAppSelector } from '@/hooks/useAppSelector';
 import useFolderElement from '@/hooks/useFolderElement';
-import { createFolderElement } from '@/redux/folder-element/folder-element.slice';
+import {
+	createFolderElement,
+	updateFolderElement,
+} from '@/redux/folder-element/folder-element.slice';
+import { closeModal } from '@/redux/modalWindow/modalwindow.slice';
 import { Button, Form, Input, Modal } from 'antd';
 import React from 'react';
 
 const CreateFolderElement = ({ handlers }: { handlers: ModalsHandlers }) => {
-	const { status } = useFolderElement();
+	const { selectedFoldEl, status } = useAppSelector(
+		(state) => state.folderElement
+	);
+	const { modal_ID } = useAppSelector((state) => state.modal);
 	const dispatch = useAppDispatch();
 	const onSubmit = (values: any) => {
 		const { title } = values;
 		const data = { title, dispatch };
 		dispatch(createFolderElement(data));
+	};
+	const onSubmitUpdate = (values: any) => {
+		const { title } = values;
+		dispatch(updateFolderElement({ id: selectedFoldEl?.id!, title }));
+		dispatch(closeModal());
 	};
 
 	return (
@@ -21,8 +34,20 @@ const CreateFolderElement = ({ handlers }: { handlers: ModalsHandlers }) => {
 			footer={null}
 			onCancel={() => handlers.close!(handlers.id!)}
 		>
-			<Form onFinish={onSubmit} layout='vertical'>
-				<Form.Item name='title' label='Titre' rules={[{ required: true }]}>
+			<Form
+				onFinish={
+					modal_ID == 'FOLDER_ELEMENT_UPDATE' ? onSubmitUpdate : onSubmit
+				}
+				layout='vertical'
+			>
+				<Form.Item
+					name='title'
+					label='Titre'
+					rules={[{ required: true }]}
+					initialValue={
+						modal_ID == 'FOLDER_ELEMENT_UPDATE' ? selectedFoldEl?.title : null
+					}
+				>
 					<Input />
 				</Form.Item>
 				<Form.Item>
