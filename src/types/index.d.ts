@@ -173,6 +173,7 @@ interface FolderElement extends GeneralData {
 
 interface CreateFolderElementDto {
 	title: string;
+	dispatch?: any;
 }
 
 interface UpdateFolderElementDto {
