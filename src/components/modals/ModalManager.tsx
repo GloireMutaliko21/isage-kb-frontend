@@ -11,6 +11,7 @@ import CreateFolderElement from './CreateFolderElement';
 import DetailFolderElement from './DetailFolderElement';
 import CreateRole from './CreateRole';
 import DetailRole from './DetailRole';
+import CreateAccess from './CreateAccess';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -55,6 +56,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'ROLE_DETAILS' && (
 				<DetailRole handlers={{ close, id: 'ROLE_DETAILS' }} />
+			)}
+			{modal_ID == 'CREATE_ACCESS' && (
+				<CreateAccess handlers={{ close, id: 'CREATE_ACCESS' }} />
 			)}
 			<></>
 		</div>

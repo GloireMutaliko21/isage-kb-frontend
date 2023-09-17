@@ -12,7 +12,7 @@ const DetailRole = ({ handlers }: { handlers: ModalsHandlers }) => {
 		<Modal
 			open={true}
 			centered
-			title={`Détails de l'élément ${selectedRole?.title}`}
+			title={`Détails du rôle ${selectedRole?.title}`}
 			footer={null}
 			onCancel={() => handlers.close!(handlers.id!)}
 		>

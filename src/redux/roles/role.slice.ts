@@ -30,7 +30,7 @@ const createRole = createAsyncThunk('roles/create', roleService.createRole);
 
 const updateRole = createAsyncThunk('roles/update', roleService.updateRole);
 
-const creareAccess = createAsyncThunk(
+const createAccess = createAsyncThunk(
 	'roles/createAccess',
 	roleService.createAccess
 );
@@ -120,14 +120,14 @@ const roleSlice = createSlice({
 			})
 
 			// create access
-			.addCase(creareAccess.pending, (state) => {
+			.addCase(createAccess.pending, (state) => {
 				state.status = STATUS.PENDING;
 			})
-			.addCase(creareAccess.fulfilled, (state, { payload }) => {
+			.addCase(createAccess.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.message = 'Enregistrement réussi';
 			})
-			.addCase(creareAccess.rejected, (state, { payload }) => {
+			.addCase(createAccess.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
 				state.message = payload as string;
 			})
@@ -170,7 +170,7 @@ export {
 	getRoleById,
 	createRole,
 	updateRole,
-	creareAccess,
+	createAccess,
 	removeAccess,
 	deleteRole,
 };
