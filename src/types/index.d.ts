@@ -207,6 +207,7 @@ interface CreateGradeDto {
 interface UpdateGradeDto {
 	id: string;
 	title?: string;
+	baseSalary?: number;
 	rate?: Record<string, number>;
 	folderIds?: string[];
 }

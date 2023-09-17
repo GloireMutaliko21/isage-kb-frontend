@@ -73,14 +73,14 @@ export const updateGrade: AsyncThunkPayloadCreator<
 	Grade,
 	UpdateGradeDto
 > = async (payload, thunkAPI) => {
-	const { folderIds, rate, title } = payload;
+	const { folderIds, rate, title, baseSalary } = payload;
 	const {
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
 		const response: AxiosResponse<Grade> = await axios.patch(
 			gradeUrls.getOnePatchDelete(payload.id),
-			{ title, rate, folderIds },
+			{ title, rate, folderIds, baseSalary },
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;

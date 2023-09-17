@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import useAuth from '@/hooks/useAuh';
-import { getGradeById } from '@/redux/grade/grade.slice';
+import { getGradeById, updateGrade } from '@/redux/grade/grade.slice';
 import PageHeader from '@/components/global/PageHeader';
 import {
 	Avatar,
@@ -15,9 +15,10 @@ import {
 	Button,
 	Card,
 	Tag,
+	Form,
 } from 'antd';
 import { CiEdit } from 'react-icons/ci';
-import { EditFilled } from '@ant-design/icons';
+import Link from 'next/link';
 
 const Singlegrade = ({ params }: { params: { id: string } }) => {
 	const { selectedGrade, status } = useAppSelector((state) => state.grade);
@@ -58,7 +59,10 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 
 	return (
 		<main className='flex flex-col h-full'>
-			<PageHeader title={`Grade : ${selectedGrade?.title}`} />
+			<PageHeader
+				title={`Grade : ${selectedGrade && selectedGrade?.title}`}
+				actionButton={<Link href='.'>Retour</Link>}
+			/>
 			<section className='p-5 flex-grow'>
 				<div className='bg-white p-5 rounded-lg h-full'>
 					<div className='grid lg:grid-cols-2 gap-x-10 divide-x'>
@@ -83,21 +87,36 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 											{
 												dataKey: 'Titre : ',
 												dataValue: editingTitle ? (
-													<div className='flex gap-4 w-3/4 2xl:w-1/2'>
-														<Input
-															type='text'
-															// value={newCompanyName}
-															// onChange={(e) => setNewCompanyName(e.target.value)}
-														/>
-														<Button
-														// onClick={() => handleSaveUpdate('denomination')}
-														>
-															Save
-														</Button>
-														<Button onClick={() => seteditingTitle(false)}>
-															Cancel
-														</Button>
-													</div>
+													<Form
+														onFinish={(values) => {
+															dispatch(
+																updateGrade({
+																	id: selectedGrade?.id!,
+																	title: values.title,
+																})
+															);
+															seteditingTitle(false);
+														}}
+													>
+														<div className='flex gap-4 w-3/4 2xl:w-1/2'>
+															<Form.Item name='title'>
+																<Input
+																	placeholder='Titre'
+																	type='text'
+																	size='small'
+																/>
+															</Form.Item>
+															<Button
+																htmlType='submit'
+																loading={status.isLoading}
+															>
+																Save
+															</Button>
+															<Button onClick={() => seteditingTitle(false)}>
+																Cancel
+															</Button>
+														</div>
+													</Form>
 												) : (
 													<div className='flex gap-4 items-center'>
 														<span>{selectedGrade?.title}</span>
@@ -110,21 +129,38 @@ const Singlegrade = ({ params }: { params: { id: string } }) => {
 											{
 												dataKey: 'Salaire de base : ',
 												dataValue: editingBaseSalary ? (
-													<div className='flex gap-4 w-3/4 2xl:w-1/2'>
-														<Input
-															type='number'
-															// value={newCompanyName}
-															// onChange={(e) => setNewCompanyName(e.target.value)}
-														/>
-														<Button
-														// onClick={() => handleSaveUpdate('denomination')}
-														>
-															Save
-														</Button>
-														<Button onClick={() => setEditingBaseSalary(false)}>
-															Cancel
-														</Button>
-													</div>
+													<Form
+														onFinish={(values) => {
+															dispatch(
+																updateGrade({
+																	id: selectedGrade?.id!,
+																	baseSalary: parseInt(values.baseSalary),
+																})
+															);
+															setEditingBaseSalary(false);
+														}}
+													>
+														<div className='flex gap-4 w-3/4 2xl:w-1/2'>
+															<Form.Item name='baseSalary'>
+																<Input
+																	placeholder='Salaire de base'
+																	type='number'
+																	size='small'
+																/>
+															</Form.Item>
+															<Button
+																htmlType='submit'
+																loading={status.isLoading}
+															>
+																Save
+															</Button>
+															<Button
+																onClick={() => setEditingBaseSalary(false)}
+															>
+																Cancel
+															</Button>
+														</div>
+													</Form>
 												) : (
 													<div className='flex gap-4 items-center'>
 														<span className='text-xl font-semibold text-secondary-700'>
