@@ -21,7 +21,7 @@ const CardService = ({
 					key={`${service.id}-${service.libelle}`}
 					onClick={() => {
 						dispatch(getServiceById(service.id));
-						dispatch(openModal({ modal_ID: 'SERIVICE_UPDATE' }));
+						dispatch(openModal({ modal_ID: 'SERVICE_UPDATE' }));
 					}}
 				>
 					Modifier
