@@ -15,6 +15,7 @@ const CreateService = ({ handlers }: { handlers: ModalsHandlers }) => {
 		const { libelle } = values;
 		const data = { libelle, dispatch };
 		dispatch(createService(data));
+		dispatch(closeModal());
 	};
 	const onSubmitUpdate = (values: any) => {
 		const { libelle } = values;
@@ -25,7 +26,11 @@ const CreateService = ({ handlers }: { handlers: ModalsHandlers }) => {
 		<Modal
 			open={true}
 			centered
-			title='Nouveau service'
+			title={
+				modal_ID == 'SERVICE_UPDATE'
+					? `Mise à jour du service ${selectedService?.libelle}`
+					: 'Nouveau service'
+			}
 			footer={null}
 			onCancel={() => handlers.close!(handlers.id!)}
 		>
@@ -33,14 +38,7 @@ const CreateService = ({ handlers }: { handlers: ModalsHandlers }) => {
 				onFinish={modal_ID == 'SERVICE_UPDATE' ? onSubmitUpdate : onSubmit}
 				layout='vertical'
 			>
-				<Form.Item
-					name='libelle'
-					label='Titre'
-					rules={[{ required: true }]}
-					initialValue={
-						modal_ID == 'SERVICE_UPDATE' ? selectedService?.libelle : null
-					}
-				>
+				<Form.Item name='libelle' label='Libellé' rules={[{ required: true }]}>
 					<Input />
 				</Form.Item>
 				<Form.Item>

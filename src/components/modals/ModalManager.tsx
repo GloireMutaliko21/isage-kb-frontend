@@ -12,6 +12,8 @@ import DetailFolderElement from './DetailFolderElement';
 import CreateRole from './CreateRole';
 import DetailRole from './DetailRole';
 import CreateAccess from './CreateAccess';
+import CreateService from './CreateService';
+import DetailService from './DetailService';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -59,6 +61,17 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'CREATE_ACCESS' && (
 				<CreateAccess handlers={{ close, id: 'CREATE_ACCESS' }} />
+			)}
+
+			{/* Services and sections */}
+			{modal_ID == 'NEW_SERVICE' && (
+				<CreateService handlers={{ close, id: 'NEW_SERVICE' }} />
+			)}
+			{modal_ID == 'SERVICE_UPDATE' && (
+				<CreateService handlers={{ close, id: 'SERVICE_UPDATE' }} />
+			)}
+			{modal_ID == 'SERVICE_DETAILS' && (
+				<DetailService handlers={{ close, id: 'SERVICE_DETAILS' }} />
 			)}
 			<></>
 		</div>
