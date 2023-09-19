@@ -1,56 +1,56 @@
 export const PERSONNEL_LINKS: HrefLink[] = [
 	{
-		href: 'personnel/agents',
+		href: '/pers/agents',
 		label: 'Agents',
 	},
 	{
-		href: 'personnel/dossier',
+		href: '/pers/dossier',
 		label: 'Dossier des agents',
 	},
 	{
-		href: 'personnel/attendency',
+		href: '/pers/attendency',
 		label: 'Gestion des présences',
 	},
 	{
-		href: 'personnel/leave',
+		href: '/pers/leave',
 		label: 'Gestion des congés',
 	},
 	{
-		href: 'personnel/paie',
+		href: '/pers/paie',
 		label: 'Gestion des salaires',
 	},
 	{
-		href: 'personnel/soccas',
+		href: '/pers/soccas',
 		label: 'Gestion cas sociaux',
 	},
 ];
 
 export const INVENTORY_LINKS: HrefLink[] = [
 	{
-		href: 'inv/articles',
+		href: '/inv/articles',
 		label: 'Articles',
 	},
 	{
-		href: 'inv/unit-cat',
+		href: '/inv/unit-cat',
 		label: 'Unités et catégories',
 	},
 	{
-		href: 'inv/oper',
+		href: '/inv/oper',
 		label: 'Opérations',
 	},
 	{
-		href: 'inv/order',
+		href: '/inv/order',
 		label: 'Commandes',
 	},
 ];
 
 export const IMMOB_LINKS: HrefLink[] = [
 	{
-		href: 'immob',
+		href: '/immob',
 		label: 'Immobilisations',
 	},
 	{
-		href: 'immob/amortis',
+		href: '/immob/amortis',
 		label: 'Immobilisations amortis',
 	},
 ];
