@@ -54,6 +54,7 @@ const Agents = () => {
 					</div>
 
 					<Table
+						id='#table'
 						size='small'
 						pagination={{ hideOnSinglePage: true, pageSize: 12 }}
 						dataSource={agents}
