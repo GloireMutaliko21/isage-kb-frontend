@@ -14,6 +14,11 @@ const AntdLayout = ({
 					colorPrimary: '#01579B',
 					fontFamily: 'cairo',
 				},
+				components: {
+					Table: {
+						colorText: '#64748b',
+					},
+				},
 			}}
 		>
 			{children}
