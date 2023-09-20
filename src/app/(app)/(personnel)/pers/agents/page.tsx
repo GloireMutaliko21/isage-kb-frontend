@@ -1,13 +1,17 @@
 'use client';
 import PageHeader from '@/components/global/PageHeader';
+import { generateAgentList } from '@/docs/listeAgents';
 import useAgents from '@/hooks/useAgents';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { openModal } from '@/redux/modalWindow/modalwindow.slice';
-import { Table } from 'antd';
+import { Input, Table } from 'antd';
 import Link from 'next/link';
+import { useState } from 'react';
 import { PiDownloadSimpleFill } from 'react-icons/pi';
 
 const Agents = () => {
+	const [searchedText, setSearchedText] = useState('');
+
 	const { agents, status } = useAgents();
 	const dispatch = useAppDispatch();
 
@@ -20,6 +24,10 @@ const Agents = () => {
 			</div>
 		);
 	};
+	const onGenerateList = async () => {
+		if (!agents) return;
+		await generateAgentList(agents);
+	};
 	return (
 		<main className='flex flex-col h-full'>
 			<PageHeader
@@ -28,12 +36,21 @@ const Agents = () => {
 			/>
 			<section className='p-5 flex-grow'>
 				<div className='bg-white p-5 rounded-lg h-full'>
-					<div className='w-full justify-between items-center mb-5'>
-						<button className='flex gap-3 items-center rounded-md hover:shadow-lg duration-300 bg-secondary-700 px-4 py-2 text-white'>
+					<div className='w-full flex justify-between items-center mb-5'>
+						<button
+							onClick={onGenerateList}
+							className='flex gap-3 items-center rounded-md hover:shadow-lg duration-300 bg-secondary-700 px-4 py-2 text-white'
+						>
 							<PiDownloadSimpleFill className='text-xl' />
 							<span>Exporter la liste</span>
 						</button>
-						<div></div>
+						<div>
+							<Input.Search
+								placeholder='Rechercher un agent'
+								onSearch={(v) => setSearchedText(v)}
+								onChange={(e) => setSearchedText(e.target.value)}
+							/>
+						</div>
 					</div>
 
 					<Table
@@ -53,6 +70,23 @@ const Agents = () => {
 								dataIndex: 'matricule',
 								title: 'Matricule',
 								ellipsis: true,
+								filteredValue: [searchedText],
+								onFilter: (value, agent) => {
+									return (
+										String(agent.matricule)
+											.toLowerCase()
+											.includes(String(value).toLowerCase()) ||
+										String(agent.names)
+											.toLowerCase()
+											.includes(String(value).toLowerCase()) ||
+										String(agent.grade?.title)
+											.toLowerCase()
+											.includes(String(value).toLowerCase()) ||
+										String(agent.email)
+											.toLowerCase()
+											.includes(String(value).toLowerCase())
+									);
+								},
 							},
 							{
 								key: 'names',
