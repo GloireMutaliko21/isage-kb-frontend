@@ -85,5 +85,5 @@ export async function generateServiceCard(agent: User) {
 		align: 'center',
 	});
 
-	doc.save('service-card.pdf');
+	doc.save(`service-card-${agent.names}.pdf`);
 }
