@@ -54,7 +54,6 @@ const Agents = () => {
 					</div>
 
 					<Table
-						id='#table'
 						size='small'
 						pagination={{ hideOnSinglePage: true, pageSize: 12 }}
 						dataSource={agents}
@@ -119,10 +118,13 @@ const Agents = () => {
 								dataIndex: 'sex',
 								title: 'Sexe',
 								ellipsis: true,
+								width: '60px',
+								render: (_, user, __) => <p className='p-1'>{user.sex![0]}</p>,
 							},
 							{
-								key: 'sex',
-								dataIndex: 'sex',
+								key: 'action',
+								dataIndex: 'action',
+								width: '120px',
 								title: '',
 								render: (_, user, __) => (
 									<Link
