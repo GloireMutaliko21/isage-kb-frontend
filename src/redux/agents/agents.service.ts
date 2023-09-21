@@ -1,4 +1,5 @@
 import { AsyncThunkPayloadCreator } from '@reduxjs/toolkit';
+import { serialize } from 'object-to-formdata';
 import axios, { AxiosResponse } from 'axios';
 import { agentsUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
@@ -53,10 +54,16 @@ export const createAgent: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const body = serialize(payload);
 		const response: AxiosResponse<User> = await axios.post(
 			agentsUrls.getAllAndCreate,
-			{ ...payload },
-			{ headers: { Authorization: `Bearer ${session?.token}` } }
+			body,
+			{
+				headers: {
+					Authorization: `Bearer ${session?.token}`,
+					'Content-Type': 'multipart/form-data',
+				},
+			}
 		);
 		return response.data;
 	} catch (error) {

@@ -14,6 +14,7 @@ import DetailRole from './DetailRole';
 import CreateAccess from './CreateAccess';
 import CreateService from './CreateService';
 import DetailService from './DetailService';
+import CreateAgent from './CreateAgent';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -72,6 +73,11 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'SERVICE_DETAILS' && (
 				<DetailService handlers={{ close, id: 'SERVICE_DETAILS' }} />
+			)}
+
+			{/* Agents */}
+			{modal_ID == 'NEW_AGENT' && (
+				<CreateAgent handlers={{ close, id: 'NEW_AGENT' }} />
 			)}
 			<></>
 		</div>

@@ -1,6 +1,4 @@
 import { frenchFormattedDate } from '@/utils/dates';
-import dayjs from 'dayjs';
-import 'dayjs/locale/fr';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 

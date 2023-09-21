@@ -12,13 +12,13 @@ import { PiDownloadSimpleFill } from 'react-icons/pi';
 const Agents = () => {
 	const [searchedText, setSearchedText] = useState('');
 
-	const { agents, status } = useAgents();
+	const { agents } = useAgents();
 	const dispatch = useAppDispatch();
 
 	const CreateAgentButton = () => {
 		return (
 			<div className=''>
-				<button onClick={() => dispatch(openModal({ modal_ID: 'NEW_AGENTS' }))}>
+				<button onClick={() => dispatch(openModal({ modal_ID: 'NEW_AGENT' }))}>
 					Ajouter un agent
 				</button>
 			</div>

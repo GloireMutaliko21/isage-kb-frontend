@@ -10,7 +10,6 @@ const UpdateGradeFolderIds = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const dispatch = useAppDispatch();
 	const { selectedGrade, status } = useAppSelector((state) => state.grade);
 	const onSubmit = (values: any) => {
-		console.log(values);
 		dispatch(
 			updateGrade({
 				id: selectedGrade?.id!,

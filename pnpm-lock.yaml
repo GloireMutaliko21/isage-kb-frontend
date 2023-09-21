@@ -59,6 +59,9 @@ dependencies:
   nextjs-toploader:
     specifier: ^1.4.2
     version: 1.4.2(next@13.4.19)(react-dom@18.2.0)(react@18.2.0)
+  object-to-formdata:
+    specifier: ^4.5.1
+    version: 4.5.1
   postcss:
     specifier: 8.4.29
     version: 8.4.29
@@ -2831,6 +2834,10 @@ packages:
   /object-keys@1.1.1:
     resolution: {integrity: sha512-NuAESUOUMrlIXOfHKzD6bpPu3tYt3xvjNdRIQ+FeT0lNb4K8WR70CaDxhuNguS2XG+GjkyMwOzsN5ZktImfhLA==}
     engines: {node: '>= 0.4'}
+    dev: false
+
+  /object-to-formdata@4.5.1:
+    resolution: {integrity: sha512-QiM9D0NiU5jV6J6tjE1g7b4Z2tcUnKs1OPUi4iMb2zH+7jwlcUrASghgkFk9GtzqNNq8rTQJtT8AzjBAvLoNMw==}
     dev: false
 
   /object.assign@4.1.4:

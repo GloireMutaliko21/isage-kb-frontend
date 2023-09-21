@@ -16,7 +16,7 @@ interface User extends GeneralData {
 	engagDate?: Date;
 	promDate?: Date;
 	acadTitle?: string;
-	sifa?: number;
+	sifa?: string;
 	contacts?: object;
 	username?: string;
 	password?: string;
@@ -43,11 +43,11 @@ interface CreateAgentDto {
 	engagDate: Date;
 	promDate?: Date;
 	acadTitle: string;
-	sifa: number;
+	sifa: string;
 	username?: string;
 	password?: string;
-	contacts: Record<string, any>;
-	file?: File;
+	contacts: any;
+	file?: any;
 	gradeId: string;
 }
 
@@ -59,7 +59,7 @@ interface UpdateAgentDto {
 	engagDate?: Date;
 	promDate?: Date;
 	acadTitle?: string;
-	sifa?: number;
+	sifa?: string;
 }
 
 interface UpdateAgentProfileDto {

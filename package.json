@@ -27,6 +27,7 @@
 		"next": "13.4.19",
 		"nextjs-progressbar": "^0.0.16",
 		"nextjs-toploader": "^1.4.2",
+		"object-to-formdata": "^4.5.1",
 		"postcss": "8.4.29",
 		"react": "18.2.0",
 		"react-cropper": "^2.3.3",
