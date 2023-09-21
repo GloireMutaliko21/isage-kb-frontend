@@ -22,6 +22,7 @@
 		"dayjs": "^1.11.9",
 		"eslint": "8.48.0",
 		"eslint-config-next": "13.4.19",
+		"html2canvas": "^1.4.1",
 		"jspdf": "^2.5.1",
 		"jspdf-autotable": "^3.6.0",
 		"next": "13.4.19",
@@ -29,6 +30,7 @@
 		"nextjs-toploader": "^1.4.2",
 		"object-to-formdata": "^4.5.1",
 		"postcss": "8.4.29",
+		"qrcode": "^1.5.3",
 		"react": "18.2.0",
 		"react-cropper": "^2.3.3",
 		"react-dom": "18.2.0",
@@ -39,6 +41,7 @@
 		"typescript": "5.2.2"
 	},
 	"devDependencies": {
-		"@types/jspdf": "^2.0.0"
+		"@types/jspdf": "^2.0.0",
+		"@types/qrcode": "^1.5.2"
 	}
 }
