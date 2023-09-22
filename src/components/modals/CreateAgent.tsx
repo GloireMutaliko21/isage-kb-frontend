@@ -8,6 +8,7 @@ import { createAgent } from '@/redux/agents/agents.slice';
 import useGrades from '@/hooks/useGrades';
 import Image from 'next/image';
 import { BiSolidImageAdd } from 'react-icons/bi';
+import { useAppSelector } from '@/hooks/useAppSelector';
 
 const CreateAgent = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const inputImage = useRef(null);
@@ -18,7 +19,8 @@ const CreateAgent = ({ handlers }: { handlers: ModalsHandlers }) => {
 
 	const dispatch = useAppDispatch();
 
-	const { grades, status } = useGrades();
+	const { status } = useAppSelector((state) => state.agents);
+	const { grades } = useGrades();
 
 	const onSubmit = (values: any) => {
 		const { phone, address, other, engagDate, birthDate, file, ...rest } =

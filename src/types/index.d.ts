@@ -17,7 +17,7 @@ interface User extends GeneralData {
 	promDate?: Date;
 	acadTitle?: string;
 	sifa?: string;
-	contacts?: object;
+	contacts?: any;
 	username?: string;
 	password?: string;
 	imgUrl?: string;

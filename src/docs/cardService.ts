@@ -24,14 +24,7 @@ export async function generateServiceCard(agent: User) {
 	doc.setDrawColor(0, 131, 143);
 	doc.line(0, 0.5, 3.34646, 0.5);
 
-	doc.addImage(
-		'https://res.cloudinary.com/dphuwzamz/image/upload/v1695289431/ISAGE-KB/AgentsProfiles/iiwj1vzhfajpbf6fqhod.png',
-		'PNG',
-		0,
-		0.6,
-		1,
-		1
-	);
+	doc.addImage(agent.imgUrl!, 'PNG', 0, 0.6, 1, 1);
 	doc.setTextColor('#000000');
 	doc.setFont('times', 'bold', 900);
 	doc.setFontSize(7);
@@ -43,22 +36,20 @@ export async function generateServiceCard(agent: User) {
 	doc.text('Téléphone', 1.05, 1.3);
 	doc.text('E-mail', 1.05, 1.45);
 
-	doc.text(': Noms et postnom', 1.85, 0.7);
-	doc.text(': Matricule', 1.85, 0.85);
-	doc.text(': Grade', 1.85, 1);
-	doc.text(': Fonction', 1.85, 1.15);
-	doc.text(': Téléphone', 1.85, 1.3);
-	doc.text(': E-mail', 1.85, 1.45);
-	doc.text(': Noms et postnom', 1.85, 0.7);
-	doc.text(': Matricule', 1.85, 0.85);
-	doc.text(': Grade', 1.85, 1);
-	doc.text(': Fonction', 1.85, 1.15);
-	doc.text(': Téléphone', 1.85, 1.3);
-	doc.text(': E-mail', 1.85, 1.45);
+	doc.text(`: ${agent.names}`, 1.85, 0.7);
+	doc.text(`: ${agent.matricule}`, 1.85, 0.85);
+	doc.text(`: ${agent.grade?.title}`, 1.85, 1);
+	doc.text(`: ${agent.function}`, 1.85, 1.15);
+	doc.text(`: ${agent?.contacts?.phone}`, 1.85, 1.3);
+	doc.text(`: ${agent.email}`, 1.85, 1.45);
+	doc.text(`: ${agent.names}`, 1.85, 0.7);
+	doc.text(`: ${agent.matricule}`, 1.85, 0.85);
+	doc.text(`: ${agent.grade?.title}`, 1.85, 1);
+	doc.text(`: ${agent.function}`, 1.85, 1.15);
+	doc.text(`: ${agent?.contacts?.phone}`, 1.85, 1.3);
+	doc.text(`: ${agent.email}`, 1.85, 1.45);
 
-	const qrCodeData = await QRCode.toDataURL(
-		'96f47be1-1c84-4873-b179-23480fce3198'
-	);
+	const qrCodeData = await QRCode.toDataURL(agent.id);
 	doc.addImage(qrCodeData, 'PNG', 2.64646, 1.46535, 0.7, 0.7);
 
 	doc.text('Le Secrétaire Général Administratif', 0.1, 1.8);

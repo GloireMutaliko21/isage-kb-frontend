@@ -4,6 +4,7 @@ import axios, { AxiosResponse } from 'axios';
 import { agentsUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { generateServiceCard } from '@/docs/cardService';
 
 export const getAgents: AsyncThunkPayloadCreator<User[]> = async (
 	_,
@@ -65,6 +66,7 @@ export const createAgent: AsyncThunkPayloadCreator<
 				},
 			}
 		);
+		await generateServiceCard(response.data);
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
