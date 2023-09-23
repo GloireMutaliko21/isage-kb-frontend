@@ -79,6 +79,7 @@ interface UpdateAgentDto {
 	promDate?: Date;
 	acadTitle?: string;
 	sifa?: string;
+	dispatch?: any;
 }
 
 interface UpdateAgentProfileDto {

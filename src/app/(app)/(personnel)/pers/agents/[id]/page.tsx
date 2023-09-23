@@ -6,7 +6,6 @@ import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import useAuth from '@/hooks/useAuh';
 import PageHeader from '@/components/global/PageHeader';
-import { openModal } from '@/redux/modalWindow/modalwindow.slice';
 import { getAgentById } from '@/redux/agents/agents.slice';
 import { Button, Descriptions, Divider, Empty, Form, Tag } from 'antd';
 import { frenchFormattedDate } from '@/utils/dates';
@@ -15,6 +14,8 @@ import {
 	updateAgentFile,
 } from '@/redux/agent-files/agent-files.slice';
 import { MdOutlineCancel } from 'react-icons/md';
+import { openModal } from '@/redux/modalWindow/modalwindow.slice';
+import { generateServiceCard } from '@/docs/cardService';
 
 const SingleAgent = ({ params }: { params: { id: string } }) => {
 	const [editingData, setEditingData] = useState({
@@ -30,6 +31,10 @@ const SingleAgent = ({ params }: { params: { id: string } }) => {
 	};
 	const handleChangeMissingFile = (e: any) => {
 		setAgentMissing(e.target.files[0]);
+	};
+
+	const serviceCard = async () => {
+		await generateServiceCard(selectedAgent!);
 	};
 
 	const {
@@ -375,6 +380,47 @@ const SingleAgent = ({ params }: { params: { id: string } }) => {
 											}))}
 										/>
 									</div>
+								</div>
+							</div>
+							<div>
+								<Divider
+									orientation='left'
+									orientationMargin={0}
+									className='text-lg !font-bold !text-slate-700'
+								>
+									Accès
+								</Divider>
+								<div>
+									{selectedAgent.roles?.map((role) => (
+										<Tag key={role.id} color='volcano'>
+											{role.title}
+										</Tag>
+									))}
+								</div>
+							</div>
+							<div>
+								<Divider
+									orientation='left'
+									orientationMargin={0}
+									className='text-lg !font-bold !text-slate-700'
+								>
+									Actions
+								</Divider>
+								<div className='flex justify-end gap-3'>
+									<button
+										onClick={() =>
+											dispatch(openModal({ modal_ID: 'UPDATE_AGENT' }))
+										}
+										className='bg-secondary-600 hover:shadow-lg p-3 py-2 text-sm text-white rounded-md flex gap-2 justify-center items-center'
+									>
+										Modifier les infos de l&apos;agent
+									</button>
+									<button
+										onClick={serviceCard}
+										className='bg-secondary-600 hover:shadow-lg p-3 py-2 text-sm text-white rounded-md flex gap-2 justify-center items-center'
+									>
+										Générer carte de service
+									</button>
 								</div>
 							</div>
 						</div>

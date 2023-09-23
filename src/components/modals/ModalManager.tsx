@@ -15,6 +15,7 @@ import CreateAccess from './CreateAccess';
 import CreateService from './CreateService';
 import DetailService from './DetailService';
 import CreateAgent from './CreateAgent';
+import UpdateAgent from './UpdateAgent';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -78,6 +79,9 @@ const ModalManager = () => {
 			{/* Agents */}
 			{modal_ID == 'NEW_AGENT' && (
 				<CreateAgent handlers={{ close, id: 'NEW_AGENT' }} />
+			)}
+			{modal_ID == 'UPDATE_AGENT' && (
+				<UpdateAgent handlers={{ close, id: 'UPDATE_AGENT' }} />
 			)}
 			<></>
 		</div>
