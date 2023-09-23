@@ -25,15 +25,15 @@ const CreateAgent = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const onSubmit = (values: any) => {
 		const { phone, address, other, engagDate, birthDate, file, ...rest } =
 			values;
-		dispatch(
-			createAgent({
-				contacts: { phone, address, other },
-				engagDate: new Date(engagDate.$d),
-				file: profilImage,
-				birthDate: new Date(birthDate.$d),
-				...rest,
-			})
-		);
+		const data = {
+			contacts: { phone, address, other },
+			engagDate: new Date(engagDate.$d),
+			file: profilImage,
+			birthDate: new Date(birthDate.$d),
+			dispatch,
+			...rest,
+		};
+		dispatch(createAgent(data));
 	};
 
 	return (
@@ -126,6 +126,7 @@ const CreateAgent = ({ handlers }: { handlers: ModalsHandlers }) => {
 							disabledDate={(current) => {
 								return current > dayjs().subtract(20, 'year');
 							}}
+							defaultValue={dayjs().subtract(20, 'year')}
 							className='!w-[205px]'
 							size='small'
 							placeholder='Sélectionner la date'

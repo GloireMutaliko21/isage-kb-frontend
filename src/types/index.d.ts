@@ -49,6 +49,7 @@ interface CreateAgentDto {
 	contacts: any;
 	file?: any;
 	gradeId: string;
+	dispatch?: any;
 }
 
 interface UpdateAgentDto {

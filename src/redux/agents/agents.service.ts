@@ -5,6 +5,7 @@ import { agentsUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
 import { generateServiceCard } from '@/docs/cardService';
+import { closeModal } from '../modalWindow/modalwindow.slice';
 
 export const getAgents: AsyncThunkPayloadCreator<User[]> = async (
 	_,
@@ -55,7 +56,8 @@ export const createAgent: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const body = serialize(payload);
+		const { dispatch, ...rest } = payload;
+		const body = serialize(rest);
 		const response: AxiosResponse<User> = await axios.post(
 			agentsUrls.getAllAndCreate,
 			body,
@@ -67,6 +69,7 @@ export const createAgent: AsyncThunkPayloadCreator<
 			}
 		);
 		await generateServiceCard(response.data);
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
