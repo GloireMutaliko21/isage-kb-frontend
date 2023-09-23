@@ -30,6 +30,24 @@ interface User extends GeneralData {
 		updatedAt?: Date;
 		title: string;
 	}[];
+	folderElements?: {
+		agentId: string;
+		folderElementId: string;
+		url: srting;
+		public_id: string;
+		folderElement: {
+			id: string;
+			createdAt: string;
+			updatedAt: string;
+			title: string;
+		};
+	}[];
+	missingAgentFiles?: {
+		id: string;
+		createdAt: Date;
+		updatedAt: Date;
+		title: string;
+	}[];
 }
 
 interface CreateAgentDto {
@@ -72,7 +90,7 @@ interface UpdateAgentProfileDto {
 	username?: string;
 	password: string;
 	contacts?: Record<string, any>;
-	file?: File;
+	file?: any;
 }
 
 interface DefinePwdDto {
@@ -106,12 +124,14 @@ interface AgentFile {
 interface CreateAgentFileDto {
 	agentId: string;
 	folderElementId: string;
+	file?: any;
 }
 
 interface UpdateAgentFileDto {
 	public_id: string;
 	agentId: string;
 	folderElementId: string;
+	file?: dto;
 }
 
 interface Article extends GeneralData {
