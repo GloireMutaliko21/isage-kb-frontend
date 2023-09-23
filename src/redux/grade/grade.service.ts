@@ -3,7 +3,6 @@ import axios, { AxiosResponse } from 'axios';
 import { gradeUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
-import { useDispatch } from 'react-redux';
 import { closeModal } from '../modalWindow/modalwindow.slice';
 
 export const getGrades: AsyncThunkPayloadCreator<Grade[]> = async (
