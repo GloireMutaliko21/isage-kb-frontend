@@ -29,6 +29,15 @@ export const frenchFormattedDate = (date: any) => {
 	dayjs.extend(localizedFormat);
 
 	dayjs.locale(fr);
-	const formattedDate = dayjs.utc(date).format('dddd, [le] D MMM YYYY');
+	const formattedDate = dayjs.utc(date).format('dddd, [le] DD MMM YYYY');
 	return formattedDate;
+};
+
+export const formattedTime = (date: any) => {
+	dayjs.extend(utc);
+	dayjs.extend(localeData);
+	dayjs.extend(localizedFormat);
+
+	dayjs.locale(fr);
+	return dayjs.utc(date).format('hh:mm');
 };
