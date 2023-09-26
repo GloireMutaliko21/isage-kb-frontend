@@ -4,10 +4,6 @@ export const PERSONNEL_LINKS: HrefLink[] = [
 		label: 'Agents',
 	},
 	{
-		href: '/pers/dossier',
-		label: 'Dossier des agents',
-	},
-	{
 		href: '/pers/attendency',
 		label: 'Gestion des présences',
 	},
