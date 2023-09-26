@@ -55,7 +55,7 @@ export const getMonthlyByAgent: AsyncThunkPayloadCreator<
 	} = thunkAPI.getState() as RootState;
 	try {
 		const response: AxiosResponse<Attendency[]> = await axios.get(
-			attendecyUrls.getMonthlyByAgent(selectedAgent.id, _.year, _.month),
+			attendecyUrls.getMonthlyByAgent(selectedAgent?.id!, _.year, _.month),
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;

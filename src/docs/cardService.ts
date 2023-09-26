@@ -24,7 +24,7 @@ export async function generateServiceCard(agent: User) {
 	doc.setDrawColor(0, 131, 143);
 	doc.line(0, 0.5, 3.34646, 0.5);
 
-	doc.addImage(agent.imgUrl!, 'PNG', 0, 0.6, 1, 1);
+	doc.addImage(agent.imgUrl! || '/images/logo.png', 'PNG', 0, 0.6, 1, 1);
 	doc.setTextColor('#000000');
 	doc.setFont('times', 'bold', 900);
 	doc.setFontSize(7);

@@ -86,11 +86,13 @@ export const updateAgent: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const { dispatch, ...rest } = payload;
 		const response: AxiosResponse<User> = await axios.patch(
 			agentsUrls.getByIdAndUpdate(payload.id),
-			{ ...payload },
+			rest,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)

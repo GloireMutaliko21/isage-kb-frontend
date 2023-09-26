@@ -4,7 +4,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	agents: User[];
-	selectedAgent: User;
+	selectedAgent: User | null;
 	status: {
 		isLoading: boolean;
 		isSuccess: boolean;
@@ -13,12 +13,7 @@ const initialState: {
 	message: string | null;
 } = {
 	agents: [],
-	selectedAgent: {
-		id: '',
-		email: '',
-		matricule: '',
-		names: '',
-	},
+	selectedAgent: null,
 	status: {
 		isLoading: false,
 		isSuccess: false,
@@ -56,23 +51,13 @@ const agentSlice = createSlice({
 			})
 			.addCase(getAgents.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.selectedAgent = {
-					id: '',
-					email: '',
-					matricule: '',
-					names: '',
-				};
+				state.selectedAgent = null;
 				state.agents = payload;
 				state.message = '';
 			})
 			.addCase(getAgents.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
-				state.selectedAgent = {
-					id: '',
-					email: '',
-					matricule: '',
-					names: '',
-				};
+				state.selectedAgent = null;
 				state.message = payload as string;
 			})
 
@@ -81,23 +66,13 @@ const agentSlice = createSlice({
 			})
 			.addCase(getAgentById.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.selectedAgent = {
-					id: '',
-					email: '',
-					matricule: '',
-					names: '',
-				};
+				state.selectedAgent = null;
 				state.selectedAgent = payload;
 				state.message = null;
 			})
 			.addCase(getAgentById.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
-				state.selectedAgent = {
-					id: '',
-					email: '',
-					matricule: '',
-					names: '',
-				};
+				state.selectedAgent = null;
 				state.message = payload as string;
 			})
 
@@ -107,22 +82,12 @@ const agentSlice = createSlice({
 			.addCase(createAgent.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.agents = [...state.agents, payload];
-				state.selectedAgent = {
-					id: '',
-					email: '',
-					matricule: '',
-					names: '',
-				};
+				state.selectedAgent = null;
 				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createAgent.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
-				state.selectedAgent = {
-					id: '',
-					email: '',
-					matricule: '',
-					names: '',
-				};
+				state.selectedAgent = null;
 				state.message = payload as string;
 			})
 

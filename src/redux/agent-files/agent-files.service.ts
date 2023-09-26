@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { agentFileUrl } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { serialize } from 'object-to-formdata';
 
 export const createAgentFile: AsyncThunkPayloadCreator<
 	AgentFile,
@@ -12,9 +13,10 @@ export const createAgentFile: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const body = serialize(payload);
 		const response: AxiosResponse<AgentFile> = await axios.post(
 			agentFileUrl.createAndUpdate,
-			payload,
+			body,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;
@@ -33,9 +35,10 @@ export const updateAgentFile: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const body = serialize(payload);
 		const response: AxiosResponse<AgentFile> = await axios.patch(
 			agentFileUrl.createAndUpdate,
-			payload,
+			body,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;
