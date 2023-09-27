@@ -102,8 +102,12 @@ const congeSlice = createSlice({
 			.addCase(approveConge.pending, (state) => {
 				state.status = STATUS.PENDING;
 			})
-			.addCase(approveConge.fulfilled, (state) => {
+			.addCase(approveConge.fulfilled, (state, { payload }) => {
+				const approved = state.unApproved.filter(
+					(record) => record.id != payload.id
+				);
 				state.status = STATUS.SUCCESS;
+				state.unApproved = [...approved];
 				state.message = 'Enregistrement réussi';
 			})
 			.addCase(approveConge.rejected, (state, { payload }) => {
