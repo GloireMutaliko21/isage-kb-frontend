@@ -4,41 +4,37 @@ import Link from 'next/link';
 
 import PageHeader from '@/components/global/PageHeader';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
-import { openModal } from '@/redux/modalWindow/modalwindow.slice';
 import { DatePicker, Table } from 'antd';
 import { useAppSelector } from '@/hooks/useAppSelector';
-import { getDaily, getMonthly } from '@/redux/attendency/attendency.slice';
+import { getMonthlyAgent } from '@/redux/attendency/attendency.slice';
 import { formattedTime, frenchFormattedDate } from '@/utils/dates';
 
-const Attendency = () => {
+const Attendency = ({ params }: { params: { id: string } }) => {
 	const dispatch = useAppDispatch();
 	const { attendecies } = useAppSelector((state) => state.attendency);
-	const CreateAttendencyButton = () => {
-		return (
-			<div className=''>
-				<button
-					onClick={() => dispatch(openModal({ modal_ID: 'NEW_ATTENDENCY' }))}
-				>
-					Scanner la présence
-				</button>
-			</div>
-		);
-	};
 
 	useEffect(() => {
-		dispatch(getDaily());
+		dispatch(
+			getMonthlyAgent({
+				id: params.id,
+				month: new Date().getMonth() + 1,
+				year: new Date().getFullYear(),
+			})
+		);
 	}, []);
 
 	const onChange = (date: any) => {
-		if (date) dispatch(getMonthly({ month: date.$M + 1, year: date.$y }));
-		else dispatch(getDaily());
+		if (date)
+			dispatch(
+				getMonthlyAgent({ id: params.id, month: date.$M + 1, year: date.$y })
+			);
 	};
 
 	return (
 		<main className='flex flex-col h-full'>
 			<PageHeader
-				title='Gestion des présences'
-				actionButton={<CreateAttendencyButton />}
+				title={`Présences mensuel de ${attendecies[0]?.agent?.names}`}
+				actionButton={<Link href='.'>Retour</Link>}
 			/>
 			<section className='p-5 flex-grow'>
 				<div className='bg-white p-5 rounded-lg h-full'>
@@ -90,21 +86,6 @@ const Attendency = () => {
 								title: 'Statut',
 								ellipsis: true,
 								align: 'center',
-							},
-							{
-								key: 'action',
-								dataIndex: 'action',
-								width: '120px',
-								title: '',
-								render: (_, record, __) => (
-									<Link
-										href={`./attendency/${record.agent?.id}`}
-										className='border border-primary-600 text-primary-600 flex justify-center hover:text-primary-800 py-px'
-									>
-										S/mensuelle
-									</Link>
-								),
-								ellipsis: true,
 							},
 						]}
 						components={{

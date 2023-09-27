@@ -168,7 +168,7 @@ const SingleAgent = ({ params }: { params: { id: string } }) => {
 												},
 												{
 													key: '15',
-													label: 'Date de dernière ppromotion',
+													label: 'Date de dernière promotion',
 													children: `${
 														selectedAgent.promDate
 															? frenchFormattedDate(selectedAgent.promDate)

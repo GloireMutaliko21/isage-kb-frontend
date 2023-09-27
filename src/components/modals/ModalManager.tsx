@@ -17,6 +17,7 @@ import DetailService from './DetailService';
 import CreateAgent from './CreateAgent';
 import UpdateAgent from './UpdateAgent';
 import UpdateAgentGrade from './UpdateAgentGrade';
+import CreateAttendency from './CreateAttendency';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -86,6 +87,11 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'UPDATE_AGENT_GRADE' && (
 				<UpdateAgentGrade handlers={{ close, id: 'UPDATE_AGENT_GRADE' }} />
+			)}
+
+			{/* Attendency */}
+			{modal_ID == 'NEW_ATTENDENCY' && (
+				<CreateAttendency handlers={{ close, id: 'NEW_ATTENDENCY' }} />
 			)}
 			<></>
 		</div>
