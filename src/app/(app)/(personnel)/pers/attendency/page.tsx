@@ -1,6 +1,5 @@
 'use client';
-import { useEffect, useState } from 'react';
-import type { DatePickerProps } from 'antd';
+import { useEffect } from 'react';
 import Link from 'next/link';
 
 import PageHeader from '@/components/global/PageHeader';
@@ -13,8 +12,7 @@ import { formattedTime, frenchFormattedDate } from '@/utils/dates';
 
 const Attendency = () => {
 	const dispatch = useAppDispatch();
-	const { attendecies, status } = useAppSelector((state) => state.attendency);
-	const [searchedText, setSearchedText] = useState('');
+	const { attendecies } = useAppSelector((state) => state.attendency);
 	const CreateAttendencyButton = () => {
 		return (
 			<div className=''>

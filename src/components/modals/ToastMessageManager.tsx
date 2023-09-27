@@ -141,7 +141,7 @@ const ToastMessageManager = () => {
 	 * Attendency toat manager
 	 */
 	const { status: attendencyStatus, message: attendencyMessage } =
-		useAppSelector((state) => state.agents);
+		useAppSelector((state) => state.attendency);
 
 	useEffect(() => {
 		if (attendencyStatus.isSuccess) {

@@ -39,5 +39,5 @@ export const formattedTime = (date: any) => {
 	dayjs.extend(localizedFormat);
 
 	dayjs.locale(fr);
-	return dayjs.utc(date).format('hh:mm');
+	return dayjs(date).utcOffset(2).format('hh:mm');
 };
