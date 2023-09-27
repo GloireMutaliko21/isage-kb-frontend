@@ -7,6 +7,7 @@ import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { openModal } from '@/redux/modalWindow/modalwindow.slice';
 import useConge from '@/hooks/useConge';
 import AgentsInLeave from '@/components/personnel/Conge/AgentsInLeave';
+import NonApproved from '@/components/personnel/Conge/NonApproved';
 
 const Page = () => {
 	const dispatch = useAppDispatch();
@@ -30,7 +31,7 @@ const Page = () => {
 		{
 			key: '2',
 			label: 'Congés non approuvés',
-			children: <AgentsInLeave records={agentInConges} />,
+			children: <NonApproved />,
 		},
 	];
 

@@ -4,6 +4,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	agentInConges: Conge[];
+	unApproved: Conge[];
 	status: {
 		isLoading: boolean;
 		isSuccess: boolean;
@@ -12,6 +13,7 @@ const initialState: {
 	message: string | null;
 } = {
 	agentInConges: [],
+	unApproved: [],
 	status: {
 		isLoading: false,
 		isSuccess: false,
@@ -75,7 +77,7 @@ const congeSlice = createSlice({
 			})
 			.addCase(getUnApproved.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.agentInConges = payload;
+				state.unApproved = payload;
 				state.message = null;
 			})
 			.addCase(getUnApproved.rejected, (state, { payload }) => {

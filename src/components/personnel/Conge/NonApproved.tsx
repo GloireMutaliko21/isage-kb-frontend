@@ -1,12 +1,22 @@
-import { frenchFormattedDate } from '@/utils/dates';
+import React, { useEffect } from 'react';
 import { Table, Tag } from 'antd';
 
-const AgentsInLeave = ({ records }: { records: Conge[] }) => {
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { getUnApproved } from '@/redux/conge/conge.slice';
+import { useAppSelector } from '@/hooks/useAppSelector';
+import { frenchFormattedDate } from '@/utils/dates';
+
+const NonApproved = () => {
+	const { unApproved } = useAppSelector((state) => state.conges);
+	const dispatch = useAppDispatch();
+	useEffect(() => {
+		dispatch(getUnApproved());
+	}, []);
 	return (
 		<Table
 			size='small'
 			pagination={{ hideOnSinglePage: true, pageSize: 10 }}
-			dataSource={records}
+			dataSource={unApproved}
 			columns={[
 				{
 					key: 'id',
@@ -28,7 +38,9 @@ const AgentsInLeave = ({ records }: { records: Conge[] }) => {
 					title: 'Date de début',
 					ellipsis: true,
 					render: (_, record, __) => (
-						<p>{frenchFormattedDate(record.startDate)}</p>
+						<p>
+							{record.approved ? frenchFormattedDate(record.startDate) : '-'}
+						</p>
 					),
 				},
 				{
@@ -37,7 +49,7 @@ const AgentsInLeave = ({ records }: { records: Conge[] }) => {
 					title: 'Date de fin',
 					ellipsis: true,
 					render: (_, record, __) => (
-						<p>{frenchFormattedDate(record.endDate)}</p>
+						<p>{record.approved ? frenchFormattedDate(record.endDate) : '-'}</p>
 					),
 				},
 				{
@@ -48,7 +60,7 @@ const AgentsInLeave = ({ records }: { records: Conge[] }) => {
 					align: 'center',
 					width: '5rem',
 					render: (_, record, __) => (
-						<Tag color={`${record.approved ? 'blue' : 'danger'}`}>
+						<Tag color={`${record.approved ? 'blue' : 'error'}`}>
 							{record.approved ? 'Oui' : 'Non'}
 						</Tag>
 					),
@@ -65,10 +77,12 @@ const AgentsInLeave = ({ records }: { records: Conge[] }) => {
 				{
 					key: 'approved',
 					dataIndex: 'updatedAt',
-					title: 'Approuvé le',
-					ellipsis: true,
+					title: '',
+					width: '120px',
 					render: (_, record, __) => (
-						<p>{frenchFormattedDate(record.updatedAt)}</p>
+						<button className='border border-primary-600 text-primary-600 flex justify-center hover:text-primary-800 py-px px-5'>
+							Approuver
+						</button>
 					),
 				},
 			]}
@@ -85,4 +99,4 @@ const AgentsInLeave = ({ records }: { records: Conge[] }) => {
 	);
 };
 
-export default AgentsInLeave;
+export default NonApproved;
