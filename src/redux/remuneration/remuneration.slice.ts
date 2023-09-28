@@ -15,12 +15,12 @@ const initialState: {
 	deduction: {
 		created: CreatedDeductionPrime | null;
 		total: DeductionPrime | null;
-		synthese: DeductionPrimeSynthese | null;
+		synthese: DeductionPrimeSynthese[];
 	};
 	prime: {
 		created: CreatedDeductionPrime | null;
 		total: DeductionPrime | null;
-		synthese: DeductionPrimeSynthese | null;
+		synthese: DeductionPrimeSynthese[];
 	};
 	allocation: {
 		created: CreatedAllocRemCongFerie | null;
@@ -62,12 +62,12 @@ const initialState: {
 	},
 	deduction: {
 		created: null,
-		synthese: null,
+		synthese: [],
 		total: null,
 	},
 	prime: {
 		created: null,
-		synthese: null,
+		synthese: [],
 		total: null,
 	},
 	allocation: {
