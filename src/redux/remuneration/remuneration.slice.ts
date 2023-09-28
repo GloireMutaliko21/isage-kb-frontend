@@ -3,6 +3,11 @@ import * as remunerationService from './remuneration.service';
 import { STATUS } from '@/constants/constants';
 
 const initialState: {
+	params: {
+		agentId: string;
+		year: number | null;
+		month: number | null;
+	};
 	remMalad: {
 		created: CreatedRemMalad | null;
 		total: RemMalad | null;
@@ -46,6 +51,11 @@ const initialState: {
 	};
 	message: string | null;
 } = {
+	params: {
+		agentId: '',
+		year: null,
+		month: null,
+	},
 	remMalad: {
 		created: null,
 		total: null,
@@ -204,6 +214,13 @@ const paieSlice = createSlice({
 		},
 		setRemunerationIsSuccess: (state, { payload }) => {
 			state.status.isSuccess = payload;
+		},
+		setAgentToPayId: (state, { payload }) => {
+			state.params.agentId = payload;
+		},
+		setYearAndMonth: (state, { payload }) => {
+			state.params.month = payload.month;
+			state.params.year = payload.year;
 		},
 	},
 	extraReducers: (builder) => {
@@ -515,5 +532,9 @@ export {
 	getPayList,
 	getUnpaidAgents,
 };
-export const { setRemunerationIsError, setRemunerationIsSuccess } =
-	paieSlice.actions;
+export const {
+	setRemunerationIsError,
+	setRemunerationIsSuccess,
+	setAgentToPayId,
+	setYearAndMonth,
+} = paieSlice.actions;
