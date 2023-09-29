@@ -8,6 +8,10 @@ html {
 	font-family: cairo, sans-serif, ui-sans-serif, system-ui;
 }
 
+body {
+	font-family: cairo, sans-serif, ui-sans-serif, system-ui;
+}
+
 .ant-collapse-item {
 	margin: 8px 5px;
 }

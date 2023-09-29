@@ -1,3 +1,4 @@
+import { generatePaySlip } from '@/docs/paySlip';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import {
@@ -129,7 +130,10 @@ const FichePaie = ({
 						<div>
 							{!fiche?.agent ? (
 								<div className='p-px border border-secondary-600 rounded-md'>
-									<button className='bg-secondary-600 hover:bg-secondary-500 hover:shadow-lg duration-300 p-3 py-1 text-sm text-white rounded-md flex gap-2 justify-center items-center'>
+									<button
+										onClick={() => generatePaySlip('#table')}
+										className='bg-secondary-600 hover:bg-secondary-500 hover:shadow-lg duration-300 p-3 py-1 text-sm text-white rounded-md flex gap-2 justify-center items-center'
+									>
 										Payer ce mois
 									</button>
 								</div>
@@ -270,6 +274,43 @@ const FichePaie = ({
 									</div>
 								</div>
 							</Card>
+							<div className='hidden'>
+								<table id='table' className='w-full'>
+									<tbody>
+										<tr>
+											<td className='px-3 w-1/3' rowSpan={4}>
+												Allocations familiales
+											</td>
+											<td className=' px-3 w-1/3 text-slate-500'>
+												Enfants bénéficiaires
+											</td>
+											<td className=' px-3 w-1/3'>alloc.enfants</td>
+										</tr>
+										<tr>
+											<td className=' px-3 w-1/3 text-slate-500'>
+												Nombre de jours
+											</td>
+											<td className=' px-3 w-1/3'>alloc.jours</td>
+										</tr>
+										<tr>
+											<td className=' px-3 w-1/3 text-slate-500'>Taux</td>
+											<td className=' px-3 w-1/3'>alloc.taux</td>
+										</tr>
+										<tr className='-b bg-amber-50 -slate-900'>
+											<td className='px-3 w-1/3'>Total</td>
+											<td className='px-3 w-1/3'>totalAlloc</td>
+										</tr>
+										<tr className='bg-amber-50 text-green-600  -slate-700'>
+											<td className='w-1/3  text-center text-xl' colSpan={2}>
+												Net à payer
+											</td>
+											<td className='px-3 w-1/3 text-xl text-center -l -slate-700'>
+												netPayer $
+											</td>
+										</tr>
+									</tbody>
+								</table>
+							</div>
 						</div>
 					)}
 				</section>
