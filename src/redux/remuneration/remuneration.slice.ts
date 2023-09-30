@@ -40,6 +40,7 @@ const initialState: {
 	};
 	slipList: {
 		fiche: PaySlip | null;
+		created: PaySlip | null;
 		paySlips: PaySlip[];
 		liste: PayList[];
 		unpaid: Unpaid[];
@@ -88,6 +89,7 @@ const initialState: {
 	},
 	slipList: {
 		fiche: null,
+		created: null,
 		paySlips: [],
 		liste: [],
 		unpaid: [],
@@ -446,7 +448,7 @@ const paieSlice = createSlice({
 			})
 			.addCase(registerPaySlip.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.slipList.fiche = payload;
+				state.slipList.created = payload;
 				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerPaySlip.rejected, (state, { payload }) => {
