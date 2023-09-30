@@ -91,7 +91,7 @@ export const getSalDeducPerAgent: AsyncThunkPayloadCreator<
 };
 
 export const getSalDeducPerAgentLibelle: AsyncThunkPayloadCreator<
-	DeductionPrimeSynthese,
+	DeductionPrimeSynthese[],
 	YearMonthParams
 > = async (data, thunkAPI) => {
 	const { id, month, year } = data;
@@ -99,7 +99,7 @@ export const getSalDeducPerAgentLibelle: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<DeductionPrimeSynthese> = await axios.get(
+		const response: AxiosResponse<DeductionPrimeSynthese[]> = await axios.get(
 			remunerationUrls.deduc.deducSynth(id!, year, month),
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
@@ -155,7 +155,7 @@ export const getPrimeAgent: AsyncThunkPayloadCreator<
 };
 
 export const getPrimeLibelle: AsyncThunkPayloadCreator<
-	DeductionPrimeSynthese,
+	DeductionPrimeSynthese[],
 	YearMonthParams
 > = async (data, thunkAPI) => {
 	const { id, month, year } = data;
@@ -163,7 +163,7 @@ export const getPrimeLibelle: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<DeductionPrimeSynthese> = await axios.get(
+		const response: AxiosResponse<DeductionPrimeSynthese[]> = await axios.get(
 			remunerationUrls.prime.primeSynth(id!, year, month),
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);

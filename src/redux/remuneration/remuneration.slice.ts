@@ -3,6 +3,11 @@ import * as remunerationService from './remuneration.service';
 import { STATUS } from '@/constants/constants';
 
 const initialState: {
+	params: {
+		agentId: string;
+		year: number | null;
+		month: number | null;
+	};
 	remMalad: {
 		created: CreatedRemMalad | null;
 		total: RemMalad | null;
@@ -10,12 +15,12 @@ const initialState: {
 	deduction: {
 		created: CreatedDeductionPrime | null;
 		total: DeductionPrime | null;
-		synthese: DeductionPrimeSynthese | null;
+		synthese: DeductionPrimeSynthese[];
 	};
 	prime: {
 		created: CreatedDeductionPrime | null;
 		total: DeductionPrime | null;
-		synthese: DeductionPrimeSynthese | null;
+		synthese: DeductionPrimeSynthese[];
 	};
 	allocation: {
 		created: CreatedAllocRemCongFerie | null;
@@ -35,6 +40,7 @@ const initialState: {
 	};
 	slipList: {
 		fiche: PaySlip | null;
+		created: PaySlip | null;
 		paySlips: PaySlip[];
 		liste: PayList[];
 		unpaid: Unpaid[];
@@ -46,18 +52,23 @@ const initialState: {
 	};
 	message: string | null;
 } = {
+	params: {
+		agentId: '',
+		year: null,
+		month: null,
+	},
 	remMalad: {
 		created: null,
 		total: null,
 	},
 	deduction: {
 		created: null,
-		synthese: null,
+		synthese: [],
 		total: null,
 	},
 	prime: {
 		created: null,
-		synthese: null,
+		synthese: [],
 		total: null,
 	},
 	allocation: {
@@ -78,6 +89,7 @@ const initialState: {
 	},
 	slipList: {
 		fiche: null,
+		created: null,
 		paySlips: [],
 		liste: [],
 		unpaid: [],
@@ -204,6 +216,13 @@ const paieSlice = createSlice({
 		},
 		setRemunerationIsSuccess: (state, { payload }) => {
 			state.status.isSuccess = payload;
+		},
+		setAgentToPayId: (state, { payload }) => {
+			state.params.agentId = payload;
+		},
+		setYearAndMonth: (state, { payload }) => {
+			state.params.month = payload.month;
+			state.params.year = payload.year;
 		},
 	},
 	extraReducers: (builder) => {
@@ -429,7 +448,7 @@ const paieSlice = createSlice({
 			})
 			.addCase(registerPaySlip.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.slipList.fiche = payload;
+				state.slipList.created = payload;
 				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerPaySlip.rejected, (state, { payload }) => {
@@ -515,5 +534,9 @@ export {
 	getPayList,
 	getUnpaidAgents,
 };
-export const { setRemunerationIsError, setRemunerationIsSuccess } =
-	paieSlice.actions;
+export const {
+	setRemunerationIsError,
+	setRemunerationIsSuccess,
+	setAgentToPayId,
+	setYearAndMonth,
+} = paieSlice.actions;
