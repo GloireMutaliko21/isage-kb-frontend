@@ -449,6 +449,7 @@ const paieSlice = createSlice({
 			.addCase(registerPaySlip.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.slipList.created = payload;
+				state.slipList.fiche = payload;
 				state.message = 'Enregistrement réussi';
 			})
 			.addCase(registerPaySlip.rejected, (state, { payload }) => {
