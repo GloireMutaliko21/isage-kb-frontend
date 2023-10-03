@@ -22,6 +22,7 @@ import CreateLeave from './CreateLeave';
 import SuppHours from './salaryDetails/SuppHours';
 import Ferie from './salaryDetails/Ferie';
 import Conge from './salaryDetails/Conge';
+import MaladAcc from './salaryDetails/MaladAcc';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -112,6 +113,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'REM_CONGE' && (
 				<Conge handlers={{ close, id: 'REM_CONGE' }} />
+			)}
+			{modal_ID == 'REM_MALAD' && (
+				<MaladAcc handlers={{ close, id: 'REM_MALAD' }} />
 			)}
 			<></>
 		</div>
