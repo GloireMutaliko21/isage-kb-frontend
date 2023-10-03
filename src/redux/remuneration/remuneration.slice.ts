@@ -506,6 +506,7 @@ const paieSlice = createSlice({
 			})
 			.addCase(getUnpaidAgents.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
+				state.slipList.unpaid = [];
 				state.message = payload as string;
 			});
 	},
