@@ -24,6 +24,7 @@ import Ferie from './salaryDetails/Ferie';
 import Conge from './salaryDetails/Conge';
 import MaladAcc from './salaryDetails/MaladAcc';
 import Primes from './salaryDetails/Primes';
+import Deductions from './salaryDetails/Deduction';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -120,6 +121,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'PRIME_GRATIF' && (
 				<Primes handlers={{ close, id: 'PRIME_GRATIF' }} />
+			)}
+			{modal_ID == 'DED_RETENUS' && (
+				<Deductions handlers={{ close, id: 'DED_RETENUS' }} />
 			)}
 			<></>
 		</div>

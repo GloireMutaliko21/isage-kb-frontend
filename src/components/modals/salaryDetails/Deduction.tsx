@@ -4,20 +4,20 @@ import { Button, Form, InputNumber, Modal, Select } from 'antd';
 import useAgents from '@/hooks/useAgents';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { closeModal } from '@/redux/modalWindow/modalwindow.slice';
-import { registerPrime } from '@/redux/remuneration/remuneration.slice';
-const Primes = ({ handlers }: { handlers: ModalsHandlers }) => {
+import { registerSalaryDeduction } from '@/redux/remuneration/remuneration.slice';
+const Deductions = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const { agents } = useAgents();
 	const dispatch = useAppDispatch();
 	const onSubmit = (values: any) => {
 		const { agentId, amount, libelle } = values;
-		dispatch(registerPrime({ agentId, amount, libelle }));
+		dispatch(registerSalaryDeduction({ agentId, amount, libelle }));
 		dispatch(closeModal());
 	};
 	return (
 		<Modal
 			open={true}
 			centered
-			title='Enregistrement des primes'
+			title='Enregistrement déductions et retenus'
 			footer={null}
 			onCancel={() => handlers.close!(handlers.id!)}
 		>
@@ -72,11 +72,11 @@ const Primes = ({ handlers }: { handlers: ModalsHandlers }) => {
 						size='small'
 						optionLabelProp='label'
 						options={[
-							{ label: 'Primes de risque', value: 'Primes de risque' },
-							{ label: "Primes d'ancienneté", value: "Primes d'ancienneté" },
-							{ label: 'Primes de pénibilité', value: 'Primes de pénibilité' },
-							{ label: 'Primes de naissance', value: 'Naissance' },
-							{ label: 'Gratifications', value: 'Gratifications' },
+							{ label: 'Pensions', value: 'Pensions' },
+							{ label: 'Indemnités', value: 'Indemnités' },
+							{ label: 'Avances sur salaire', value: 'Avances sur salaire' },
+							{ label: 'Retenues fiscales', value: 'Retenues fiscales' },
+							{ label: 'Cas sociaux', value: 'Cas sociaux' },
 							{ label: 'Divers', value: 'Divers' },
 						]}
 					/>
@@ -85,7 +85,7 @@ const Primes = ({ handlers }: { handlers: ModalsHandlers }) => {
 					<div className='flex justify-end w-full gap-4'>
 						<Button
 							size='middle'
-							onClick={() => handlers.close!('PRIME_GRATIF')}
+							onClick={() => handlers.close!('DED_RETENUS')}
 						>
 							Annuler
 						</Button>
@@ -97,4 +97,4 @@ const Primes = ({ handlers }: { handlers: ModalsHandlers }) => {
 	);
 };
 
-export default Primes;
+export default Deductions;
