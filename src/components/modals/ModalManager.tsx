@@ -23,6 +23,7 @@ import SuppHours from './salaryDetails/SuppHours';
 import Ferie from './salaryDetails/Ferie';
 import Conge from './salaryDetails/Conge';
 import MaladAcc from './salaryDetails/MaladAcc';
+import Primes from './salaryDetails/Primes';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -116,6 +117,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'REM_MALAD' && (
 				<MaladAcc handlers={{ close, id: 'REM_MALAD' }} />
+			)}
+			{modal_ID == 'PRIME_GRATIF' && (
+				<Primes handlers={{ close, id: 'PRIME_GRATIF' }} />
 			)}
 			<></>
 		</div>
