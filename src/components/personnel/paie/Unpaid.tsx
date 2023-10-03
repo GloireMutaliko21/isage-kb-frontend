@@ -1,7 +1,10 @@
 import React, { useEffect } from 'react';
 import { Table } from 'antd';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
-import { getUnpaidAgents } from '@/redux/remuneration/remuneration.slice';
+import {
+	getUnpaidAgents,
+	registerPaySlip,
+} from '@/redux/remuneration/remuneration.slice';
 import { useAppSelector } from '@/hooks/useAppSelector';
 
 const Unpaid = () => {
@@ -129,7 +132,25 @@ const Unpaid = () => {
 						width: '120px',
 						title: '',
 						render: (_, user, __) => (
-							<button className='border border-primary-600 text-primary-600 flex justify-center hover:text-primary-800 py-px px-4'>
+							<button
+								onClick={() => {
+									dispatch(
+										registerPaySlip({
+											agentId: user.id!,
+											month: month!,
+											year: year!,
+										})
+									);
+
+									dispatch(
+										getUnpaidAgents({
+											month: month!,
+											year: year!,
+										})
+									);
+								}}
+								className='border border-primary-600 text-primary-600 flex justify-center hover:text-primary-800 py-px px-4'
+							>
 								Payer
 							</button>
 						),
