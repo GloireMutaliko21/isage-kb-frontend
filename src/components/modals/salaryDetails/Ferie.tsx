@@ -3,22 +3,21 @@ import { Button, Form, InputNumber, Modal, Select } from 'antd';
 
 import useAgents from '@/hooks/useAgents';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
-import { registerSuppHour } from '@/redux/remuneration/remuneration.slice';
 import { closeModal } from '@/redux/modalWindow/modalwindow.slice';
-
-const SuppHours = ({ handlers }: { handlers: ModalsHandlers }) => {
+import { registerRemDaysFerie } from '@/redux/remuneration/remuneration.slice';
+const Ferie = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const { agents } = useAgents();
 	const dispatch = useAppDispatch();
 	const onSubmit = (values: any) => {
-		const { agentId, number } = values;
-		dispatch(registerSuppHour({ agentId, number }));
+		const { agentId, days } = values;
+		dispatch(registerRemDaysFerie({ agentId, days }));
 		dispatch(closeModal());
 	};
 	return (
 		<Modal
 			open={true}
 			centered
-			title='Enregistrement des heures supplémentaires'
+			title='Enregistrement travail en jours fériés'
 			footer={null}
 			onCancel={() => handlers.close!(handlers.id!)}
 		>
@@ -50,8 +49,8 @@ const SuppHours = ({ handlers }: { handlers: ModalsHandlers }) => {
 					/>
 				</Form.Item>
 				<Form.Item
-					name='number'
-					label="Nombre d'heures prestées"
+					name='days'
+					label='Nombre de jours'
 					rules={[{ required: true, type: 'number' }]}
 					className='w-full'
 				>
@@ -64,7 +63,7 @@ const SuppHours = ({ handlers }: { handlers: ModalsHandlers }) => {
 				</Form.Item>
 				<Form.Item>
 					<div className='flex justify-end w-full gap-4'>
-						<Button size='middle' onClick={() => handlers.close!('HEURE_SUPP')}>
+						<Button size='middle' onClick={() => handlers.close!('REM_FERIE')}>
 							Annuler
 						</Button>
 						<Button htmlType='submit'>Attribuer</Button>
@@ -75,4 +74,4 @@ const SuppHours = ({ handlers }: { handlers: ModalsHandlers }) => {
 	);
 };
 
-export default SuppHours;
+export default Ferie;
