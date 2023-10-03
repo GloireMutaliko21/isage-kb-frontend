@@ -25,6 +25,7 @@ import Conge from './salaryDetails/Conge';
 import MaladAcc from './salaryDetails/MaladAcc';
 import Primes from './salaryDetails/Primes';
 import Deductions from './salaryDetails/Deduction';
+import Allocations from './salaryDetails/Allocations';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -124,6 +125,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'DED_RETENUS' && (
 				<Deductions handlers={{ close, id: 'DED_RETENUS' }} />
+			)}
+			{modal_ID == 'FAMILY_ALLOC' && (
+				<Allocations handlers={{ close, id: 'FAMILY_ALLOC' }} />
 			)}
 			<></>
 		</div>
