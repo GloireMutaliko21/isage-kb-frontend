@@ -21,6 +21,7 @@ import CreateAttendency from './CreateAttendency';
 import CreateLeave from './CreateLeave';
 import SuppHours from './salaryDetails/SuppHours';
 import Ferie from './salaryDetails/Ferie';
+import Conge from './salaryDetails/Conge';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -108,6 +109,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'REM_FERIE' && (
 				<Ferie handlers={{ close, id: 'REM_FERIE' }} />
+			)}
+			{modal_ID == 'REM_CONGE' && (
+				<Conge handlers={{ close, id: 'REM_CONGE' }} />
 			)}
 			<></>
 		</div>
