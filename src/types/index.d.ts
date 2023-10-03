@@ -557,7 +557,7 @@ interface PayList {
 interface Unpaid {
 	names: string;
 	grade: Grade;
-	prime: {
+	primes: {
 		amount: number;
 	}[];
 	suppHours: {
