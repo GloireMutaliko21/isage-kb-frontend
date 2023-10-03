@@ -3,7 +3,7 @@ import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 import 'jspdf-autotable';
 
-export async function generatePaySlip(id?: string, agent?: User) {
+export async function generatePaySlip(id?: string, agent?: User, month?: any) {
 	(function (jsPDFAPI: typeof jsPDF.API) {
 		const callAddFont = function (this: any) {
 			this.addFileToVFS('Cairo-Regular-normal.ttf', fontNormal);
@@ -29,6 +29,8 @@ export async function generatePaySlip(id?: string, agent?: User) {
 	doc.text('Direction du personnel', 35, 26, { align: 'center' });
 	doc.setFontSize(16);
 	doc.text('Fiche de paie', 100, 17, { align: 'center' });
+	doc.setFontSize(8);
+	doc.text(`Mois: ${month}`, 100, 25, { align: 'center' });
 	doc.setFont('Cairo-SemiBold');
 	doc.setFontSize(10);
 	doc.setTextColor('#16A34A');

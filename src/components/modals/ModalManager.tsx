@@ -19,6 +19,13 @@ import UpdateAgent from './UpdateAgent';
 import UpdateAgentGrade from './UpdateAgentGrade';
 import CreateAttendency from './CreateAttendency';
 import CreateLeave from './CreateLeave';
+import SuppHours from './salaryDetails/SuppHours';
+import Ferie from './salaryDetails/Ferie';
+import Conge from './salaryDetails/Conge';
+import MaladAcc from './salaryDetails/MaladAcc';
+import Primes from './salaryDetails/Primes';
+import Deductions from './salaryDetails/Deduction';
+import Allocations from './salaryDetails/Allocations';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -98,6 +105,29 @@ const ModalManager = () => {
 			{/* Leave */}
 			{modal_ID == 'NEW_LEAVE' && (
 				<CreateLeave handlers={{ close, id: 'NEW_LEAVE' }} />
+			)}
+
+			{/* Pay */}
+			{modal_ID == 'HEURE_SUPP' && (
+				<SuppHours handlers={{ close, id: 'HEURE_SUPP' }} />
+			)}
+			{modal_ID == 'REM_FERIE' && (
+				<Ferie handlers={{ close, id: 'REM_FERIE' }} />
+			)}
+			{modal_ID == 'REM_CONGE' && (
+				<Conge handlers={{ close, id: 'REM_CONGE' }} />
+			)}
+			{modal_ID == 'REM_MALAD' && (
+				<MaladAcc handlers={{ close, id: 'REM_MALAD' }} />
+			)}
+			{modal_ID == 'PRIME_GRATIF' && (
+				<Primes handlers={{ close, id: 'PRIME_GRATIF' }} />
+			)}
+			{modal_ID == 'DED_RETENUS' && (
+				<Deductions handlers={{ close, id: 'DED_RETENUS' }} />
+			)}
+			{modal_ID == 'FAMILY_ALLOC' && (
+				<Allocations handlers={{ close, id: 'FAMILY_ALLOC' }} />
 			)}
 			<></>
 		</div>
