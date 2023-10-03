@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { remunerationUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { generatePaySlip } from '@/docs/paySlip';
 
 // payments for days of accidents and sickness
 export const registerRemMaladAccid: AsyncThunkPayloadCreator<

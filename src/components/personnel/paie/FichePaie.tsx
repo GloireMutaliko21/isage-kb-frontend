@@ -139,6 +139,14 @@ const FichePaie = ({
 		joursMaladAcc(created).total +
 		primes(created).total;
 
+	const totBrutExisted =
+		baseSalary(fiche).total +
+		suppHours(fiche).total +
+		joursFeries(fiche).total +
+		joursConge(fiche).total +
+		joursMaladAcc(fiche).total +
+		primes(fiche).total;
+
 	const submitPay = () => {
 		dispatch(registerPaySlip({ agentId: agentId!, month, year }));
 	};
@@ -153,6 +161,14 @@ const FichePaie = ({
 								<div className='font-bold'>
 									Fiche de paie de l&apos;agent :{' '}
 									<span className='text-slate-700'>{fiche.agent?.names}</span>
+									<button
+										onClick={() =>
+											generatePaySlip('#table2', fiche?.agent, fiche.month)
+										}
+										className='bg-secondary-600 hover:bg-secondary-500 hover:shadow-lg duration-300 p-3 py-1 text-sm text-white rounded-md flex gap-2 justify-center items-center font-normal mt-3'
+									>
+										Télécharger la fiche de paie
+									</button>
 								</div>
 							) : (
 								<div className='text-red-500'>Agent {} non payé ce mois</div>
@@ -539,6 +555,239 @@ const FichePaie = ({
 									{totBrut +
 										alloc(created).total -
 										deductionData(created).total}{' '}
+									$
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+				<div className='hidden'>
+					<table id='table2' className='w-full'>
+						<tbody>
+							{/* Salaire de base */}
+							<tr>
+								<td className='px-3 w-1/3 font-bold' rowSpan={3}>
+									Salaire de base
+								</td>
+								<td className='px-3 w-1/3 text-slate-500'>Taux</td>
+								<td className='px-3 w-1/3'>{baseSalary(fiche).rate}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>Base</td>
+								<td className='px-3 w-1/3'>{baseSalary(fiche).base}</td>
+							</tr>
+							<tr className='bg-secondary-50 font-extrabold text-slate-700'>
+								<td className='px-3 w-1/3'>Total</td>
+								<td className='px-3 w-1/3'>{baseSalary(fiche).total}</td>
+							</tr>
+
+							{/* Heures supp */}
+							<tr>
+								<td className='px-3 w-1/3 font-bold' rowSpan={3}>
+									Heures supplémentaires
+								</td>
+								<td className='px-3 w-1/3 text-slate-500'>
+									Nombre d&apos;heures
+								</td>
+								<td className='px-3 w-1/3'>{suppHours(fiche).hours}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>Taux</td>
+								<td className='px-3 w-1/3'>{suppHours(fiche).rate}</td>
+							</tr>
+							<tr className='bg-secondary-50 font-extrabold text-slate-700'>
+								<td className='px-3 w-1/3'>Total</td>
+								<td className='px-3 w-1/3'>{suppHours(fiche).total}</td>
+							</tr>
+
+							{/* Jours fériés et chômés */}
+							<tr>
+								<td className='px-3 w-1/3 font-bold' rowSpan={3}>
+									Jours fériés/chômés
+								</td>
+								<td className='px-3 w-1/3 text-slate-500'>Nombre de jours</td>
+								<td className='px-3 w-1/3'>{joursFeries(fiche).days}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>Taux</td>
+								<td className='px-3 w-1/3'>{joursFeries(fiche).rate}</td>
+							</tr>
+							<tr className='bg-secondary-50 font-extrabold text-slate-700'>
+								<td className='px-3 w-1/3'>Total</td>
+								<td className='px-3 w-1/3'>{joursFeries(fiche).total}</td>
+							</tr>
+
+							{/* Jours de congé */}
+							<tr>
+								<td className='px-3 w-1/3 font-bold' rowSpan={3}>
+									Travail jours congé
+								</td>
+								<td className='px-3 w-1/3 text-slate-500'>Nombre de jours</td>
+								<td className='px-3 w-1/3'>{joursConge(fiche).days}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>Taux</td>
+								<td className='px-3 w-1/3'>{joursConge(fiche).rate}</td>
+							</tr>
+							<tr className='bg-secondary-50 font-extrabold text-slate-700'>
+								<td className='px-3 w-1/3'>Total</td>
+								<td className='px-3 w-1/3'>{joursConge(fiche).total}</td>
+							</tr>
+
+							{/* Primes */}
+							<tr>
+								<td className='px-3 w-1/3 font-bold' rowSpan={6}>
+									Primes
+								</td>
+								<td className='px-3 w-1/3 text-slate-500'>Primes de risque</td>
+								<td className='px-3 w-1/3'>{primes(fiche).risque}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>
+									Primes d&apos;ancienneté
+								</td>
+								<td className='px-3 w-1/3'>{primes(fiche).anciennete}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>
+									Primes de pénibilité
+								</td>
+								<td className='px-3 w-1/3'>{primes(fiche).penibility}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>Naissance</td>
+								<td className='px-3 w-1/3'>{primes(fiche).birth}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>Gratifications</td>
+								<td className='px-3 w-1/3'>{primes(fiche).gratication}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>Divers</td>
+								<td className='px-3 w-1/3'>{primes(fiche).other}</td>
+							</tr>
+							<tr className='bg-secondary-50 font-extrabold text-slate-700'>
+								<td className='px-3 w-1/3 text-center' colSpan={2}>
+									Total Primes
+								</td>
+								<td className='px-3 w-1/3'>{primes(fiche).total}</td>
+							</tr>
+
+							{/* Jours maladies et accidents et salaire brut à payer */}
+							<tr>
+								<td className='px-3 w-1/3 font-bold' rowSpan={3}>
+									Jours de maladies/accidents
+								</td>
+								<td className='px-3 w-1/3 text-slate-500'>
+									Jours payés au 2/3
+								</td>
+								<td className='px-3 w-1/3'>{joursMaladAcc(fiche).days}</td>
+							</tr>
+							<tr>
+								<td className='px-3 w-1/3 text-slate-500'>Taux journalier</td>
+								<td className='px-3 w-1/3'>{joursMaladAcc(fiche).rate}</td>
+							</tr>
+							<tr className='bg-secondary-50 font-extrabold text-slate-700'>
+								<td className='px-3 w-1/3'>Total</td>
+								<td className='px-3 w-1/3'>{joursMaladAcc(fiche).total}</td>
+							</tr>
+							<tr className='bg-secondary-50 text-green-600'>
+								<td className='w-1/3  text-center text-lg' colSpan={2}>
+									Total brut dû
+								</td>
+								<td className='px-3 w-1/3 text-lg text-center font-black'>
+									{totBrutExisted} $
+								</td>
+							</tr>
+
+							{/* Retenus et déductions */}
+							<tr>
+								<td className='border px-3 w-1/3 font-bold' rowSpan={6}>
+									Retenus et déductions
+								</td>
+								<td className='border px-3 w-1/3 text-slate-500'>Pensions</td>
+								<td className='border px-3 w-1/3'>
+									{deductionData(fiche).pensions}
+								</td>
+							</tr>
+							<tr>
+								<td className='border px-3 w-1/3 text-slate-500'>Indemnités</td>
+								<td className='border px-3 w-1/3'>
+									{deductionData(fiche).indemnites}
+								</td>
+							</tr>
+							<tr>
+								<td className='border px-3 w-1/3 text-slate-500'>
+									Avances sur salaire
+								</td>
+								<td className='border px-3 w-1/3'>
+									{deductionData(fiche).avances}
+								</td>
+							</tr>
+							<tr>
+								<td className='border px-3 w-1/3 text-slate-500'>
+									Retenues fiscales
+								</td>
+								<td className='border px-3 w-1/3'>
+									{deductionData(fiche).retenusFisc}
+								</td>
+							</tr>
+							<tr>
+								<td className='border px-3 w-1/3 text-slate-500'>
+									Cas sociaux
+								</td>
+								<td className='border px-3 w-1/3'>
+									{deductionData(fiche).casSoc}
+								</td>
+							</tr>
+							<tr>
+								<td className='border px-3 w-1/3 text-slate-500'>Divers</td>
+								<td className='border px-3 w-1/3'>
+									{deductionData(fiche).other}
+								</td>
+							</tr>
+							<tr className='bg-secondary-50 font-extrabold text-slate-700'>
+								<td
+									className='border px-3 w-1/3 font-bold text-center'
+									colSpan={2}
+								>
+									Total Déductions
+								</td>
+								<td className='border px-3 w-1/3'>
+									{deductionData(fiche).total}
+								</td>
+							</tr>
+
+							{/* Allocations familiales et net à  payer */}
+							<tr>
+								<td className='px-3 w-1/3' rowSpan={4}>
+									Allocations familiales
+								</td>
+								<td className=' px-3 w-1/3 text-slate-500'>
+									Enfants bénéficiaires
+								</td>
+								<td className=' px-3 w-1/3'>{alloc(fiche).children}</td>
+							</tr>
+							<tr>
+								<td className=' px-3 w-1/3 text-slate-500'>Nombre de jours</td>
+								<td className=' px-3 w-1/3'>{alloc(fiche).days}</td>
+							</tr>
+							<tr>
+								<td className=' px-3 w-1/3 text-slate-500'>Taux</td>
+								<td className=' px-3 w-1/3'>{alloc(fiche).rate}</td>
+							</tr>
+							<tr className='bg-secondary-50 font-extrabold text-slate-700'>
+								<td className='px-3 w-1/3'>Total</td>
+								<td className='px-3 w-1/3'>{alloc(fiche).total}</td>
+							</tr>
+							<tr className='bg-secondary-50 text-green-600'>
+								<td className='w-1/3  text-center text-lg' colSpan={2}>
+									Net à payer
+								</td>
+								<td className='px-3 w-1/3 text-lg text-center font-black'>
+									{totBrutExisted +
+										alloc(fiche).total -
+										deductionData(fiche).total}{' '}
 									$
 								</td>
 							</tr>
