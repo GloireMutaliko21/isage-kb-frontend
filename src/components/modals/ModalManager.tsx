@@ -19,6 +19,7 @@ import UpdateAgent from './UpdateAgent';
 import UpdateAgentGrade from './UpdateAgentGrade';
 import CreateAttendency from './CreateAttendency';
 import CreateLeave from './CreateLeave';
+import SuppHours from './salaryDetails/SuppHours';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -98,6 +99,11 @@ const ModalManager = () => {
 			{/* Leave */}
 			{modal_ID == 'NEW_LEAVE' && (
 				<CreateLeave handlers={{ close, id: 'NEW_LEAVE' }} />
+			)}
+
+			{/* Pay */}
+			{modal_ID == 'HEURE_SUPP' && (
+				<SuppHours handlers={{ close, id: 'HEURE_SUPP' }} />
 			)}
 			<></>
 		</div>
