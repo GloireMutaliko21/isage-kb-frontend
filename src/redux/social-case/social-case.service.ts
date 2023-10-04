@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { socialCaseUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { closeModal } from '../modalWindow/modalwindow.slice';
 
 export const createSocialCase: AsyncThunkPayloadCreator<
 	SocialCase,
@@ -88,7 +89,7 @@ export const updateSocialCase: AsyncThunkPayloadCreator<
 	SocialCase,
 	UpdateSocialCaseDto
 > = async (payload, thunkAPI) => {
-	const { id, description, endDate } = payload;
+	const { id, description, endDate, dispatch } = payload;
 	const {
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
@@ -98,6 +99,7 @@ export const updateSocialCase: AsyncThunkPayloadCreator<
 			{ description, endDate },
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)

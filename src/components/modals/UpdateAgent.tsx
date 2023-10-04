@@ -1,8 +1,8 @@
 'use client';
+import { Button, DatePicker, Form, Input, Modal } from 'antd';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { updateAgent } from '@/redux/agents/agents.slice';
-import { Button, DatePicker, Form, Input, Modal } from 'antd';
 
 const UpdateAgent = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const dispatch = useAppDispatch();

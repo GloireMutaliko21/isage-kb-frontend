@@ -448,6 +448,7 @@ interface UpdateSocialCaseDto {
 	id: string;
 	description?: string;
 	endDate?: Date;
+	dispatch: any;
 }
 
 interface CreatedRemMalad extends GeneralData {
