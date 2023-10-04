@@ -45,6 +45,26 @@ export const getAllSocialsCase: AsyncThunkPayloadCreator<SocialCase[]> = async (
 	}
 };
 
+export const getOneSocialCase: AsyncThunkPayloadCreator<
+	SocialCase,
+	string
+> = async (id, thunkAPI) => {
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const response: AxiosResponse<SocialCase> = await axios.get(
+			socialCaseUrls.getByIdAndUpdate(id),
+			{ headers: { Authorization: `Bearer ${session?.token}` } }
+		);
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Post error');
+	}
+};
+
 export const getPubInProgSocialCase: AsyncThunkPayloadCreator<
 	SocialCase[]
 > = async (_, thunkAPI) => {
@@ -74,7 +94,7 @@ export const updateSocialCase: AsyncThunkPayloadCreator<
 	} = thunkAPI.getState() as RootState;
 	try {
 		const response: AxiosResponse<SocialCase> = await axios.patch(
-			socialCaseUrls.update(id),
+			socialCaseUrls.getByIdAndUpdate(id),
 			{ description, endDate },
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);

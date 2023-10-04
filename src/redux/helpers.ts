@@ -105,7 +105,7 @@ export const subscriptionUrls = {
 export const socialCaseUrls = {
 	createAndGet: `${apiUrl}social-case`,
 	getInprogress: `${apiUrl}social-case/progress`,
-	update: (id: string) => `${apiUrl}social-case/${id}`,
+	getByIdAndUpdate: (id: string) => `${apiUrl}social-case/${id}`,
 	publish: (id: string) => `${apiUrl}social-case/pub/${id}`,
 	close: (id: string) => `${apiUrl}social-case/close/${id}`,
 };

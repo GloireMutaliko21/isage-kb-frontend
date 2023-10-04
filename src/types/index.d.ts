@@ -435,8 +435,8 @@ interface SocialCase extends GeneralData {
 	status: string;
 	validity: string;
 	agentId: string;
-	agent: User;
-	casSocSubscriptions: Subscription[];
+	agent?: User;
+	casSocSubscriptions?: Subscription[];
 }
 
 interface CreateSocialCaseDto {
