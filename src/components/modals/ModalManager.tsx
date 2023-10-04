@@ -26,6 +26,7 @@ import MaladAcc from './salaryDetails/MaladAcc';
 import Primes from './salaryDetails/Primes';
 import Deductions from './salaryDetails/Deduction';
 import Allocations from './salaryDetails/Allocations';
+import GeneratePayroll from './GeneratePayroll';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -128,6 +129,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'FAMILY_ALLOC' && (
 				<Allocations handlers={{ close, id: 'FAMILY_ALLOC' }} />
+			)}
+			{modal_ID == 'PAYROLL' && (
+				<GeneratePayroll handlers={{ close, id: 'PAYROLL' }} />
 			)}
 			<></>
 		</div>
