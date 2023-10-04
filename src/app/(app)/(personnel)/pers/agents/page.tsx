@@ -1,13 +1,13 @@
 'use client';
+import { Input, Table } from 'antd';
+import Link from 'next/link';
+import { useState } from 'react';
+import { PiDownloadSimpleFill } from 'react-icons/pi';
 import PageHeader from '@/components/global/PageHeader';
 import { generateAgentList } from '@/docs/listeAgents';
 import useAgents from '@/hooks/useAgents';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { openModal } from '@/redux/modalWindow/modalwindow.slice';
-import { Input, Table } from 'antd';
-import Link from 'next/link';
-import { useState } from 'react';
-import { PiDownloadSimpleFill } from 'react-icons/pi';
 
 const Agents = () => {
 	const [searchedText, setSearchedText] = useState('');
