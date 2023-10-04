@@ -148,7 +148,7 @@ const Sidebar = () => {
 			/>
 			<div className='text-[#737a87] text-[14.3px] mx-3 my-3'>
 				<Link
-					href='soccase'
+					href='/soccase'
 					className='flex gap-2 items-center hover:text-secondary-800 duration-150'
 				>
 					<PiUsersFourThin className='text-xl' />
@@ -157,7 +157,7 @@ const Sidebar = () => {
 			</div>
 			<div className='text-[#737a87] text-[14.3px] mx-3 my-4'>
 				<Link
-					href='conge'
+					href='/conge'
 					className='flex gap-2 items-center hover:text-secondary-800 duration-150'
 				>
 					<PiCalendarPlusDuotone className='text-xl' />
@@ -166,7 +166,7 @@ const Sidebar = () => {
 			</div>
 			<div className='text-[#737a87] text-[14.3px] mx-3 my-4'>
 				<Link
-					href='attend'
+					href='/attend'
 					className='flex gap-2 items-center hover:text-secondary-800 duration-150'
 				>
 					<PiCalendarLight className='text-xl' />

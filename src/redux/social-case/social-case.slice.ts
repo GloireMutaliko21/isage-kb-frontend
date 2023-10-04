@@ -197,6 +197,7 @@ export default socialCaseSlice.reducer;
 export {
 	createSocialCase,
 	getAllSocialsCase,
+	getOneSocialCase,
 	getPubInProgSocialCase,
 	updateSocialCase,
 	publishSocialCase,
