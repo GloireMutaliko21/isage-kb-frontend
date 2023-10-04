@@ -24,7 +24,8 @@ export async function generatePayroll(id?: string, month?: any) {
 
 	doc.setFont('Cairo-Bold');
 	doc.setFontSize(11);
-	doc.setTextColor('#00838F');
+	doc.setTextColor('#000000');
+	// doc.setTextColor('#00838F');
 	doc.text('ISAGE-KAHUZI BIEGA', 35, 5, { align: 'center' });
 	doc.addImage('/images/logo.png', 'PNG', 28, 7, 12, 12);
 	doc.setFontSize(8);

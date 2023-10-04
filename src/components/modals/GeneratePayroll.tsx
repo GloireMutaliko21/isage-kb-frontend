@@ -114,7 +114,7 @@ const GeneratePayroll = ({ handlers }: { handlers: ModalsHandlers }) => {
 								idx
 							) => (
 								<tr key={idx} className='text-slate-700'>
-									<td className='border px-2 text-left text-slate-800'>
+									<td className='border px-2 text-left text-slate-500'>
 										{names}
 									</td>
 									<td className='border px-2 text-left text-slate-800'>
