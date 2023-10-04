@@ -34,6 +34,11 @@ const getAllSocialsCase = createAsyncThunk(
 	socialCaseService.getAllSocialsCase
 );
 
+const getOneSocialCase = createAsyncThunk(
+	'socialcase/getById',
+	socialCaseService.getOneSocialCase
+);
+
 const getPubInProgSocialCase = createAsyncThunk(
 	'socialcase/getPubProg',
 	socialCaseService.getPubInProgSocialCase
@@ -94,6 +99,21 @@ const socialCaseSlice = createSlice({
 				state.message = null;
 			})
 			.addCase(getAllSocialsCase.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
+				state.selectedSocialCase = null;
+				state.message = payload as string;
+			})
+
+			// get one social case
+			.addCase(getOneSocialCase.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(getOneSocialCase.fulfilled, (state, { payload }) => {
+				state.status = STATUS.SUCCESS;
+				state.selectedSocialCase = payload;
+				state.message = null;
+			})
+			.addCase(getOneSocialCase.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
 				state.selectedSocialCase = null;
 				state.message = payload as string;
@@ -177,6 +197,7 @@ export default socialCaseSlice.reducer;
 export {
 	createSocialCase,
 	getAllSocialsCase,
+	getOneSocialCase,
 	getPubInProgSocialCase,
 	updateSocialCase,
 	publishSocialCase,

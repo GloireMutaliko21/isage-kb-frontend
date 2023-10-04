@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { socialCaseUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { closeModal } from '../modalWindow/modalwindow.slice';
 
 export const createSocialCase: AsyncThunkPayloadCreator<
 	SocialCase,
@@ -45,6 +46,26 @@ export const getAllSocialsCase: AsyncThunkPayloadCreator<SocialCase[]> = async (
 	}
 };
 
+export const getOneSocialCase: AsyncThunkPayloadCreator<
+	SocialCase,
+	string
+> = async (id, thunkAPI) => {
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const response: AxiosResponse<SocialCase> = await axios.get(
+			socialCaseUrls.getByIdAndUpdate(id),
+			{ headers: { Authorization: `Bearer ${session?.token}` } }
+		);
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Post error');
+	}
+};
+
 export const getPubInProgSocialCase: AsyncThunkPayloadCreator<
 	SocialCase[]
 > = async (_, thunkAPI) => {
@@ -68,16 +89,17 @@ export const updateSocialCase: AsyncThunkPayloadCreator<
 	SocialCase,
 	UpdateSocialCaseDto
 > = async (payload, thunkAPI) => {
-	const { id, description, endDate } = payload;
+	const { id, description, endDate, dispatch } = payload;
 	const {
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
 		const response: AxiosResponse<SocialCase> = await axios.patch(
-			socialCaseUrls.update(id),
+			socialCaseUrls.getByIdAndUpdate(id),
 			{ description, endDate },
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
