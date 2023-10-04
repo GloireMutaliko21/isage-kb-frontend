@@ -35,7 +35,7 @@ const getAllSocialsCase = createAsyncThunk(
 );
 
 const getOneSocialCase = createAsyncThunk(
-	'socialcase/getAll',
+	'socialcase/getById',
 	socialCaseService.getOneSocialCase
 );
 

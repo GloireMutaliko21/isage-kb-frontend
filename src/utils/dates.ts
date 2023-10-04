@@ -29,7 +29,7 @@ export const frenchFormattedDate = (date: any) => {
 	dayjs.extend(localizedFormat);
 
 	dayjs.locale(fr);
-	const formattedDate = dayjs(date).format('dddd, [le] DD MMM YYYY');
+	const formattedDate = dayjs(date).format('ddd, DD MMM YYYY');
 	return formattedDate;
 };
 
