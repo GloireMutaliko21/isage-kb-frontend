@@ -4,6 +4,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	articles: Article[];
+	articlesByCateg: Article[];
 	unStocked: Article[];
 	selectedArticle: Article | null;
 	status: {
@@ -14,6 +15,7 @@ const initialState: {
 	message: string | null;
 } = {
 	articles: [],
+	articlesByCateg: [],
 	unStocked: [],
 	selectedArticle: null,
 	status: {
@@ -85,7 +87,7 @@ const articleSlice = createSlice({
 			.addCase(getArticleByCated.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.selectedArticle = null;
-				state.articles = payload;
+				state.articlesByCateg = payload;
 				state.message = null;
 			})
 			.addCase(getArticleByCated.rejected, (state, { payload }) => {
