@@ -6,6 +6,7 @@ import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { getArticleById } from '@/redux/article/article.slice';
 import { openModal } from '@/redux/modalWindow/modalwindow.slice';
 import { useAppSelector } from '@/hooks/useAppSelector';
+import { generateArticlesList } from '@/docs/listeArticles';
 
 const Articles = () => {
 	const [searchedText, setSearchedText] = useState('');
@@ -15,8 +16,8 @@ const Articles = () => {
 	const { selectedArticle } = useAppSelector((state) => state.articles);
 
 	const onGenerateList = async () => {
-		// if (!articles) return;
-		// await generateArticlesList(articles);
+		if (!articles) return;
+		await generateArticlesList(articles);
 	};
 
 	const onUpdate = (id: string) => {
