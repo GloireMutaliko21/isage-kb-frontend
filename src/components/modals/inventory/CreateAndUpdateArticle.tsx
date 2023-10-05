@@ -1,10 +1,22 @@
 'use client';
-import { Button, Form, Input, InputNumber, Modal, Select } from 'antd';
+import {
+	Button,
+	Divider,
+	Form,
+	Input,
+	InputNumber,
+	Modal,
+	Select,
+	Space,
+} from 'antd';
+import { PlusOutlined } from '@ant-design/icons';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import useArticleUnity from '@/hooks/useArticleUnity';
 import useCategory from '@/hooks/useCategory';
 import { createArticle, updateArticle } from '@/redux/article/article.slice';
+import { createCategory } from '@/redux/property-category/category.slice';
+import { createUnity } from '@/redux/article-unity/article-unity.slice';
 
 const CreateAndUpdateArticle = ({ handlers }: { handlers: ModalsHandlers }) => {
 	const dispatch = useAppDispatch();
@@ -72,11 +84,44 @@ const CreateAndUpdateArticle = ({ handlers }: { handlers: ModalsHandlers }) => {
 					<Select
 						placeholder='Sélectionner une catégorie'
 						optionLabelProp='label'
+						size='small'
+						dropdownRender={(cat) => (
+							<>
+								{cat}
+								<Divider style={{ margin: '8px 0' }} />
+								<Form onFinish={(values) => dispatch(createCategory(values))}>
+									<Space style={{ padding: '0 8px 4px' }}>
+										<Form.Item name='libelle' style={{ marginBottom: '2px' }}>
+											<Input placeholder='Libellé catégorie' size='small' />
+										</Form.Item>
+										<Form.Item style={{ marginBottom: '2px' }}>
+											<Button
+												htmlType='submit'
+												icon={<PlusOutlined />}
+												size='small'
+											>
+												Ajouter
+											</Button>
+										</Form.Item>
+									</Space>
+								</Form>
+							</>
+						)}
+						showSearch
+						filterOption={(input, option) =>
+							(option?.label ?? '').includes(input) ||
+							(option?.label ?? '').toLowerCase().includes(input) ||
+							(option?.label ?? '').toUpperCase().includes(input)
+						}
+						filterSort={(optionA, optionB) =>
+							(optionA?.label ?? '')
+								.toLowerCase()
+								.localeCompare((optionB?.label ?? '').toLowerCase())
+						}
 						options={categories.map((cat) => ({
 							value: cat.id,
 							label: cat.libelle,
 						}))}
-						size='small'
 					/>
 				</Form.Item>
 				<Form.Item
@@ -87,6 +132,39 @@ const CreateAndUpdateArticle = ({ handlers }: { handlers: ModalsHandlers }) => {
 					<Select
 						placeholder='Sélectionner une unité'
 						optionLabelProp='label'
+						dropdownRender={(cat) => (
+							<>
+								{cat}
+								<Divider style={{ margin: '8px 0' }} />
+								<Form onFinish={(values) => dispatch(createUnity(values))}>
+									<Space style={{ padding: '0 8px 4px' }}>
+										<Form.Item name='libelle' style={{ marginBottom: '2px' }}>
+											<Input placeholder='Libellé unité' size='small' />
+										</Form.Item>
+										<Form.Item style={{ marginBottom: '2px' }}>
+											<Button
+												htmlType='submit'
+												icon={<PlusOutlined />}
+												size='small'
+											>
+												Ajouter
+											</Button>
+										</Form.Item>
+									</Space>
+								</Form>
+							</>
+						)}
+						showSearch
+						filterOption={(input, option) =>
+							(option?.label ?? '').includes(input) ||
+							(option?.label ?? '').toLowerCase().includes(input) ||
+							(option?.label ?? '').toUpperCase().includes(input)
+						}
+						filterSort={(optionA, optionB) =>
+							(optionA?.label ?? '')
+								.toLowerCase()
+								.localeCompare((optionB?.label ?? '').toLowerCase())
+						}
 						options={unities.map((unity) => ({
 							value: unity.id,
 							label: unity.libelle,
