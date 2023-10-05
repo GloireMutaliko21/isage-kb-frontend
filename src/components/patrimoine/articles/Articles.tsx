@@ -1,17 +1,29 @@
-import useArticles from '@/hooks/useArticles';
-import { Input, Table, Tag } from 'antd';
-import Link from 'next/link';
 import React, { useState } from 'react';
+import { Input, Table, Tag } from 'antd';
 import { PiDownloadSimpleFill } from 'react-icons/pi';
+import useArticles from '@/hooks/useArticles';
+import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { getArticleById } from '@/redux/article/article.slice';
+import { openModal } from '@/redux/modalWindow/modalwindow.slice';
+import { useAppSelector } from '@/hooks/useAppSelector';
 
 const Articles = () => {
 	const [searchedText, setSearchedText] = useState('');
 
 	const { articles } = useArticles();
+	const dispatch = useAppDispatch();
+	const { selectedArticle } = useAppSelector((state) => state.articles);
+
 	const onGenerateList = async () => {
 		// if (!articles) return;
 		// await generateArticlesList(articles);
 	};
+
+	const onUpdate = (id: string) => {
+		dispatch(getArticleById(id));
+		dispatch(openModal({ modal_ID: 'UPDATE_ARTICLE' }));
+	};
+
 	return (
 		<div>
 			<div className='w-full flex justify-between items-center mb-5'>
@@ -100,8 +112,11 @@ const Articles = () => {
 						dataIndex: 'action',
 						width: '120px',
 						title: '',
-						render: (_, article, __) => (
-							<button className='border border-secondary-500 text-secondary-500 flex justify-center hover:text-secondary-700 py-px px-4'>
+						render: (_, { id }, __) => (
+							<button
+								className='border border-secondary-500 text-secondary-500 flex justify-center hover:text-secondary-700 py-px px-4'
+								onClick={() => onUpdate(id)}
+							>
 								Modifier
 							</button>
 						),

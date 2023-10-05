@@ -12,7 +12,7 @@ const useCategory = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !categories) dispatch(getCategories());
+		if (isLogin) dispatch(getCategories());
 		else console.log(message);
 	}, [dispatch, isLogin, message]);
 	return { categories, selectedCategory, status, message };

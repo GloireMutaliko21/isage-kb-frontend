@@ -154,6 +154,7 @@ interface CreateArticleDto {
 	stockAlert: number;
 	unityId: string;
 	categoryId: string;
+	dispatch?: any;
 }
 
 interface UpdateArticleDto {
@@ -162,6 +163,7 @@ interface UpdateArticleDto {
 	stockAlert?: number;
 	unityId?: string;
 	categoryId?: string;
+	dispatch?: any;
 }
 
 interface Unity extends GeneralData {
