@@ -156,6 +156,14 @@ interface CreateArticleDto {
 	categoryId: string;
 }
 
+interface UpdateArticleDto {
+	id?: string;
+	libelle?: string;
+	stockAlert?: number;
+	unityId?: string;
+	categoryId?: string;
+}
+
 interface Unity extends GeneralData {
 	libelle?: string;
 	articles?: Aricle[];

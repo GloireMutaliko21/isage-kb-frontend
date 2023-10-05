@@ -104,3 +104,25 @@ export const createrticle: AsyncThunkPayloadCreator<
 			: thunkAPI.rejectWithValue('Post error');
 	}
 };
+
+export const updateArticle: AsyncThunkPayloadCreator<
+	Article,
+	UpdateArticleDto
+> = async (payload, thunkAPI) => {
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const { id, ...rest } = payload;
+		const response: AxiosResponse<Article> = await axios.patch(
+			articleUrls.getOne(id!),
+			rest,
+			{ headers: { Authorization: `Bearer ${session?.token}` } }
+		);
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Post error');
+	}
+};

@@ -51,6 +51,11 @@ const createArticle = createAsyncThunk(
 	articleService.createrticle
 );
 
+const updateArticle = createAsyncThunk(
+	'articles/update',
+	articleService.updateArticle
+);
+
 const articleSlice = createSlice({
 	name: 'articles',
 	initialState,
@@ -142,6 +147,22 @@ const articleSlice = createSlice({
 				state.status = STATUS.ERROR;
 				state.selectedArticle = null;
 				state.message = payload as string;
+			})
+
+			// update article
+			.addCase(updateArticle.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(updateArticle.fulfilled, (state, { payload }) => {
+				const updated = state.articles.filter((el) => el.id !== payload.id);
+				state.status = STATUS.SUCCESS;
+				state.selectedArticle = payload;
+				state.articles = [...updated, payload];
+				state.message = 'Mise à jour réussie';
+			})
+			.addCase(updateArticle.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
+				state.message = payload as string;
 			});
 	},
 });
@@ -153,5 +174,6 @@ export {
 	getArticleByCated,
 	getUnstockArticles,
 	createArticle,
+	updateArticle,
 };
 export const { setArticleIsError, setArticleIsSuccess } = articleSlice.actions;

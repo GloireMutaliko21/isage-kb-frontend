@@ -100,7 +100,7 @@ const Articles = () => {
 						dataIndex: 'action',
 						width: '120px',
 						title: '',
-						render: (_, { id }, __) => (
+						render: (_, article, __) => (
 							<button className='border border-secondary-500 text-secondary-500 flex justify-center hover:text-secondary-700 py-px px-4'>
 								Modifier
 							</button>
