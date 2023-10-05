@@ -28,7 +28,7 @@ import Deductions from './salaryDetails/Deduction';
 import Allocations from './salaryDetails/Allocations';
 import GeneratePayroll from './GeneratePayroll';
 import UpdateSocCase from './UpdateSocCase';
-import UpdateArticle from './inventory/UpdateArticle';
+import CreateAndUpdateArticle from './inventory/CreateAndUpdateArticle';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -143,7 +143,10 @@ const ModalManager = () => {
 
 			{/* Articles */}
 			{modal_ID == 'UPDATE_ARTICLE' && (
-				<UpdateArticle handlers={{ close, id: 'UPDATE_ARTICLE' }} />
+				<CreateAndUpdateArticle handlers={{ close, id: 'UPDATE_ARTICLE' }} />
+			)}
+			{modal_ID == 'NEW_ARTICLE' && (
+				<CreateAndUpdateArticle handlers={{ close, id: 'NEW_ARTICLE' }} />
 			)}
 			<></>
 		</div>
