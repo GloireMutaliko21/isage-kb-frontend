@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { articleUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { closeModal } from '../modalWindow/modalwindow.slice';
 
 export const getArticles: AsyncThunkPayloadCreator<Article[]> = async (
 	_,
@@ -92,11 +93,36 @@ export const createrticle: AsyncThunkPayloadCreator<
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
+		const { dispatch, ...rest } = payload;
 		const response: AxiosResponse<Article> = await axios.post(
 			articleUrls.createAndGet,
-			payload,
+			rest,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		dispatch(closeModal());
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Post error');
+	}
+};
+
+export const updateArticle: AsyncThunkPayloadCreator<
+	Article,
+	UpdateArticleDto
+> = async (payload, thunkAPI) => {
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const { id, dispatch, ...rest } = payload;
+		const response: AxiosResponse<Article> = await axios.patch(
+			articleUrls.getOne(id!),
+			rest,
+			{ headers: { Authorization: `Bearer ${session?.token}` } }
+		);
+		dispatch(closeModal());
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)

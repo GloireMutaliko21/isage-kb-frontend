@@ -28,6 +28,7 @@ import Deductions from './salaryDetails/Deduction';
 import Allocations from './salaryDetails/Allocations';
 import GeneratePayroll from './GeneratePayroll';
 import UpdateSocCase from './UpdateSocCase';
+import CreateAndUpdateArticle from './inventory/CreateAndUpdateArticle';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -138,6 +139,14 @@ const ModalManager = () => {
 			{/* Social cases */}
 			{modal_ID == 'UPDATE_SOCCASE' && (
 				<UpdateSocCase handlers={{ close, id: 'UPDATE_SOCCASE' }} />
+			)}
+
+			{/* Articles */}
+			{modal_ID == 'UPDATE_ARTICLE' && (
+				<CreateAndUpdateArticle handlers={{ close, id: 'UPDATE_ARTICLE' }} />
+			)}
+			{modal_ID == 'NEW_ARTICLE' && (
+				<CreateAndUpdateArticle handlers={{ close, id: 'NEW_ARTICLE' }} />
 			)}
 			<></>
 		</div>

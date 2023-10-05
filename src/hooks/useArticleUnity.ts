@@ -12,7 +12,7 @@ const useArticleUnity = () => {
 	const { isLogin } = useAuth();
 
 	useEffect(() => {
-		if (isLogin && !unities) dispatch(getUnities());
+		if (isLogin) dispatch(getUnities());
 		else console.log(message);
 	}, [dispatch, isLogin, message]);
 	return { unities, selectedUnity, status, message };

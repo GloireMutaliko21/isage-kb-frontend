@@ -51,6 +51,11 @@ const createArticle = createAsyncThunk(
 	articleService.createrticle
 );
 
+const updateArticle = createAsyncThunk(
+	'articles/update',
+	articleService.updateArticle
+);
+
 const articleSlice = createSlice({
 	name: 'articles',
 	initialState,
@@ -70,7 +75,6 @@ const articleSlice = createSlice({
 			})
 			.addCase(getArticles.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.selectedArticle = null;
 				state.articles = payload;
 				state.message = null;
 			})
@@ -86,7 +90,6 @@ const articleSlice = createSlice({
 			})
 			.addCase(getArticleByCated.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.selectedArticle = null;
 				state.articlesByCateg = payload;
 				state.message = null;
 			})
@@ -102,7 +105,6 @@ const articleSlice = createSlice({
 			})
 			.addCase(getUnstockArticles.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.selectedArticle = null;
 				state.unStocked = payload;
 				state.message = null;
 			})
@@ -118,13 +120,11 @@ const articleSlice = createSlice({
 			})
 			.addCase(getArticleById.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.selectedArticle = null;
 				state.selectedArticle = payload;
 				state.message = null;
 			})
 			.addCase(getArticleById.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
-				state.selectedArticle = null;
 				state.message = payload as string;
 			})
 
@@ -134,13 +134,27 @@ const articleSlice = createSlice({
 			})
 			.addCase(createArticle.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.selectedArticle = null;
 				state.articles = [...state.articles, payload];
 				state.message = 'Enregistrement réussi';
 			})
 			.addCase(createArticle.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
-				state.selectedArticle = null;
+				state.message = payload as string;
+			})
+
+			// update article
+			.addCase(updateArticle.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(updateArticle.fulfilled, (state, { payload }) => {
+				const updated = state.articles.filter((el) => el.id !== payload.id);
+				state.status = STATUS.SUCCESS;
+				state.selectedArticle = payload;
+				state.articles = [...updated, payload];
+				state.message = 'Mise à jour réussie';
+			})
+			.addCase(updateArticle.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
 				state.message = payload as string;
 			});
 	},
@@ -153,5 +167,6 @@ export {
 	getArticleByCated,
 	getUnstockArticles,
 	createArticle,
+	updateArticle,
 };
 export const { setArticleIsError, setArticleIsSuccess } = articleSlice.actions;
