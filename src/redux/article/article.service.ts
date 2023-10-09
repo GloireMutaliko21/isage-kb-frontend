@@ -45,7 +45,7 @@ export const getArticleById: AsyncThunkPayloadCreator<Article, string> = async (
 	}
 };
 
-export const getByCated: AsyncThunkPayloadCreator<Article[]> = async (
+export const getByCated: AsyncThunkPayloadCreator<ArticleByCated[]> = async (
 	_,
 	thunkAPI
 ) => {
@@ -53,7 +53,7 @@ export const getByCated: AsyncThunkPayloadCreator<Article[]> = async (
 		auth: { session },
 	} = thunkAPI.getState() as RootState;
 	try {
-		const response: AxiosResponse<Article[]> = await axios.get(
+		const response: AxiosResponse<ArticleByCated[]> = await axios.get(
 			articleUrls.getCateg,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);

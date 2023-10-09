@@ -149,6 +149,16 @@ interface Article extends GeneralData {
 	};
 }
 
+interface ArticleByCated {
+	categorie: string;
+	articles: {
+		libelle: string;
+		qte: number;
+		stockAlert: number;
+		unity: string;
+	}[];
+}
+
 interface CreateArticleDto {
 	libelle: string;
 	stockAlert: number;
