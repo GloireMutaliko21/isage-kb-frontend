@@ -13,7 +13,6 @@ const Articles = () => {
 
 	const { articles } = useArticles();
 	const dispatch = useAppDispatch();
-	const { selectedArticle } = useAppSelector((state) => state.articles);
 
 	const onGenerateList = async () => {
 		if (!articles) return;

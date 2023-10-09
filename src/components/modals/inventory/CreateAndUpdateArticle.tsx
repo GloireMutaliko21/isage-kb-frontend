@@ -85,6 +85,7 @@ const CreateAndUpdateArticle = ({ handlers }: { handlers: ModalsHandlers }) => {
 						placeholder='Sélectionner une catégorie'
 						optionLabelProp='label'
 						size='small'
+						placement='topRight'
 						dropdownRender={(cat) => (
 							<>
 								{cat}

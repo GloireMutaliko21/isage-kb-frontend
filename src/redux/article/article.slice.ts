@@ -4,7 +4,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	articles: Article[];
-	articlesByCateg: Article[];
+	articlesByCateg: ArticleByCated[];
 	unStocked: Article[];
 	selectedArticle: Article | null;
 	status: {
