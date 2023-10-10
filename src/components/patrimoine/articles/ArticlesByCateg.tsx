@@ -14,21 +14,28 @@ const ArticlesByCateg = () => {
 		// await generateArticlesList(articlesByCateg);
 	};
 
-	const ExpandedRowRender = ({ data }: { data: any }) => {
+	const expandedRowRender = (data: ArticleByCated) => {
 		const columns = [
 			{ title: 'Désignation', dataIndex: 'libelle', key: 'libelle' },
 			{ title: 'Quantité', dataIndex: 'qte', key: 'qte' },
 			{ title: 'Stock alerte', dataIndex: 'stockAlert', key: 'stockAlert' },
 			{ title: 'Unité de mesure', dataIndex: 'unity', key: 'unity' },
 		];
-		return <Table columns={columns} dataSource={data} pagination={false} />;
+		return (
+			<Table
+				columns={columns}
+				dataSource={data.articles}
+				pagination={false}
+				size='small'
+			/>
+		);
 	};
 
 	const colums = [
 		{
 			title: 'Catégorie',
 			dataIndex: 'categorie',
-			key: 'libelle',
+			key: 'categ',
 			filteredValue: [searchedText],
 			onFilter: (value: any, categ: ArticleByCated) =>
 				String(categ.categorie)
@@ -58,10 +65,9 @@ const ArticlesByCateg = () => {
 			<Table
 				dataSource={articlesByCateg}
 				columns={colums}
-				expandable={{
-					expandedRowRender: (art) => <ExpandedRowRender data={art.articles} />,
-					defaultExpandedRowKeys: ['0'],
-				}}
+				expandable={{ expandedRowRender, expandRowByClick: true }}
+				size='small'
+				rowKey={(record) => record.categorie}
 			/>
 		</div>
 	);
