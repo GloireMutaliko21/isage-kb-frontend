@@ -55,7 +55,6 @@ const authSlice = createSlice({
 		},
 	},
 	extraReducers: (builder) => {
-		//getProfile
 		builder
 			//login
 			.addCase(loginUser.pending, (state) => {
