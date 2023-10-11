@@ -24,12 +24,7 @@ interface User extends GeneralData {
 	public_id?: string;
 	gradeId?: string;
 	grade?: Grade;
-	roles?: {
-		id: string;
-		createdAt?: Date;
-		updatedAt?: Date;
-		title: string;
-	}[];
+	roles?: Role[];
 	folderElements?: {
 		agentId: string;
 		folderElementId: string;
