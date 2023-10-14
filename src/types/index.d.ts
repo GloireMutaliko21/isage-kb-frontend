@@ -177,7 +177,7 @@ interface Unity extends GeneralData {
 }
 
 interface CreateUnityDto {
-	id: string;
+	id?: string;
 	libelle: string;
 }
 
