@@ -334,7 +334,7 @@ interface CreateOrderDto {
 
 interface Category extends GeneralData {
 	libelle?: string;
-	immobilisation?: {
+	immobilisations?: {
 		id: string;
 		createdAt: Date;
 		updatedAt: Date;

@@ -74,7 +74,7 @@ const Unities = () => {
 			<div className='w-full flex justify-end items-center mb-5'>
 				<div>
 					<Input.Search
-						placeholder='Rechercher un article'
+						placeholder='Rechercher une unité'
 						onSearch={(v) => setSearchedText(v)}
 						onChange={(e) => setSearchedText(e.target.value)}
 					/>
