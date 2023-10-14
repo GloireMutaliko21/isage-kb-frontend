@@ -97,8 +97,8 @@ const Categories = () => {
 			dataIndex: 'libelle',
 			key: 'categ',
 			filteredValue: [searchedText],
-			onFilter: (value: any, unity: Unity) =>
-				String(unity.libelle)
+			onFilter: (value: any, categ: Category) =>
+				String(categ.libelle)
 					.toLowerCase()
 					.includes(String(value).toLowerCase()),
 		},

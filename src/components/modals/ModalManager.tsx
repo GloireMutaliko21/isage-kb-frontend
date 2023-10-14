@@ -31,6 +31,7 @@ import UpdateSocCase from './UpdateSocCase';
 import CreateAndUpdateArticle from './inventory/CreateAndUpdateArticle';
 import CreateOrder from './inventory/CreateOrder';
 import CreateAndUpdateUnity from './inventory/CreateAndUpdateUnity';
+import CreateAndUpdateCategory from './inventory/CreateAndUpdateCategory';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -158,6 +159,12 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'NEW_UNITY' && (
 				<CreateAndUpdateUnity handlers={{ close, id: 'NEW_UNITY' }} />
+			)}
+			{modal_ID == 'UPDATE_CATEGORY' && (
+				<CreateAndUpdateCategory handlers={{ close, id: 'UPDATE_CATEGORY' }} />
+			)}
+			{modal_ID == 'NEW_CATEGORY' && (
+				<CreateAndUpdateCategory handlers={{ close, id: 'NEW_CATEGORY' }} />
 			)}
 			<></>
 		</div>
