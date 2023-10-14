@@ -2,7 +2,7 @@ import { fontBold, fontMedium, fontNormal, fontSemiBold } from '@/assets/fonts';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
-export async function generateArticlesList(articles: Article[]) {
+export async function generateArticlesList(articles: Article[], label = '') {
 	(function (jsPDFAPI: typeof jsPDF.API) {
 		const callAddFont = function (this: any) {
 			this.addFileToVFS('Cairo-Regular-normal.ttf', fontNormal);
@@ -63,11 +63,11 @@ export async function generateArticlesList(articles: Article[]) {
 				});
 				doc.text('Direction du personnel', 35, 26, { align: 'center' });
 				doc.setFontSize(13);
-				doc.text("LISTE D'ARTICLES", 110, 17, { align: 'center' });
+				doc.text(`LISTE D'ARTICLES ${label}`, 110, 17, { align: 'center' });
 			}
 		},
 	});
-	doc.save('liste_articles.pdf');
+	doc.save(`liste_articles_${label.toLowerCase()}.pdf`);
 }
 
 export async function generateArticlesListByCateg(articles: ArticleByCated[]) {
@@ -146,5 +146,5 @@ export async function generateArticlesListByCateg(articles: ArticleByCated[]) {
 			},
 		})
 	);
-	doc.save('liste_articles.pdf');
+	doc.save('liste_articles_by_category.pdf');
 }
