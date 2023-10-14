@@ -29,6 +29,7 @@ import Allocations from './salaryDetails/Allocations';
 import GeneratePayroll from './GeneratePayroll';
 import UpdateSocCase from './UpdateSocCase';
 import CreateAndUpdateArticle from './inventory/CreateAndUpdateArticle';
+import CreateOrder from './inventory/CreateOrder';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -147,6 +148,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'NEW_ARTICLE' && (
 				<CreateAndUpdateArticle handlers={{ close, id: 'NEW_ARTICLE' }} />
+			)}
+			{modal_ID == 'ORDER_ARTICLE' && (
+				<CreateOrder handlers={{ close, id: 'ORDER_ARTICLE' }} />
 			)}
 			<></>
 		</div>
