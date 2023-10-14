@@ -1,6 +1,6 @@
-import { useAppDispatch } from '@/hooks/useAppDispatch';
+import { generateArticlesListByCateg } from '@/docs/listeArticles';
 import useArticles from '@/hooks/useArticles';
-import { Input, Table, type TableColumnsType } from 'antd';
+import { Input, Table } from 'antd';
 import { useState } from 'react';
 import { PiDownloadSimpleFill } from 'react-icons/pi';
 
@@ -8,10 +8,9 @@ const ArticlesByCateg = () => {
 	const [searchedText, setSearchedText] = useState('');
 
 	const { articlesByCateg } = useArticles();
-	const dispatch = useAppDispatch();
 	const onGenerateList = async () => {
-		// if (!articlesByCateg) return;
-		// await generateArticlesList(articlesByCateg);
+		if (!articlesByCateg) return;
+		await generateArticlesListByCateg(articlesByCateg);
 	};
 
 	const expandedRowRender = (data: ArticleByCated) => {
