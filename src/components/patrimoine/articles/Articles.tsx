@@ -5,7 +5,6 @@ import useArticles from '@/hooks/useArticles';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { getArticleById } from '@/redux/article/article.slice';
 import { openModal } from '@/redux/modalWindow/modalwindow.slice';
-import { useAppSelector } from '@/hooks/useAppSelector';
 import { generateArticlesList } from '@/docs/listeArticles';
 
 const Articles = () => {

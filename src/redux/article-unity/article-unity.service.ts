@@ -74,7 +74,7 @@ export const updateUnity: AsyncThunkPayloadCreator<
 	} = thunkAPI.getState() as RootState;
 	try {
 		const response: AxiosResponse<Unity> = await axios.patch(
-			unityUrls.updateAndGetOne(payload.id),
+			unityUrls.updateAndGetOne(payload.id!),
 			payload,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);

@@ -177,7 +177,7 @@ interface Unity extends GeneralData {
 }
 
 interface CreateUnityDto {
-	id: string;
+	id?: string;
 	libelle: string;
 }
 
@@ -334,7 +334,7 @@ interface CreateOrderDto {
 
 interface Category extends GeneralData {
 	libelle?: string;
-	immobilisation?: {
+	immobilisations?: {
 		id: string;
 		createdAt: Date;
 		updatedAt: Date;
