@@ -46,6 +46,8 @@ export async function generatePurchaseOrder(order: Order) {
 
 	doc.text(`Quantité : ${order.qty}`, 1, 2.2, { align: 'center' });
 
+	doc.setFontSize(9);
+	doc.text(`${order.article?.unity?.libelle}(s)`, 1, 2.4, { align: 'center' });
 	doc.save(
 		`bon_de_commande_${order.article?.libelle}_${frenchFormattedDate(
 			order.createdAt

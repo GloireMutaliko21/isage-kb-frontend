@@ -77,6 +77,7 @@ export const closeOrder: AsyncThunkPayloadCreator<Order, string> = async (
 	try {
 		const response: AxiosResponse<Order> = await axios.patch(
 			orderUrls.close(id),
+			{},
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;
@@ -97,6 +98,7 @@ export const cancelOrder: AsyncThunkPayloadCreator<Order, string> = async (
 	try {
 		const response: AxiosResponse<Order> = await axios.patch(
 			orderUrls.cancel(id),
+			{},
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;
