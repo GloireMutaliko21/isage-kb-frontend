@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { orderUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { generatePurchaseOrder } from '@/docs/orders';
 
 export const createOrder: AsyncThunkPayloadCreator<
 	Order,
@@ -17,6 +18,7 @@ export const createOrder: AsyncThunkPayloadCreator<
 			payload,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		await generatePurchaseOrder(response.data);
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)

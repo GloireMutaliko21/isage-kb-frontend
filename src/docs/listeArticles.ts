@@ -1,6 +1,6 @@
-import { fontBold, fontMedium, fontNormal, fontSemiBold } from '@/assets/fonts';
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
+import { fontBold, fontMedium, fontNormal, fontSemiBold } from '@/assets/fonts';
 
 export async function generateArticlesList(articles: Article[], label = '') {
 	(function (jsPDFAPI: typeof jsPDF.API) {
@@ -61,7 +61,7 @@ export async function generateArticlesList(articles: Article[], label = '') {
 				doc.text('Secrétariat Général Administratif', 35, 22, {
 					align: 'center',
 				});
-				doc.text('Direction du personnel', 35, 26, { align: 'center' });
+				doc.text('Direction du patrimoine', 35, 26, { align: 'center' });
 				doc.setFontSize(13);
 				doc.text(`LISTE D'ARTICLES ${label}`, 110, 17, { align: 'center' });
 			}
@@ -97,7 +97,7 @@ export async function generateArticlesListByCateg(articles: ArticleByCated[]) {
 	doc.text('Secrétariat Général Administratif', 35, 22, {
 		align: 'center',
 	});
-	doc.text('Direction du personnel', 35, 26, { align: 'center' });
+	doc.text('Direction du patrimoine', 35, 26, { align: 'center' });
 
 	let y = 0;
 
