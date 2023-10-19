@@ -2,19 +2,32 @@
 import { useState } from 'react';
 import { Select, Table, Tag } from 'antd';
 
-import PageHeader from '@/components/global/PageHeader';
-import { frenchFormattedDate } from '@/utils/dates';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import useOrder from '@/hooks/useOrder';
 import { cancelOrder, closeOrder } from '@/redux/order/order.slice';
+import { PiDownloadSimpleFill } from 'react-icons/pi';
+import { generateOrderList } from '@/docs/orders';
 
 const OrderList = () => {
 	const dispatch = useAppDispatch();
 	const [filtered, setFiltered] = useState<string[]>([]);
 	const { orders } = useOrder();
+
+	const onGenerateList = async () => {
+		if (!orders) return;
+		await generateOrderList(orders);
+	};
+
 	return (
 		<main className='flex flex-col h-full'>
-			<div className='flex justify-end gap-5 mb-5'>
+			<div className='flex justify-between gap-5 mb-5'>
+				<button
+					onClick={onGenerateList}
+					className='flex gap-3 items-center rounded-md hover:shadow-lg duration-300 bg-secondary-700 px-4 py-2 text-white'
+				>
+					<PiDownloadSimpleFill className='text-xl' />
+					<span>Exporter la liste</span>
+				</button>
 				<Select
 					onChange={(v) => setFiltered(v)}
 					value={filtered}
