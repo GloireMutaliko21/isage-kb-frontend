@@ -1,11 +1,10 @@
 'use client';
 import Image from 'next/image';
-import { FormEventHandler, useEffect, useRef, useState } from 'react';
+import { FormEventHandler, useEffect, useState } from 'react';
 import InputComponent from '../global/Input';
 import PwdInput from '../global/PwdInput';
 import Link from 'next/link';
 import { Divider } from 'antd';
-import type { InputRef } from 'antd';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { loginUser } from '@/redux/auth/auth.slice';
 import useAuth from '@/hooks/useAuh';

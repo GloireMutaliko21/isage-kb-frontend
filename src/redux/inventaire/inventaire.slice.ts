@@ -4,6 +4,8 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	stockSheet: SheetGlobalHistoric[];
+	todayStockSheet: SheetGlobalHistoric[];
+	weekStockSheet: SheetGlobalHistoric[];
 	globalSheet: SheetGlobalHistoric[];
 	sheetSynthese: SheetSynthese[];
 	status: {
@@ -14,6 +16,8 @@ const initialState: {
 	message: string | null;
 } = {
 	stockSheet: [],
+	todayStockSheet: [],
+	weekStockSheet: [],
 	globalSheet: [],
 	sheetSynthese: [],
 	status: {
@@ -86,7 +90,7 @@ const inventaireSlice = createSlice({
 			})
 			.addCase(getTodaySheet.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.stockSheet = payload;
+				state.todayStockSheet = payload;
 				state.message = null;
 			})
 			.addCase(getTodaySheet.rejected, (state, { payload }) => {
@@ -100,7 +104,7 @@ const inventaireSlice = createSlice({
 			})
 			.addCase(getWeekSheet.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
-				state.stockSheet = payload;
+				state.weekStockSheet = payload;
 				state.message = null;
 			})
 			.addCase(getWeekSheet.rejected, (state, { payload }) => {
