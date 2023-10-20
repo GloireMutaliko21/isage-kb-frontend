@@ -4,6 +4,7 @@ import { useAppSelector } from './useAppSelector';
 import { useAppDispatch } from './useAppDispatch';
 import useAuth from './useAuh';
 import {
+	getGlobalDashboardHistoric,
 	getGlobalHistoric,
 	getMonthSynthese,
 	getTodaySheet,
@@ -15,6 +16,7 @@ const useInventaire = () => {
 		message,
 		todayStockSheet,
 		globalSheet,
+		globalDashboardSheet,
 		sheetSynthese,
 		status,
 		stockSheet,
@@ -32,11 +34,13 @@ const useInventaire = () => {
 			dispatch(getTodaySheet());
 			dispatch(getMonthSynthese());
 			dispatch(getGlobalHistoric(lastSixMonths()));
+			dispatch(getGlobalDashboardHistoric(lastSixMonths()));
 		} else console.log(message);
 	}, [dispatch, isLogin]);
 	return {
 		todayStockSheet,
 		globalSheet,
+		globalDashboardSheet,
 		lastYearGlobHistoric,
 		lastSixMonthsGlobalHistoric,
 		message,
