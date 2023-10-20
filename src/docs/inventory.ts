@@ -34,7 +34,7 @@ export async function generateStockSheet(
 	doc.setFontSize(8);
 	doc.text('Secrétariat Général Administratif', 35, 22, { align: 'center' });
 	doc.text('Direction du patrimoine', 35, 26, { align: 'center' });
-	doc.setFontSize(18);
+	doc.setFontSize(13);
 	doc.text(`Fiche de stock ${text}`, 150, 17, { align: 'center' });
 	doc.setFontSize(8);
 

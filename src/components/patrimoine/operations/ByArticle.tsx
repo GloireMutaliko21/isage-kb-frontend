@@ -5,12 +5,17 @@ import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { getGlobalHistoricByArticle } from '@/redux/inventaire/inventaire.slice';
 import useArticles from '@/hooks/useArticles';
+import { generateStockSheet } from '@/docs/inventory';
+import { frenchFormattedDate } from '@/utils/dates';
 
 const { RangePicker } = DatePicker;
 
 const ByArticle = () => {
 	const [date, setDate] = useState<any>();
-	const [articleId, setArticleId] = useState('');
+	const [articleId, setArticleId] = useState({
+		id: '',
+		libelle: '',
+	});
 
 	const dispatch = useAppDispatch();
 	const { stockSheet } = useAppSelector((state) => state.inventaire);
@@ -19,7 +24,7 @@ const ByArticle = () => {
 	useEffect(() => {
 		dispatch(
 			getGlobalHistoricByArticle({
-				id: articleId,
+				id: articleId.id,
 				start: date?.[0]?.$d,
 				end: date?.[1]?.$d,
 			})
@@ -36,6 +41,17 @@ const ByArticle = () => {
 	};
 
 	const maxLength = Math.max(entries?.data.length!, outs?.data.length!);
+
+	const onGenerate = async () => {
+		if (!stockSheet || !date) return;
+		await generateStockSheet(
+			'#entriesArt',
+			'#outsArt',
+			`${articleId.libelle} de ${frenchFormattedDate(date?.[0]?.$d).slice(
+				6
+			)} au ${frenchFormattedDate(date?.[1]?.$d).slice(6)}`
+		);
+	};
 
 	const paddedEntries = Array.from(
 		{ length: maxLength },
@@ -57,7 +73,7 @@ const ByArticle = () => {
 		<section>
 			<div className='mb-5 flex justify-between'>
 				<button
-					// onClick={onGenerateList}
+					onClick={onGenerate}
 					className='flex gap-3 items-center rounded-md hover:shadow-lg duration-300 bg-secondary-700 px-4 py-2 text-white'
 				>
 					<PiDownloadSimpleFill className='text-xl' />
@@ -68,7 +84,9 @@ const ByArticle = () => {
 						placeholder='Sélectionner article'
 						optionLabelProp='label'
 						showSearch
-						onChange={(value) => setArticleId(value)}
+						onChange={(value, opt: any) =>
+							setArticleId({ id: value, libelle: opt.label! })
+						}
 						filterOption={(input, option) =>
 							(option?.label ?? '').includes(input) ||
 							(option?.label ?? '').toLowerCase().includes(input) ||
@@ -89,7 +107,7 @@ const ByArticle = () => {
 				{/* Colonne des Entrées */}
 				<div className='w-1/2 pr-2'>
 					<h2 className='text-lg font-semibold mb-2 text-center'>Entrées</h2>
-					<table className='w-full'>
+					<table id='entriesArt' className='w-full'>
 						<thead>
 							<tr>
 								<th className='border p-2'>N°</th>
@@ -118,7 +136,7 @@ const ByArticle = () => {
 				{/* Colonne des Sorties */}
 				<div className='w-1/2 pl-2'>
 					<h2 className='text-lg font-semibold mb-2 text-center'>Sorties</h2>
-					<table className='w-full'>
+					<table id='outsArt' className='w-full'>
 						<thead>
 							<tr>
 								<th className='border p-2'>N°</th>
