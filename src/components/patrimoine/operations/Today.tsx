@@ -1,6 +1,4 @@
 import useInventaire from '@/hooks/useInventaire';
-import React from 'react';
-import { frenchFormattedDate } from '../../../utils/dates';
 
 const Today = () => {
 	const { todayStockSheet } = useInventaire();
