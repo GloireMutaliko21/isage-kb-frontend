@@ -33,7 +33,7 @@ const useInventaire = () => {
 			dispatch(getMonthSynthese());
 			dispatch(getGlobalHistoric(lastSixMonths()));
 		} else console.log(message);
-	}, [dispatch, isLogin, message]);
+	}, [dispatch, isLogin]);
 	return {
 		todayStockSheet,
 		globalSheet,
