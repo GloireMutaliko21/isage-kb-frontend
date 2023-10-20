@@ -42,17 +42,6 @@ const ByArticle = () => {
 
 	const maxLength = Math.max(entries?.data.length!, outs?.data.length!);
 
-	const onGenerate = async () => {
-		if (!stockSheet || !date) return;
-		await generateStockSheet(
-			'#entriesArt',
-			'#outsArt',
-			`${articleId.libelle} de ${frenchFormattedDate(date?.[0]?.$d).slice(
-				6
-			)} au ${frenchFormattedDate(date?.[1]?.$d).slice(6)}`
-		);
-	};
-
 	const paddedEntries = Array.from(
 		{ length: maxLength },
 		(_, index) =>
@@ -68,6 +57,17 @@ const ByArticle = () => {
 		(_, index) =>
 			outs?.data[index] || { date: '', designation: '', libelle: '', qte: '' }
 	);
+
+	const onGenerate = async () => {
+		if (!stockSheet || !date) return;
+		await generateStockSheet(
+			'#entriesArt',
+			'#outsArt',
+			`${articleId.libelle} de ${frenchFormattedDate(date?.[0]?.$d).slice(
+				6
+			)} au ${frenchFormattedDate(date?.[1]?.$d).slice(6)}`
+		);
+	};
 
 	return (
 		<section>
