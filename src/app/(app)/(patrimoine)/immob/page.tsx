@@ -5,18 +5,17 @@ import { Input, Table, Tag } from 'antd';
 import PageHeader from '@/components/global/PageHeader';
 import useImmob from '@/hooks/useImmob';
 import { frenchFormattedDate } from '@/utils/dates';
+import CreateImmob from '@/components/patrimoine/immobs/CreateImmob';
 
 const Page = () => {
 	const [searchedText, setSearchedText] = useState('');
-
+	const [openDrawer, setopenDrawer] = useState(false);
 	const { immobs } = useImmob();
 
 	const CreateImmobButton = () => {
 		return (
 			<div className=''>
-				<button
-				// onClick={() => dispatch(openModal({ modal_ID: 'NEW_ARTICLE' }))}
-				>
+				<button onClick={() => setopenDrawer(true)}>
 					Ajouter une immobilisation
 				</button>
 			</div>
@@ -175,6 +174,7 @@ const Page = () => {
 					/>
 				</div>
 			</section>
+			<CreateImmob openDrawer={openDrawer} setOpenDrawer={setopenDrawer} />
 		</main>
 	);
 };

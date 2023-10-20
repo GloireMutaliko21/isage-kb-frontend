@@ -52,7 +52,7 @@ export const createImmob: AsyncThunkPayloadCreator<
 	} = thunkAPI.getState() as RootState;
 	try {
 		const response: AxiosResponse<Immob> = await axios.post(
-			immobUrls.getAmortis,
+			immobUrls.createAndGet,
 			payload,
 			{
 				headers: { Authorization: `Bearer ${session?.token}` },
