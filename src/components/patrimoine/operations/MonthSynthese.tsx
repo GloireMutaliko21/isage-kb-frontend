@@ -25,7 +25,7 @@ const MonthSynthese = () => {
 				</button>
 				<div>
 					<Input.Search
-						placeholder='Rechercher une catégorie'
+						placeholder='Rechercher par article'
 						onSearch={(v) => setSearchedText(v)}
 						onChange={(e) => setSearchedText(e.target.value)}
 					/>

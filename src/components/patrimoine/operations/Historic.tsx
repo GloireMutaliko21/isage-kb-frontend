@@ -4,6 +4,8 @@ import { DatePicker } from 'antd';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { getGlobalHistoric } from '@/redux/inventaire/inventaire.slice';
+import { generateStockSheet } from '@/docs/inventory';
+import { frenchFormattedDate } from '@/utils/dates';
 
 const { RangePicker } = DatePicker;
 
@@ -33,6 +35,17 @@ const Historic = () => {
 
 	const maxLength = Math.max(entries?.data.length!, outs?.data.length!);
 
+	const onGenerate = async () => {
+		if (!globalSheet || !date) return;
+		await generateStockSheet(
+			'#entries',
+			'#outs',
+			`de ${frenchFormattedDate(date?.[0]?.$d).slice(
+				6
+			)} au ${frenchFormattedDate(date?.[1]?.$d).slice(6)}`
+		);
+	};
+
 	const paddedEntries = Array.from(
 		{ length: maxLength },
 		(_, index) =>
@@ -53,7 +66,7 @@ const Historic = () => {
 		<section>
 			<div className='mb-5 flex justify-between'>
 				<button
-					// onClick={onGenerateList}
+					onClick={onGenerate}
 					className='flex gap-3 items-center rounded-md hover:shadow-lg duration-300 bg-secondary-700 px-4 py-2 text-white'
 				>
 					<PiDownloadSimpleFill className='text-xl' />
@@ -70,7 +83,7 @@ const Historic = () => {
 				{/* Colonne des Entrées */}
 				<div className='w-1/2 pr-2'>
 					<h2 className='text-lg font-semibold mb-2 text-center'>Entrées</h2>
-					<table className='w-full'>
+					<table id='entries' className='w-full'>
 						<thead>
 							<tr>
 								<th className='border p-2'>N°</th>
@@ -99,7 +112,7 @@ const Historic = () => {
 				{/* Colonne des Sorties */}
 				<div className='w-1/2 pl-2'>
 					<h2 className='text-lg font-semibold mb-2 text-center'>Sorties</h2>
-					<table className='w-full'>
+					<table id='outs' className='w-full'>
 						<thead>
 							<tr>
 								<th className='border p-2'>N°</th>
