@@ -1,5 +1,6 @@
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
+import { closeModal } from '@/redux/modalWindow/modalwindow.slice';
 import { createOrder } from '@/redux/order/order.slice';
 import { Button, Form, InputNumber, Modal } from 'antd';
 import React from 'react';
@@ -11,6 +12,7 @@ const CreateOrder = ({ handlers }: { handlers: ModalsHandlers }) => {
 
 	const onSubmit = (values: any) => {
 		dispatch(createOrder({ articleId: selectedArticle?.id!, qty: values.qty }));
+		dispatch(closeModal());
 	};
 	return (
 		<Modal

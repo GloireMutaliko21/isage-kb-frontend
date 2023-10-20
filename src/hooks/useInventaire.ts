@@ -11,8 +11,14 @@ import {
 import { lastSixMonths, lastYear } from '@/utils/dates';
 
 const useInventaire = () => {
-	const { message, globalSheet, sheetSynthese, status, stockSheet } =
-		useAppSelector((state) => state.inventaire);
+	const {
+		message,
+		todayStockSheet,
+		globalSheet,
+		sheetSynthese,
+		status,
+		stockSheet,
+	} = useAppSelector((state) => state.inventaire);
 	const dispatch = useAppDispatch();
 	const { isLogin } = useAuth();
 
@@ -27,8 +33,9 @@ const useInventaire = () => {
 			dispatch(getMonthSynthese());
 			dispatch(getGlobalHistoric(lastSixMonths()));
 		} else console.log(message);
-	}, [dispatch, isLogin, message]);
+	}, [dispatch, isLogin]);
 	return {
+		todayStockSheet,
 		globalSheet,
 		lastYearGlobHistoric,
 		lastSixMonthsGlobalHistoric,

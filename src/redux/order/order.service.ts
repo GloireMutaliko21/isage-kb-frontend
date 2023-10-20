@@ -3,6 +3,7 @@ import axios, { AxiosResponse } from 'axios';
 import { orderUrls } from '../helpers';
 import { returnApiError } from '@/utils/error.handler';
 import { RootState } from '../store';
+import { generatePurchaseOrder } from '@/docs/orders';
 
 export const createOrder: AsyncThunkPayloadCreator<
 	Order,
@@ -17,6 +18,7 @@ export const createOrder: AsyncThunkPayloadCreator<
 			payload,
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
+		await generatePurchaseOrder(response.data);
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
@@ -75,6 +77,7 @@ export const closeOrder: AsyncThunkPayloadCreator<Order, string> = async (
 	try {
 		const response: AxiosResponse<Order> = await axios.patch(
 			orderUrls.close(id),
+			{},
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;
@@ -95,6 +98,7 @@ export const cancelOrder: AsyncThunkPayloadCreator<Order, string> = async (
 	try {
 		const response: AxiosResponse<Order> = await axios.patch(
 			orderUrls.cancel(id),
+			{},
 			{ headers: { Authorization: `Bearer ${session?.token}` } }
 		);
 		return response.data;

@@ -41,3 +41,12 @@ export const formattedTime = (date: any) => {
 	dayjs.locale(fr);
 	return dayjs(date).utcOffset(2).format('hh:mm');
 };
+
+export const currentWeek = () => {
+	const startOfWeek = currDate.startOf('week');
+	const endOfWeek = currDate.endOf('week');
+
+	const startDateFormatted = startOfWeek.format('DD/MM/YYYY');
+	const endDateFormatted = endOfWeek.format('DD/MM/YYYY');
+	return `semaine du ${startDateFormatted} au ${endDateFormatted}`;
+};

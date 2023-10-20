@@ -4,6 +4,7 @@ import { STATUS } from '@/constants/constants';
 
 const initialState: {
 	orders: Order[];
+	closedOrder: Order[];
 	selectedOrder: Order | null;
 	status: {
 		isLoading: boolean;
@@ -13,6 +14,7 @@ const initialState: {
 	message: string | null;
 } = {
 	orders: [],
+	closedOrder: [],
 	selectedOrder: null,
 	status: {
 		isLoading: false,
@@ -84,7 +86,7 @@ const orderSlice = createSlice({
 			.addCase(getHistoric.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
-				state.orders = payload;
+				state.closedOrder = payload;
 				state.message = null;
 			})
 			.addCase(getHistoric.rejected, (state, { payload }) => {
@@ -102,6 +104,7 @@ const orderSlice = createSlice({
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
 				state.orders = [...updated];
+				state.closedOrder = [...state.closedOrder, payload];
 				state.message = 'Fermé avec succès';
 			})
 			.addCase(closeOrder.rejected, (state, { payload }) => {
@@ -118,7 +121,7 @@ const orderSlice = createSlice({
 				const updated = state.orders.filter((order) => order.id !== payload.id);
 				state.status = STATUS.SUCCESS;
 				state.selectedOrder = null;
-				state.orders = [...updated];
+				state.orders = [...updated, payload];
 				state.message = 'Commande annulée';
 			})
 			.addCase(cancelOrder.rejected, (state, { payload }) => {

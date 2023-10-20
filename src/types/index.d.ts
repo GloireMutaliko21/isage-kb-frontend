@@ -324,6 +324,7 @@ interface Order extends GeneralData {
 		stockAlert: number;
 		categoryId: string;
 		unityId: string;
+		unity?: Unity;
 	};
 }
 
