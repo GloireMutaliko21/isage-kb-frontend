@@ -38,17 +38,16 @@ export const definePwdAndUsername: AsyncThunkPayloadCreator<
 	User,
 	DefinePwdDto
 > = async (payload, thunkAPI) => {
-	const {
-		auth: { session },
-	} = thunkAPI.getState() as RootState;
 	try {
+		const { token, form, ...rest } = payload;
 		const response: AxiosResponse<User> = await axios.post(
 			authUrls.definePwd,
-			payload,
+			rest,
 			{
-				headers: { Authorization: `Bearer ${session?.token}` },
+				headers: { Authorization: `Bearer ${token}` },
 			}
 		);
+		form.resetFields();
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
