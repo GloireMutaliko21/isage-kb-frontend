@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { PiDownloadSimpleFill } from 'react-icons/pi';
-import { DatePicker, Select } from 'antd';
+import { DatePicker } from 'antd';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
 import { getGlobalHistoric } from '@/redux/inventaire/inventaire.slice';
