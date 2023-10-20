@@ -93,8 +93,6 @@ const DashboardAdmin = () => {
 		maxColumnWidth: 30,
 	};
 
-	console.log(columnInventaireChartData(globalDashboardSheet));
-
 	const onChangeLastYear = (checked: boolean) => {
 		if (checked) lastYearGlobHistoric();
 		else lastSixMonthsGlobalHistoric();
