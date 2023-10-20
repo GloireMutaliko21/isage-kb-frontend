@@ -6,6 +6,7 @@ import PageHeader from '@/components/global/PageHeader';
 import useImmob from '@/hooks/useImmob';
 import { frenchFormattedDate } from '@/utils/dates';
 import CreateImmob from '@/components/patrimoine/immobs/CreateImmob';
+import { generateImmobsList } from '@/docs/immobs';
 
 const Page = () => {
 	const [searchedText, setSearchedText] = useState('');
@@ -23,8 +24,8 @@ const Page = () => {
 	};
 
 	const onGenerateList = async () => {
-		// if (!articles) return;
-		// await generateArticlesList(articles);
+		if (!immobs) return;
+		await generateImmobsList(immobs);
 	};
 	return (
 		<main className='flex flex-col h-full'>
