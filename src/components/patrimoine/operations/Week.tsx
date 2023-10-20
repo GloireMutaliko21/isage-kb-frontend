@@ -13,8 +13,14 @@ const Week = () => {
 		dispatch(getWeekSheet());
 	}, []);
 
-	const entries = weekStockSheet.find((fiche) => fiche.typeOp == 'entry');
-	const outs = weekStockSheet.find((fiche) => fiche.typeOp == 'out');
+	const entries = weekStockSheet.find((fiche) => fiche.typeOp == 'entry') ?? {
+		typeOp: 'entry',
+		data: [],
+	};
+	const outs = weekStockSheet.find((fiche) => fiche.typeOp == 'out') ?? {
+		typeOp: 'out',
+		data: [],
+	};
 
 	const maxLength = Math.max(entries?.data.length!, outs?.data.length!);
 

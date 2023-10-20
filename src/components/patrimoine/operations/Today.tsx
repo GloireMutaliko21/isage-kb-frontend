@@ -2,8 +2,14 @@ import useInventaire from '@/hooks/useInventaire';
 
 const Today = () => {
 	const { todayStockSheet } = useInventaire();
-	const entries = todayStockSheet.find((fiche) => fiche.typeOp == 'entry');
-	const outs = todayStockSheet.find((fiche) => fiche.typeOp == 'out');
+	const entries = todayStockSheet.find((fiche) => fiche.typeOp == 'entry') ?? {
+		typeOp: 'entry',
+		data: [],
+	};
+	const outs = todayStockSheet.find((fiche) => fiche.typeOp == 'out') ?? {
+		typeOp: 'out',
+		data: [],
+	};
 
 	const maxLength = Math.max(entries?.data.length!, outs?.data.length!);
 
