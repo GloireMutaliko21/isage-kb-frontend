@@ -14,6 +14,8 @@ const Page = () => {
 	const searchParams = useSearchParams();
 	const token = searchParams.get('t');
 
+	const [form] = Form.useForm();
+
 	const onSubmit = (values: any) => {
 		const { username, password, confirmPassword } = values;
 		dispatch(
@@ -22,6 +24,7 @@ const Page = () => {
 				password,
 				username,
 				token: token!,
+				form,
 			})
 		);
 	};
@@ -45,7 +48,7 @@ const Page = () => {
 					</p>
 				</div>
 				<div className='mt-5 w-full'>
-					<Form onFinish={onSubmit} layout='vertical'>
+					<Form onFinish={onSubmit} layout='vertical' form={form}>
 						<Form.Item
 							name='username'
 							label="Nom d'utilisateur"

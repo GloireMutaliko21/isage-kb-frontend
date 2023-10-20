@@ -94,6 +94,7 @@ interface DefinePwdDto {
 	password: string;
 	confirmPassword: string;
 	token: string;
+	form: any;
 }
 
 interface Attendency extends GeneralData {

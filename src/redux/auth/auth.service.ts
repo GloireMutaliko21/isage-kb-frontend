@@ -39,7 +39,7 @@ export const definePwdAndUsername: AsyncThunkPayloadCreator<
 	DefinePwdDto
 > = async (payload, thunkAPI) => {
 	try {
-		const { token, ...rest } = payload;
+		const { token, form, ...rest } = payload;
 		const response: AxiosResponse<User> = await axios.post(
 			authUrls.definePwd,
 			rest,
@@ -47,6 +47,7 @@ export const definePwdAndUsername: AsyncThunkPayloadCreator<
 				headers: { Authorization: `Bearer ${token}` },
 			}
 		);
+		form.resetFields();
 		return response.data;
 	} catch (error) {
 		return axios.isAxiosError(error)
