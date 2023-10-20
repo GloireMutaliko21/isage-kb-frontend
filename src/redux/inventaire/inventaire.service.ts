@@ -103,6 +103,27 @@ export const getGlobalHistoric: AsyncThunkPayloadCreator<
 	}
 };
 
+export const getGlobalDashboardHistoric: AsyncThunkPayloadCreator<
+	SheetGlobalHistoric[],
+	StartEndDatesParams
+> = async (payload, thunkAPI) => {
+	const { start, end } = payload;
+	const {
+		auth: { session },
+	} = thunkAPI.getState() as RootState;
+	try {
+		const response: AxiosResponse<SheetGlobalHistoric[]> = await axios.get(
+			inventaireUrls.getGlobalDash(start, end),
+			{ headers: { Authorization: `Bearer ${session?.token}` } }
+		);
+		return response.data;
+	} catch (error) {
+		return axios.isAxiosError(error)
+			? thunkAPI.rejectWithValue(returnApiError(error))
+			: thunkAPI.rejectWithValue('Fetch error');
+	}
+};
+
 export const getGlobalHistoricByArticle: AsyncThunkPayloadCreator<
 	SheetGlobalHistoric[],
 	StartEndDatesParams

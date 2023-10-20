@@ -7,6 +7,7 @@ const initialState: {
 	todayStockSheet: SheetGlobalHistoric[];
 	weekStockSheet: SheetGlobalHistoric[];
 	globalSheet: SheetGlobalHistoric[];
+	globalDashboardSheet: SheetGlobalHistoric[];
 	sheetSynthese: SheetSynthese[];
 	status: {
 		isLoading: boolean;
@@ -19,6 +20,7 @@ const initialState: {
 	todayStockSheet: [],
 	weekStockSheet: [],
 	globalSheet: [],
+	globalDashboardSheet: [],
 	sheetSynthese: [],
 	status: {
 		isLoading: false,
@@ -51,6 +53,11 @@ const getMonthSynthese = createAsyncThunk(
 const getGlobalHistoric = createAsyncThunk(
 	'inventaire/global',
 	inventaireService.getGlobalHistoric
+);
+
+const getGlobalDashboardHistoric = createAsyncThunk(
+	'inventaire/globalDash',
+	inventaireService.getGlobalDashboardHistoric
 );
 
 const getGlobalHistoricByArticle = createAsyncThunk(
@@ -141,6 +148,20 @@ const inventaireSlice = createSlice({
 			})
 
 			// Get Global historic
+			.addCase(getGlobalDashboardHistoric.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(getGlobalDashboardHistoric.fulfilled, (state, { payload }) => {
+				state.status = STATUS.SUCCESS;
+				state.globalDashboardSheet = payload;
+				state.message = null;
+			})
+			.addCase(getGlobalDashboardHistoric.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
+				state.message = payload as string;
+			})
+
+			// Get Global historic
 			.addCase(getGlobalHistoricByArticle.pending, (state) => {
 				state.status = STATUS.PENDING;
 			})
@@ -163,6 +184,7 @@ export {
 	getWeekSheet,
 	getMonthSynthese,
 	getGlobalHistoric,
+	getGlobalDashboardHistoric,
 	getGlobalHistoricByArticle,
 };
 export const { setInventaireIsError, setInventaireIsSuccess } =

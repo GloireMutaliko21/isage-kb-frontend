@@ -69,6 +69,8 @@ export const inventaireUrls = {
 	getSheetSynthese: `${apiUrl}inventaire/synthese`,
 	getGlobal: (start: Date, end: Date) =>
 		`${apiUrl}inventaire?start=${start}&end=${end}`,
+	getGlobalDash: (start: Date, end: Date) =>
+		`${apiUrl}inventaire/dash?start=${start}&end=${end}`,
 	getGlobalHistoricByArticle: (id: string, start: Date, end: Date) =>
 		`${apiUrl}inventaire/${id}?start=${start}&end=${end}`,
 };

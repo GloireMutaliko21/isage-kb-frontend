@@ -21,8 +21,11 @@ const DashboardAdmin = () => {
 	const { agentInConges } = useConge();
 	const { attendecies } = useAttendency();
 	const { services } = useServiceSection();
-	const { globalSheet, lastYearGlobHistoric, lastSixMonthsGlobalHistoric } =
-		useInventaire();
+	const {
+		globalDashboardSheet,
+		lastYearGlobHistoric,
+		lastSixMonthsGlobalHistoric,
+	} = useInventaire();
 	const { amortis, immobs } = useImmob();
 
 	const immobChartData = [
@@ -80,7 +83,7 @@ const DashboardAdmin = () => {
 		},
 	};
 	const config: ColumnConfig = {
-		data: columnInventaireChartData(globalSheet),
+		data: columnInventaireChartData(globalDashboardSheet),
 		isGroup: true,
 		xField: 'libelle',
 		yField: 'qty',
@@ -89,6 +92,8 @@ const DashboardAdmin = () => {
 		minColumnWidth: 30,
 		maxColumnWidth: 30,
 	};
+
+	console.log(columnInventaireChartData(globalDashboardSheet));
 
 	const onChangeLastYear = (checked: boolean) => {
 		if (checked) lastYearGlobHistoric();
