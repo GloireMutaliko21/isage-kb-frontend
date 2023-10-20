@@ -78,10 +78,8 @@ const ByArticle = () => {
 							value: art.id,
 							label: art.libelle,
 						}))}
-						size='middle'
 					/>
 					<RangePicker
-						size='middle'
 						format={'DD-MM-YYYY'}
 						onChange={(values) => setDate(values)}
 					/>

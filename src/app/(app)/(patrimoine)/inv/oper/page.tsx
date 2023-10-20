@@ -7,6 +7,7 @@ import Week from '@/components/patrimoine/operations/Week';
 import ByArticle from '@/components/patrimoine/operations/ByArticle';
 import Historic from '@/components/patrimoine/operations/Historic';
 import CreateOperation from '@/components/patrimoine/operations/CreateOperation';
+import MonthSynthese from '@/components/patrimoine/operations/MonthSynthese';
 
 const Page = () => {
 	const [openDrawer, setopenDrawer] = useState(false);
@@ -38,6 +39,11 @@ const Page = () => {
 			key: '4',
 			label: 'Historique',
 			children: <Historic />,
+		},
+		{
+			key: '5',
+			label: 'Synhthèse mensuelle',
+			children: <MonthSynthese />,
 		},
 	];
 
