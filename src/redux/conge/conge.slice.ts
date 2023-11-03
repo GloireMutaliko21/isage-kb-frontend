@@ -5,6 +5,7 @@ import { STATUS } from '@/constants/constants';
 const initialState: {
 	agentInConges: Conge[];
 	unApproved: Conge[];
+	leaves: Conge[];
 	status: {
 		isLoading: boolean;
 		isSuccess: boolean;
@@ -14,6 +15,7 @@ const initialState: {
 } = {
 	agentInConges: [],
 	unApproved: [],
+	leaves: [],
 	status: {
 		isLoading: false,
 		isSuccess: false,
@@ -26,6 +28,8 @@ const getAgentsOnConge = createAsyncThunk(
 	'conge/inLeave',
 	congeService.getAgentsOnConge
 );
+
+const getOwnConges = createAsyncThunk('conge/mines', congeService.getOwnConges);
 
 const getUnApproved = createAsyncThunk(
 	'conge/unproved',
@@ -67,6 +71,20 @@ const congeSlice = createSlice({
 				state.message = null;
 			})
 			.addCase(getAgentsOnConge.rejected, (state, { payload }) => {
+				state.status = STATUS.ERROR;
+				state.message = payload as string;
+			})
+
+			//get owns leaves
+			.addCase(getOwnConges.pending, (state) => {
+				state.status = STATUS.PENDING;
+			})
+			.addCase(getOwnConges.fulfilled, (state, { payload }) => {
+				state.status = STATUS.SUCCESS;
+				state.leaves = payload;
+				state.message = null;
+			})
+			.addCase(getOwnConges.rejected, (state, { payload }) => {
 				state.status = STATUS.ERROR;
 				state.message = payload as string;
 			})
@@ -133,6 +151,7 @@ const congeSlice = createSlice({
 export default congeSlice.reducer;
 export {
 	getAgentsOnConge,
+	getOwnConges,
 	getUnApproved,
 	createConge,
 	approveConge,
