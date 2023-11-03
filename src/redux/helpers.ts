@@ -91,7 +91,7 @@ export const roleUrls = {
 	createAndGet: `${apiUrl}roles`,
 	getOneUpdateDelete: (id: string) => `${apiUrl}roles/${id}`,
 	createAccess: (agentId: string) => `${apiUrl}roles/access/${agentId}`,
-	removeAccess: (agentId: string) => `${apiUrl}roles/rm/${agentId}`,
+	removeAccess: (agentId: string) => `${apiUrl}roles/access/rm/${agentId}`,
 };
 
 export const sectionUrls = {

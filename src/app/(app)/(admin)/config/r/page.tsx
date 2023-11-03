@@ -33,6 +33,19 @@ const Roles = () => {
 			</div>
 		);
 	};
+
+	const RemoveAccessBtn = () => {
+		return (
+			<div className=''>
+				<button
+					className='bg-red-600 p-2 text-white rounded-md text-sm'
+					onClick={() => dispatch(openModal({ modal_ID: 'REMOVE_ACCESS' }))}
+				>
+					Supprrimer accès
+				</button>
+			</div>
+		);
+	};
 	return (
 		<main className='flex flex-col h-full'>
 			<div className='flex w-full justify-between items-center pr-5 border-b'>
@@ -40,6 +53,7 @@ const Roles = () => {
 				<div className='flex gap-4'>
 					<CreateRoleBtn />
 					<CreateAccessBtn />
+					<RemoveAccessBtn />
 				</div>
 			</div>
 			<section className='p-5 flex-grow'>
