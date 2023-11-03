@@ -32,6 +32,7 @@ import CreateAndUpdateArticle from './inventory/CreateAndUpdateArticle';
 import CreateOrder from './inventory/CreateOrder';
 import CreateAndUpdateUnity from './inventory/CreateAndUpdateUnity';
 import CreateAndUpdateCategory from './inventory/CreateAndUpdateCategory';
+import RemoveAccess from './RemoveAccess';
 
 const ModalManager = () => {
 	const { modal_ID, payload, thread } = useAppSelector((state) => state.modal);
@@ -79,6 +80,9 @@ const ModalManager = () => {
 			)}
 			{modal_ID == 'CREATE_ACCESS' && (
 				<CreateAccess handlers={{ close, id: 'CREATE_ACCESS' }} />
+			)}
+			{modal_ID == 'REMOVE_ACCESS' && (
+				<RemoveAccess handlers={{ close, id: 'REMOVE_ACCESS' }} />
 			)}
 
 			{/* Services and sections */}
