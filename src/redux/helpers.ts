@@ -44,6 +44,7 @@ export const congeUrls = {
 	createAndGet: `${apiUrl}conge`,
 	requestConge: `${apiUrl}conge/request`,
 	getUnapproved: `${apiUrl}conge/pending`,
+	getOwns: `${apiUrl}conge/mines`,
 	approveConge: (id: string) => `${apiUrl}conge/${id}`,
 };
 
