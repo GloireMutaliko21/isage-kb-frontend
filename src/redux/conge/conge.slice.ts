@@ -137,8 +137,9 @@ const congeSlice = createSlice({
 			.addCase(requestConge.pending, (state) => {
 				state.status = STATUS.PENDING;
 			})
-			.addCase(requestConge.fulfilled, (state) => {
+			.addCase(requestConge.fulfilled, (state, { payload }) => {
 				state.status = STATUS.SUCCESS;
+				state.leaves = [...state.leaves, payload];
 				state.message = 'Enregistrement réussi';
 			})
 			.addCase(requestConge.rejected, (state, { payload }) => {

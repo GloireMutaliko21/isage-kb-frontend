@@ -2,24 +2,28 @@
 import PageHeader from '@/components/global/PageHeader';
 import { useAppDispatch } from '@/hooks/useAppDispatch';
 import { useAppSelector } from '@/hooks/useAppSelector';
-import { getOwnConges } from '@/redux/conge/conge.slice';
+import { getOwnConges, requestConge } from '@/redux/conge/conge.slice';
 import { openModal } from '@/redux/modalWindow/modalwindow.slice';
 import { frenchFormattedDate } from '@/utils/dates';
-import { Table, Tag } from 'antd';
+import { Button, Table, Tag } from 'antd';
 import React, { useEffect } from 'react';
 
 const Page = () => {
-	const UpdateAttendencyButton = () => {
+	const { leaves, status } = useAppSelector((state) => state.conges);
+	const RequestAttendencyButton = () => {
 		const dispatch = useAppDispatch();
 		return (
 			<div className=''>
-				<button onClick={() => dispatch(openModal({ modal_ID: 'NEW_LEAVE' }))}>
+				<Button
+					loading={status.isError}
+					className='!border-none !m-0 !text-white'
+					onClick={() => dispatch(requestConge())}
+				>
 					Demander un congé
-				</button>
+				</Button>
 			</div>
 		);
 	};
-	const { leaves, status } = useAppSelector((state) => state.conges);
 	const dispatch = useAppDispatch();
 	useEffect(() => {
 		dispatch(getOwnConges());
@@ -29,7 +33,7 @@ const Page = () => {
 		<main className='flex flex-col h-full'>
 			<PageHeader
 				title='Gestion des congés'
-				actionButton={<UpdateAttendencyButton />}
+				actionButton={<RequestAttendencyButton />}
 			/>
 			<section className='p-5 flex-grow'>
 				<div className='bg-white p-5 rounded-lg h-full'>
@@ -79,7 +83,7 @@ const Page = () => {
 								align: 'center',
 								width: '5rem',
 								render: (_, record, __) => (
-									<Tag color={`${record.approved ? 'blue' : 'danger'}`}>
+									<Tag color={`${record.approved ? 'blue' : 'error'}`}>
 										{record.approved ? 'Oui' : 'Non'}
 									</Tag>
 								),
